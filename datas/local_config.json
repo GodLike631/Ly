@@ -21,7 +21,8 @@
             "filterable": 0,
             "ext": {
                 "url": "http://v.rbotv.cn"
-            },
+            }
+        },
     {
             "key": "三秋影视",
             "name": "三秋｜APP",
@@ -50,7 +51,8 @@
                 "package": "com.wujiys.app",
                 "buildNumber": "2001",
                 "buildSignature": "A0859BDC35AD3E81D4051E2A4678C77C62773EDB3423DDF1DEFF94CB331D398E"
-            },
+            }
+        },
     {
             "key": "听心99",
             "name": "听心｜APP",
@@ -65,7 +67,8 @@
                 "package": "com.iksp.adsys.jjsp",
                 "buildNumber": "2001",
                 "buildSignature": "03DD38CE4C3D62D0F0DEFACC06768D14EB382C7BD77A05B2EBF4D66E154A0D47"
-            },
+            }
+        },
     {
             "key": "橙子99",
             "name": "橙子丨APP",
@@ -80,7 +83,8 @@
                 "package": "com.xchengzix.app",
                 "buildNumber": "2001",
                 "buildSignature": "99DA983CF878CEC016616175464A91A94775E20A489F07F76FCDEA1A0F2B6B45"
-            },
+            }
+        },
     {
             "key": "追番99",
             "name": "追番｜APP",
@@ -95,7 +99,8 @@
                 "package": "com.android.packageinstaller",
                 "buildNumber": "2002",
                 "buildSignature": "A40DA80A59D170CAA950CF15C18C454D47A39B26989D8B640ECD745BA71BF5DC"
-            },
+            }
+        },
     {
             "key": "咕噜99",
             "name": "咕噜丨APP",
@@ -110,7 +115,8 @@
                 "package": "com.bd.tool.gulu",
                 "buildNumber": "2001",
                 "buildSignature": "B07C8F6DBEBD3ABEE6A4A4DE2BFBBF29A0AC3F984D532A39448EC3BF5DD36311"
-            },
+            }
+        },
     {
             "key": "剧圈99",
             "name": "剧圈丨APP",
@@ -124,7 +130,8 @@
                 "package": "com.qingtangxiaozhuan.xyz",
                 "buildNumber": "2002",
                 "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"
-            },
+            }
+        },
     {
             "key": "双星99",
             "name": "双星丨APP",
@@ -139,7 +146,8 @@
                 "package": "com.yingfu.mobile.android.pgsp",
                 "buildNumber": "2003",
                 "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"
-            },
+            }
+        },
     {
             "key": "顾我99",
             "name": "顾我丨APP",
@@ -154,7 +162,8 @@
                 "package": "com.guwozhuijux.app",
                 "buildNumber": "2001",
                 "buildSignature": "5AD4436C4730FFE26910C86278B80F3E661C317FFC3616F702D20A729262624A"
-            },
+            }
+        },
     {
             "key": "天堂",
             "name": "天堂｜APP",
@@ -173,7 +182,8 @@
                 "site": "https://dyttandroid04-1372779881.cos.ap-shanghai.myqcloud.com/app_dyttandroid.txt",
                 "version": "3.0.0.7",
                 "decrypt": "0"
-            },
+            }
+        },
     {
             "key": "橘汁",
             "name": "橘汁｜APP",
@@ -192,7 +202,8 @@
                 "site": "https://123-1349250429.cos.ap-shanghai.myqcloud.com/app.txt",
                 "version": "3.0.2.1",
                 "decrypt": "1"
-            },
+            }
+        },
     {
             "key": "华谊",
             "name": "华谊｜APP",
@@ -211,7 +222,8 @@
                 "site": "https://vip.123pan.cn/1851089669/oss/az5.txt",
                 "version": "1.0.0.4",
                 "decrypt": "1"
-            },
+            }
+        },
     {
             "key": "苹果",
             "name": "苹果｜APP",
@@ -230,7 +242,8 @@
                 "site": "https://xpgandroid03-1372779881.cos.ap-beijing.myqcloud.com/app_xpg_android.txt",
                 "version": "1.0.0.3",
                 "decrypt": "0"
-            },
+            }
+        },
     {
             "key": "薯条",
             "name": "薯条｜APP",
@@ -249,7 +262,8 @@
                 "site": "https://dyttandroid-1372779881.cos.ap-guangzhou.myqcloud.com/app_dyttandroid.txt",
                 "version": "5.0.0.1",
                 "decrypt": "0"
-            },
+            }
+        },
     {
             "key": "久久",
             "name": "久久｜APP",
@@ -289,7 +303,8 @@
             "changeable": 1,
             "ext": {
                 "host": "http://app.hktvyb.cc"
-            },
+            }
+        },
     {
             "key": "首发",
             "name": "首发｜APP",
@@ -303,7 +318,8 @@
                 "dataIv": "FTgP4Gq8zPiqbt7M",
                 "init": "initV122",
                 "ua": "okhttp/3.10.0"
-            },
+            }
+        },
     {
             "key": "金牌",
             "name": "金牌｜APP",
@@ -318,7 +334,8 @@
                 "search": "searchList4",
                 "init": "initV122",
                 "ua": "okhttp/3.10.0"
-            },
+            }
+        },
     {
             "key": "老鹰",
             "name": "老鹰｜APP",
@@ -331,7 +348,8 @@
                 "dataKey": "zxPtEUDGVllIUhDB",
                 "dataIv": "zxPtEUDGVllIUhDB",
                 "ua": "okhttp/3.10.0"
-            },
+            }
+        },
     {
             "key": "蓝鹰",
             "name": "蓝鹰｜APP",
@@ -345,7 +363,8 @@
                 "dataIv": "ca94b06ca359d80e",
                 "init": "initV120",
                 "ua": "okhttp/3.10.0"
-            },
+            }
+        },
     {
             "key": "猎豹",
             "name": "猎豹｜APP",
@@ -357,7 +376,8 @@
                 "url": "https://444421.xyz",
                 "dataKey": "#getapp@TMD@2025",
                 "dataIv": "#getapp@TMD@2025"
-            },
+            }
+        },
     {
             "key": "映画",
             "name": "映画｜APP",
@@ -369,7 +389,8 @@
                 "url": "https://cms140.yhg.one",
                 "dataKey": "bM7iC9eA3oZ1nB7z",
                 "dataIv": "bM7iC9eA3oZ1nB7z"
-            },
+            }
+        },
     {
             "key": "王子",
             "name": "王子｜APP",
@@ -381,7 +402,8 @@
                 "url": "https://app.95112475.xyz",
                 "dataKey": "5a9w6x58dsq6z3a6",
                 "dataIv": "5a9w6x58dsq6z3a6"
-            },
+            }
+        },
     {
             "key": "秒看",
             "name": "秒看｜APP",
@@ -394,7 +416,8 @@
                 "dataKey": "c60d88b2eep53za8",
                 "dataIv": "c60d88b2eep53za8",
                 "token": "4181e508e7a17657d6a6246e70b1b13553e5ae9d8d287dc47000fb2df638dffa"
-            },
+            }
+        },
     {
             "key": "茉莉",
             "name": "茉莉｜APP",
@@ -406,7 +429,8 @@
                 "site": "https://gitee.com/wmmoliill/wimg/raw/master/img/bk/9.txt",
                 "dataKey": "88689667dce61725",
                 "dataIv": "88689667dce61725"
-            },
+            }
+        },
     {
             "key": "灵虎",
             "name": "灵虎｜APP",
@@ -418,7 +442,8 @@
                 "site": "https://bind.315999.xyz/89.txt",
                 "dataKey": "#getapp@TMD@2025",
                 "dataIv": "#getapp@TMD@2025"
-            },
+            }
+        },
     {
          "key":"AQY",
         "name":"🐬爱奇艺 海豚影视完全免费，如有收费的都是骗子",
