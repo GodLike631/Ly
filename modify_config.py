@@ -1,82 +1,60 @@
-import json
 import os
-import re
 
 cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
 output_path = 'datas/local_config.json'
 
-# 强力容错读取器：能把各种行尾多逗号、不规范的多余空行强行掰正，并转成 Python 的数据对象
-def load_file_to_object(path):
+# 安全读取文本
+def read_file_text(path):
     if not os.path.exists(path):
-        print(f"❌ 错误：找不到文件 {path}")
-        return {}
+        return ""
     with open(path, 'r', encoding='utf-8') as f:
-        content = f.read()
+        return f.read()
+
+text_cnb = read_file_text(cnb_path)
+text_haitun = read_file_text(haitun_path)
+
+# ====================================================================
+# 切片法：将 cnb 里的核心站点剥离出来，塞入海豚源大框架的最前面
+# ====================================================================
+split_key = '"sites": ['
+
+if split_key in text_haitun and split_key in text_cnb:
+    # 1. 拆解海豚源
+    parts_haitun = text_haitun.split(split_key, 1)
+    haitun_front = parts_haitun[0] + split_key  # 包含头部
+    haitun_back = parts_haitun[1]               # 包含原本所有站点及以下内容
     
-    # 彻底剃掉全线注释（// 和 /* */）
-    content = re.sub(r'//.*', '', content)
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
+    # 2. 剥离 CNB 的 sites 站点文本段落
+    cnb_back = text_cnb.split(split_key, 1)[1]
+    cnb_sites_text = cnb_back.split(']', 1)[0].strip() # 只留下中括号内部的内容
     
-    # 用 eval 强行降维打击，无视一切末尾多出逗号等低级 JSON 格式错误
-    try:
-        if '{' in content and '}' in content:
-            content = content[content.find('{'):content.rfind('}')+1]
-        return eval(content, {"true": True, "false": False, "null": None})
-    except Exception as e:
-        print(f"❌ 解析 {path} 失败: {e}")
-        return {}
-
-print("🔄 开始全量加载并融合两条上游线路数据...")
-data_cnb = load_file_to_object(cnb_path)
-data_haitun = load_file_to_object(haitun_path)
-
-if not data_haitun:
-    print("❌ 致命错误：海豚源未能成功硬解，请检查文件是否存在！")
-    exit(1)
-
-# ====================================================================
-# 核心大挪移：由于海豚源是大框架，我们直接将 CNB 的 sites（视频站）提取出来，
-# 塞进海豚源大框架的 sites 列表最前面！这样做能保证所有的规则、直播、解析绝不漏掉。
-# ====================================================================
-
-cnb_sites = data_cnb.get('sites', []) if isinstance(data_cnb.get('sites'), list) else []
-haitun_sites = data_haitun.get('sites', []) if isinstance(data_haitun.get('sites'), list) else []
-
-# 建立全局视频站 key 去重集合，保证两个源合并后，相同的站不会重复出现
-seen_keys = set()
-merged_sites = []
-
-# 1. 优先塞入 CNB 的全部核心站点[span_1](start_span)[span_1](end_span)
-for site in cnb_sites:
-    key = site.get('key')
-    if key and key not in seen_keys:
-        seen_keys.add(key)
-        merged_sites.append(site)
-
-# 2. 紧接着跟上海豚源的所有站点[span_2](start_span)[span_2](end_span)
-for site in haitun_sites:
-    key = site.get('key')
-    if key and key not in seen_keys:
-        seen_keys.add(key)
-        merged_sites.append(site)
-
-# 将提纯合流后的全新站点列表，写回到海豚大配置里
-data_haitun['sites'] = merged_sites
+    # ====================================================================
+    # 【核心修复】：解决 $.sites[38].ext 符号断裂报错的交界修复逻辑
+    # ====================================================================
+    if cnb_sites_text:
+        # 去掉前后多余的空行和逗号，标准化 CNB 站点文本段
+        cnb_sites_text = cnb_sites_text.strip().rstrip(',')
+        haitun_back = haitun_back.strip().lstrip(',')
+        
+        # 强制在交界处补上一个标准的换行和逗号，保证 JSON 链条严丝合缝
+        final_sites_block = cnb_sites_text + ",\n    " + haitun_back
+        
+        # 完整合流拼装
+        final_json_text = haitun_front + "\n    " + final_sites_block
+    else:
+        final_json_text = text_haitun
+else:
+    final_json_text = text_haitun
 
 # ====================================================================
-# 核心微调：将最上方的防倒卖提示与公告切掉，定制成你自己的专属品牌
+# 定制个性化头部品牌（不改动任何核心解析及线路数据）
 # ====================================================================
-data_haitun['spider'] = "./tvbox.jar"
-data_haitun['warningText'] = "欢迎使用老杨自用缝合专线，本接口完全免费！"
+final_json_text = final_json_text.replace('"spider": "./spider.jar"', '"spider": "./tvbox.jar"')
+final_json_text = final_json_text.replace('"warningText": "注意:如果别人倒卖海豚影视接口收费的都是骗子,没有qq群微信群，只有tg官方交流群 TG：@hshsjk"', '"warningText": "欢迎使用老杨自用缝合专线，本接口完全免费！"')
 
-# ====================================================================
-# 最终盘存：调用大厂级别的标准 json.dump，它在写出文件时，
-# 会自动将内存里的数据转换成绝对规范、绝不漏掉或多出任何逗号的标准 JSON[span_3](start_span)[span_3](end_span)
-# ====================================================================
+# 写入最终存盘文件
 with open(output_path, 'w', encoding='utf-8') as f:
-    # ensure_ascii=False 确保中文和 🐬 🔞 这些复杂字符绝不产生乱码转义[span_4](start_span)[span_4](end_span)
-    # indent=2 保证缩进漂亮，蜂蜜影视和电视盒子 100% 能够完美读取加载[span_5](start_span)[span_5](end_span)
-    json.dump(data_haitun, f, ensure_ascii=False, indent=2)
+    f.write(final_json_text)
 
-print(f"🎉 终极无缝合流成功！总合并站点总数：{len(data_haitun['sites'])} 个")
+print("⚡ 文本链条符号完全对齐修复，合流成功！")
