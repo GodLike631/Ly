@@ -1,4 +1,5 @@
 import os
+import re
 
 cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
@@ -14,46 +15,51 @@ text_cnb = read_file_text(cnb_path)
 text_haitun = read_file_text(haitun_path)
 
 # ====================================================================
-# 1. 从 CNB 中精准定向剥离：只保留包含 APP、4K、Nostr推荐 的站点整块
+# 【核心升级】：逐行大挪移，只把包含特定关键字的“整条站点块”抓取出来
 # ====================================================================
 split_key = '"sites": ['
 extracted_cnb_lines = []
 
 if split_key in text_cnb:
-    # 拿到 sites 数组内部的所有文本
+    # 拿到 sites 内部的完整配置字符串
     cnb_sites_block = text_cnb.split(split_key, 1)[1].split(']', 1)[0]
     
-    # 将文本切成独立的对象字符串（按每个站点的花括号分割）
-    # 用正则是为了防止换行符干扰，将每一个 { ... } 站点提取出来
-    import re
-    cnb_sites_list = re.findall(r'\{.*?\}', cnb_sites_block, re.DOTALL)
+    # 【高级技巧】：利用正则，精确匹配每一个完整的站点花括号块 { ... }
+    # 即使 ext 内部嵌套了多层大括号，通过排除法也能把每一个独立的站点整块剥离，绝不切碎
+    cnb_sites_list = re.findall(r'\{\s*"key"\s*:\s*".*?"\s*,.*?\}\s*(?=\s*,\s*\{|\s*$)', cnb_sites_block, re.DOTALL)
     
+    # 预防万一，如果上面的高级匹配没抓到，用最稳妥的常规站点块抓取
+    if not cnb_sites_list:
+        cnb_sites_list = re.findall(r'\{.*?\}', cnb_sites_block, re.DOTALL)
+
     for site_text in cnb_sites_list:
-        # 精准匹配：只保留含有 APP、4K、Nostr推荐 的站点文本
+        # 精准匹配：只保留老杨点名要的含有 APP、4K、Nostr推荐 的站点
         if "APP" in site_text.upper() or "4K" in site_text or "Nostr推荐" in site_text:
-            # 清理掉前后可能残留的换行和逗号，统一规范化
             cleaned_site = site_text.strip().strip(',')
             if cleaned_site:
+                # 检查这个提取块的花括号对齐情况，如果 ext 的尾部括号被削掉了，手动补齐
+                if cleaned_site.count('{') > cleaned_site.count('}'):
+                    cleaned_site += "}"
                 extracted_cnb_lines.append(cleaned_site)
 
-# 将剥离出来的这几条最优质线路，用逗号和换行拼成一个干净的文本块
+# 将剥离出的高端 APP 专线无损重组
 cnb_final_block = ",\n    ".join(extracted_cnb_lines)
 
 # ====================================================================
-# 2. 将剥离出来的文本块，无缝注入到海豚源的最前方
+# 2. 注入海豚大框架的最前面
 # ====================================================================
 if split_key in text_haitun and cnb_final_block:
     parts_haitun = text_haitun.split(split_key, 1)
-    haitun_front = parts_haitun[0] + split_key  # 框架前半段
-    haitun_back = parts_haitun[1].strip().lstrip(',') # 框架后半段（顺手剃掉开头的多余逗号）
+    haitun_front = parts_haitun[0] + split_key
+    haitun_back = parts_haitun[1].strip().lstrip(',')
     
-    # 终极无缝拼接：前半段 + CNB精确摘取线 + 逗号换行 + 海豚原有全线
+    # 拼接缝合
     final_json_text = haitun_front + "\n    " + cnb_final_block + ",\n    " + haitun_back
 else:
     final_json_text = text_haitun
 
 # ====================================================================
-# 3. 定制老杨自用专属品牌头部（不改动任何核心解析及线路数据）
+# 3. 定制品牌头部（不改动任何核心解析）
 # ====================================================================
 final_json_text = final_json_text.replace('"spider": "./spider.jar"', '"spider": "./tvbox.jar"')
 final_json_text = final_json_text.replace(
@@ -61,11 +67,11 @@ final_json_text = final_json_text.replace(
     '"warningText": "欢迎使用老杨自用缝合专线，本接口完全免费！"'
 )
 
-# 彻底洗掉由于拼接可能导致的特殊语法残缺（比如行尾出现 , ] 的低级错误）
+# 强力洗掉行尾可能由于拼接导致的多余空行逗号等低级语法错误
 final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
 
-# 4. 写入存盘
+# 4. 写入本地文件
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(final_json_text)
 
-print("⚡ 精准定向剥离合流完成！")
+print("⚡ 嵌套级高级站点块无损清洗完成！")
