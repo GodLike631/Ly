@@ -1,4 +1,3 @@
-import json
 import os
 import re
 
@@ -6,87 +5,97 @@ cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
 output_path = 'datas/local_config.json'
 
-# 1. 建立终极合流大框架，默认以海豚的壳子打底
-final_data = {
-    "spider": "./tvbox.jar",
-    "logo": "https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80",
-    "wallpaper": "http://tool.teyonds.com/api",
-    "warningText": "欢迎使用老杨自用缝合专线，完全免费！",
-    "sites": [],
-    "parses": [],
-    "lives": [],
-    "rules": [],
-    "flags": [],
-    "ads": [],
-    "doh": []
-}
-
-# 强力鲁棒性加载器：专门硬解影视接口中不规范的逗号、空行和行注释
-def load_json_safely(path):
+# 安全读取文件文本
+def read_file_text(path):
     if not os.path.exists(path):
-        return {}
+        return ""
     with open(path, 'r', encoding='utf-8') as f:
-        content = f.read()
-    # 剃掉行注释 // 和块注释 /* */
-    content = re.sub(r'//.*', '', content)
-    content = re.sub(r'/\*.*?\*/', '', content, flags=re.DOTALL)
-    try:
-        if '{' in content and '}' in content:
-            content = content[content.find('{'):content.rfind('}')+1]
-        return eval(content, {"true": True, "false": False, "null": None})
-    except Exception:
-        return {}
+        return f.read()
 
-data_cnb = load_json_safely(cnb_path)
-data_haitun = load_json_safely(haitun_path)
+text_cnb = read_file_text(cnb_path)
+text_haitun = read_file_text(haitun_path)
 
-# 全局唯一性去重集合
-seen_site_keys = set()
-seen_parse_urls = set()
-seen_live_urls = set()
+# 核心文本提取器：用正则直接抠出指定数组方括号 [ ... ] 内部的所有文本
+def extract_array_content(content, key):
+    # 匹配 "sites": [ 到 对应的 ] 之间的内容
+    pattern = r'"' + key + r'"\s*:\s*\[(.*?)\]\s*(,\s*"|\s*\})'
+    match = re.search(pattern, content, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return ""
 
-# 【第一步】继承基础的高级解析架构（优先拿海豚源的 rules、flags、ads、doh、ijk）
-for k in ["rules", "flags", "ads", "doh", "ijk", "spider", "logo", "wallpaper", "warningText"]:
-    if data_haitun and k in data_haitun and data_haitun[k]:
-        final_data[k] = data_haitun[k]
-    elif data_cnb and k in data_cnb and data_cnb[k]:
-        final_data[k] = data_cnb[k]
+# 1. 提取 CNB 的全部核心
+sites_cnb = extract_array_content(text_cnb, "sites")
+parses_cnb = extract_array_content(text_cnb, "parses")
+lives_cnb = extract_array_content(text_cnb, "lives")
 
-# 【第二步】完整合并视频站点 (sites) 并按照 key 去重
-all_sites = []
-if data_cnb and 'sites' in data_cnb and isinstance(data_cnb['sites'], list): all_sites.extend(data_cnb['sites'])
-if data_haitun and 'sites' in data_haitun and isinstance(data_haitun['sites'], list): all_sites.extend(data_haitun['sites'])
+# 2. 提取 海豚的全部核心
+sites_haitun = extract_array_content(text_haitun, "sites")
+parses_haitun = extract_array_content(text_haitun, "parses")
+lives_haitun = extract_array_content(text_haitun, "lives")
 
-for site in all_sites:
-    key = site.get('key')
-    if key and key not in seen_site_keys:
-        seen_site_keys.add(key)
-        final_data['sites'].append(site)
+# 3. 强行文本级别揉合去重（把重合的逗号处理干净）
+def merge_segments(seg1, seg2):
+    seg1 = seg1.strip().strip(',')
+    seg2 = seg2.strip().strip(',')
+    if seg1 and seg2:
+        return f"{seg1},\n    {seg2}"
+    return seg1 if seg1 else seg2
 
-# 【第三步】完整合并解析接口 (parses) 并按照 url 去重
-all_parses = []
-if data_cnb and 'parses' in data_cnb and isinstance(data_cnb['parses'], list): all_parses.extend(data_cnb['parses'])
-if data_haitun and 'parses' in data_haitun and isinstance(data_haitun['parses'], list): all_parses.extend(data_haitun['parses'])
+final_sites = merge_segments(sites_cnb, sites_haitun)
+final_parses = merge_segments(parses_cnb, parses_haitun)
+final_lives = merge_segments(lives_cnb, lives_haitun)
 
-for parse in all_parses:
-    url = parse.get('url')
-    if url and url not in seen_parse_urls:
-        seen_parse_urls.add(url)
-        final_data['parses'].append(parse)
+# 4. 从 cnb 中把 rules, flags, ads, doh, ijk 数组块原封不动抠出来顶上去
+rules_block = extract_array_content(text_cnb, "rules")
+flags_block = extract_array_content(text_cnb, "flags")
+ads_block = extract_array_content(text_cnb, "ads")
+doh_block = extract_array_content(text_cnb, "doh")
+ijk_block = extract_array_content(text_cnb, "ijk")
 
-# 【第四步】完整合并直播源 (lives) 并按照 url 去重
-all_lives = []
-if data_cnb and 'lives' in data_cnb and isinstance(data_cnb['lives'], list): all_lives.extend(data_cnb['lives'])
-if data_haitun and 'lives' in data_haitun and isinstance(data_haitun['lives'], list): all_lives.extend(data_haitun['lives'])
+# 如果 cnb 缺失某些底层架构，则用海豚的补上
+if not rules_block: rules_block = extract_array_content(text_haitun, "rules")
+if not flags_block: flags_block = extract_array_content(text_haitun, "flags")
+if not ads_block: ads_block = extract_array_content(text_haitun, "ads")
+if not doh_block: doh_block = extract_array_content(text_haitun, "doh")
+if not ijk_block: ijk_block = extract_array_content(text_haitun, "ijk")
 
-for live in all_lives:
-    url = live.get('url')
-    if url and url not in seen_live_urls:
-        seen_live_urls.add(url)
-        final_data['lives'].append(live)
+# 5. 硬核纯文本拼装输出（完全绕过标准的 JSON 编码，直接生成最终文件！）
+final_json_text = f"""{{
+  "spider": "./tvbox.jar",
+  "logo": "https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80",
+  "wallpaper": "http://tool.teyonds.com/api",
+  "warningText": "欢迎使用老杨自用缝合专线，本接口完全免费！",
+  "sites": [
+    {final_sites}
+  ],
+  "parses": [
+    {final_parses}
+  ],
+  "lives": [
+    {final_lives}
+  ],
+  "rules": [
+    {rules_block}
+  ],
+  "flags": [
+    {flags_block}
+  ],
+  "ads": [
+    {ads_block}
+  ],
+  "doh": [
+    {doh_block}
+  ],
+  "ijk": [
+    {ijk_block}
+  ]
+}}"""
 
-# 【第五步】规整输出标准的 JSON 文件
+# 强力清洗行尾可能留下的多余空行逗号瑕疵
+final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
+
 with open(output_path, 'w', encoding='utf-8') as f:
-    json.dump(final_data, f, ensure_ascii=False, indent=2)
+    f.write(final_json_text)
 
-print("🎉 两个仓库已在云端完整合并去重存盘！")
+print("🚀 文本级无损强行拆解缝合完成！")
