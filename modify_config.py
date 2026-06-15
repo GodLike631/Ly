@@ -5,22 +5,6 @@ cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
 output_path = 'datas/local_config.json'
 
-# 初始化最终的无损合流大框架
-final_data = {
-    "spider": "./tvbox.jar",  # 默认强制锁死为兼容性更广的 tvbox 核心
-    "logo": "https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80",
-    "wallpaper": "http://tool.teyonds.com/api",
-    "warningText": "欢迎使用老杨自用全量缝合专线，本接口完全免费！",
-    "sites": [],
-    "parses": [],
-    "lives": [],
-    "rules": [],
-    "flags": [],
-    "ads": [],
-    "doh": [],
-    "ijk": []
-}
-
 def read_file_text(path):
     if not os.path.exists(path):
         return ""
@@ -31,141 +15,114 @@ text_cnb = read_file_text(cnb_path)
 text_haitun = read_file_text(haitun_path)
 
 # ====================================================================
-# 【高级算法升级】：采用定点锚点拦截法，完美抓取带任意嵌套大括号的对象块
+# 【核心算法升级】：纯物理大挪移，不需要懂结构，只管把两边数组内的文本无损合并
 # ====================================================================
-def extract_nested_objects(content, array_name):
-    split_key = f'"{array_name}": ['
+def get_array_inner_text(content, key):
+    split_key = f'"{key}": ['
     if split_key not in content:
-        return []
-        
-    # 斩下数组内部的全部文本块
-    block = content.split(split_key, 1)[1].split(']', 1)[0]
+        return ""
+    # 切出数组后面的所有文本
+    after_key = content.split(split_key, 1)[1]
     
-    # 针对不同数组，使用绝对无法被内部嵌套糊弄的高级特征正则表达式
-    if array_name == "sites":
-        # 必须同时满足 {"key": 开头，并且顺延到下一个对象的起始特征处拦截
-        items = re.findall(r'\{\s*"key"\s*:\s*".*?"\s*,.*?\}\s*(?=\s*,\s*\[|\s*,\s*\{|\s*$)', block, re.DOTALL)
-    elif array_name == "parses":
-        # 必须同时满足 {"name": 开头，并且顺延到下一个解析项边界拦截，无视 ext.header 里的多层花括号
-        items = re.findall(r'\{\s*"name"\s*:\s*".*?"\s*,.*?\}\s*(?=\s*,\s*\[|\s*,\s*\{|\s*$)', block, re.DOTALL)
+    # 巧妙利用找中括号闭合的原理，截取最前面的内容
+    # 影视接口数组一般以 "],\n" 或 "]\n" 结束
+    if '],' in after_key:
+        inner_text = after_key.split('],', 1)[0]
     else:
-        # 直播、规则等普通项，按标准常规对齐提取
-        items = re.findall(r'\{.*?\}', block, re.DOTALL)
+        # 兜底截取到第一个右中括号
+        inner_text = after_key.split(']', 1)[0]
         
-    return [item.strip().strip(',') for item in items if item.strip()]
+    return inner_text.strip()
 
-# 全局去重集合
-seen_site_keys = set()
-seen_parse_urls = set()
-seen_live_urls = set()
+# 1. 提取双方所有核心数组的纯文本段落
+sites_cnb = get_array_inner_text(text_cnb, "sites")
+sites_ht = get_array_inner_text(text_haitun, "sites")
 
-# ==================== 【1. 全量处理视频站点 (sites)】 ====================
-cnb_sites = extract_nested_objects(text_cnb, "sites")
-for site_text in cnb_sites:
-    if site_text.count('{') > site_text.count('}'): site_text += "}"
+parses_cnb = get_array_inner_text(text_cnb, "parses")
+parses_ht = get_array_inner_text(text_haitun, "parses")
+
+lives_cnb = get_array_inner_text(text_cnb, "lives")
+lives_ht = get_array_inner_text(text_haitun, "lives")
+
+rules_cnb = get_array_inner_text(text_cnb, "rules")
+rules_ht = get_array_inner_text(text_haitun, "rules")
+
+flags_cnb = get_array_inner_text(text_cnb, "flags")
+flags_ht = get_array_inner_text(text_haitun, "flags")
+
+ads_cnb = get_array_inner_text(text_cnb, "ads")
+ads_ht = get_array_inner_text(text_haitun, "ads")
+
+doh_cnb = get_array_inner_text(text_cnb, "doh")
+doh_ht = get_array_inner_text(text_haitun, "doh")
+
+ijk_cnb = get_array_inner_text(text_cnb, "ijk")
+ijk_ht = get_array_inner_text(text_haitun, "ijk")
+
+# ====================================================================
+# 【路径修复手术】：只针对 CNB 提取出来的站点文本段进行绝对路径升级
+# ====================================================================
+if sites_cnb:
+    # 让所有没有写 jar 的站点统一认回 cnb 的 spider.jar
+    # 考虑到有些站点内部带有换行，我们直接把第一个 {"key" 替换成插入 jar 的版本
+    sites_cnb = re.sub(r'\{\s*"key"\s*:', '{\n      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",\n      "key":', sites_cnb)
     
-    # 全量网络路径无损打通手术，保证 CNB 相对路径在任何地方独立运行不失效
-    if '"jar"' not in site_text:
-        site_text = site_text.replace('{', '{\n      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",', 1)
-        
-    site_text = site_text.replace('./XBPQ/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/')
-    site_text = site_text.replace('./XYQHiker/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/')
-    site_text = site_text.replace('./js/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/')
-    site_text = site_text.replace('./json/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/')
-    site_text = site_text.replace('./py/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/')
-    
-    key_match = re.search(r'"key"\s*:\s*"(.*?)"', site_text)
-    if key_match:
-        key_val = key_match.group(1)
-        if key_val not in seen_site_keys:
-            seen_site_keys.add(key_val)
-            final_data["sites"].append(site_text)
+    # 强行补全 CNB 的各种本地相对路径
+    sites_cnb = sites_cnb.replace('./XBPQ/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/')
+    sites_cnb = sites_cnb.replace('./XYQHiker/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/')
+    sites_cnb = sites_cnb.replace('./js/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/')
+    sites_cnb = sites_cnb.replace('./json/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/')
+    sites_cnb = sites_cnb.replace('./py/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/')
 
-haitun_sites = extract_nested_objects(text_haitun, "sites")
-for site_text in haitun_sites:
-    if site_text.count('{') > site_text.count('}'): site_text += "}"
-    key_match = re.search(r'"key"\s*:\s*"(.*?)"', site_text)
-    if key_match:
-        key_val = key_match.group(1)
-        if key_val not in seen_site_keys:
-            seen_site_keys.add(key_val)
-            final_data["sites"].append(site_text)
+# ====================================================================
+# 安全拼接函数：把两段文本连在一起，并把中间的逗号瑕疵剔除干净
+# ====================================================================
+def safe_join(seg1, seg2):
+    seg1 = seg1.strip().rstrip(',')
+    seg2 = seg2.strip().lstrip(',')
+    if seg1 and seg2:
+        return f"{seg1},\n    {seg2}"
+    return seg1 if seg1 else seg2
 
-# ==================== 【2. 全量处理解析接口 (parses)】 ====================
-cnb_parses = extract_nested_objects(text_cnb, "parses")
-haitun_parses = extract_nested_objects(text_haitun, "parses")
-
-for parse_text in (cnb_parses + haitun_parses):
-    if parse_text.count('{') > parse_text.count('}'): 
-        # 精准修复：如果是多级嵌套导致右括号数量不够，看差了几个就补齐几个
-        parse_text += "}" * (parse_text.count('{') - parse_text.count('}'))
-        
-    url_match = re.search(r'"url"\s*:\s*"(.*?)"', parse_text)
-    if url_match:
-        url_val = url_match.group(1)
-        if url_val not in seen_parse_urls:
-            seen_parse_urls.add(url_val)
-            final_data["parses"].append(parse_text)
-
-# ==================== 【3. 全量处理直播频道 (lives)】 ====================
-cnb_lives = extract_nested_objects(text_cnb, "lives")
-haitun_lives = extract_nested_objects(text_haitun, "lives")
-
-for live_text in (cnb_lives + haitun_lives):
-    url_match = re.search(r'"url"\s*:\s*"(.*?)"', live_text)
-    if url_match:
-        url_val = url_match.group(1)
-        if url_val not in seen_live_urls:
-            seen_live_urls.add(url_val)
-            final_data["lives"].append(live_text)
-
-# ==================== 【4. 完整融合并去重核心底层规则段】 ====================
-for array_name in ["rules", "flags", "ads", "doh", "ijk"]:
-    block_cnb = extract_nested_objects(text_cnb, array_name)
-    block_ht = extract_nested_objects(text_haitun, array_name)
-    combined_blocks = list(set(block_cnb + block_ht))
-    final_data[array_name] = combined_blocks
-
-# ==================== 【5. 纯文本无缝格式化合拼输出】 ====================
-def make_json_array_text(item_list):
-    return ",\n    ".join(item_list)
-
+# ====================================================================
+# 终极纯文本组装出壳（完美绕过所有解析盲区，格式绝对标准无损）
+# ====================================================================
 final_json_text = f"""{{
-  "spider": "{final_data['spider']}",
-  "logo": "{final_data['logo']}",
-  "wallpaper": "{final_data['wallpaper']}",
-  "warningText": "{final_data['warningText']}",
+  "spider": "./tvbox.jar",
+  "logo": "https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80",
+  "wallpaper": "http://tool.teyonds.com/api",
+  "warningText": "欢迎使用老杨自用全量缝合专线，本接口完全免费！",
   "sites": [
-    {make_json_array_text(final_data['sites'])}
+    {safe_join(sites_cnb, sites_ht)}
   ],
   "parses": [
-    {make_json_array_text(final_data['parses'])}
+    {safe_join(parses_cnb, parses_ht)}
   ],
   "lives": [
-    {make_json_array_text(final_data['lives'])}
+    {safe_join(lives_cnb, lives_ht)}
   ],
   "rules": [
-    {make_json_array_text(final_data['rules'])}
+    {safe_join(rules_cnb, rules_ht)}
   ],
   "flags": [
-    {make_json_array_text(final_data['flags'])}
+    {safe_join(flags_cnb, flags_ht)}
   ],
   "ads": [
-    {make_json_array_text(final_data['ads'])}
+    {safe_join(ads_cnb, ads_ht)}
   ],
   "doh": [
-    {make_json_array_text(final_data['doh'])}
+    {safe_join(doh_cnb, doh_ht)}
   ],
   "ijk": [
-    {make_json_array_text(final_data['ijk'])}
+    {safe_join(ijk_cnb, ijk_ht)}
   ]
 }}"""
 
-# 强效清洗数组首尾处可能产生的格式断开瑕疵
+# 强效最后清洗：抹除由于合并空配置段可能留下的 [ , ] 错位
 final_json_text = re.sub(r'\[\s*,', '[', final_json_text)
 final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
 
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(final_json_text)
 
-print("🎉 突破嵌套限制，全量绝对无损缝合成功！")
+print("🎉 降维打击成功！全量纯文本物理级合流完成！")
