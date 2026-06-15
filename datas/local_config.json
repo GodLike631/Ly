@@ -23,6 +23,7 @@
         "ext":"https://cdn.waimaimingtang.com/file/images/bwc/20251023002144-0e40887294.js"
         },
         {
+           "spider": "./tvbox.jar",
            "key": "hajim-腾讯备",
            "name": "🐬腾讯4K",
            "type": 3,
@@ -38,7 +39,8 @@
         "ext":"https://cdn.waimaimingtang.com/file/images/bwc/20251023002108-a4795930ec.js"
         },
 		{
-		"key": "茫茫",
+		"spider": "./tvbox.jar",
+        "key": "茫茫",
         "name": "🐬芒果4K",
         "type": 3,
          "api": "https://ghfast.top/https://raw.githubusercontent.com/IY-CPU/IY/main/lib/drpy2.min.js",
