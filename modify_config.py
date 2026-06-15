@@ -26,19 +26,35 @@ if split_key in text_cnb:
         cnb_sites_list = re.findall(r'\{.*?\}', cnb_sites_block, re.DOTALL)
 
     for site_text in cnb_sites_list:
-        # 只保留含有 APP、4K、Nostr推荐 的站点
-        if "APP" in site_text.upper() or "4K" in site_text or "Nostr推荐" in site_text:
+        # ====================================================================
+        # 【全线扩容捕获】：排除掉测试、本地和空白，把剩下的精髓全捞出来
+        # ====================================================================
+        # 1. 优先抓取你点名要的核心核心
+        is_target = "APP" in site_text.upper() or "4K" in site_text or "Nostr推荐" in site_text
+        
+        # 2. 扩大范围：把动漫、磁力、影视、搜索、体育、音乐、课堂合集等剩下有用的线全抓进来
+        if not is_target:
+            ext_keywords = ["动漫", "磁力", "影视", "搜索", "体育", "音乐", "课堂", "短剧", "看球", "广播", "听书", "戏曲", "教育"]
+            for kw in ext_keywords:
+                if kw in site_text:
+                    is_target = True
+                    break
+        
+        # 3. 拦截剔除：如果是纯粹的测试、本地视频或者推送，则不参与融合
+        if "Nostr测试" in site_text or "本地｜视频" in site_text or "push_agent" in site_text:
+            is_target = False
+
+        if is_target:
             cleaned_site = site_text.strip().strip(',')
             if cleaned_site:
                 if cleaned_site.count('{') > cleaned_site.count('}'):
                     cleaned_site += "}"
                 
                 # ====================================================================
-                # 【核心复活手术】：将 CNB APP 线路的底层依赖全部引向 CNB 的官方网络绝对路径
+                # 【核心复活手术】：将 CNB 线路的底层依赖全部引向 CNB 的官方网络绝对路径
                 # ====================================================================
-                # 1. 强行让这批 APP 线路认回属于它们的 spider 爬虫文件
+                # 1. 强行让这批线路认回属于它们的 spider 爬虫文件
                 if '"jar"' not in cleaned_site:
-                    # 如果站点本身没写 jar，我们在它内部强行插入一条，指向 CNB 官方的 spider.jar 绝对路径
                     cleaned_site = cleaned_site.replace('{', '{\n      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",', 1)
                 
                 # 2. 强行补全相对路径（将 ./XBPQ/ 和 ./XYQHiker/ 替换为官方绝对网络链接）
@@ -50,7 +66,7 @@ if split_key in text_cnb:
                 
                 extracted_cnb_lines.append(cleaned_site)
 
-# 将剥离出且经过“网络打通”的 APP 专线重组
+# 将剥离出且经过“网络打通”的 APP/优质专线重组
 cnb_final_block = ",\n    ".join(extracted_cnb_lines)
 
 # 2. 注入海豚大框架的最前面（保持海豚原本的所有直播、解析和 tvbox.jar 框架不变）
@@ -77,4 +93,4 @@ final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(final_json_text)
 
-print("⚡ APP线路底层网络依赖打通，全线复活合流完成！")
+print("⚡ 剩下全线优质站点已顺畅插入，网络依赖同步打通，合流完成！")
