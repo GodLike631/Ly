@@ -1,9 +1,44 @@
+import json
 import os
 import re
 
 cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
 output_path = 'datas/local_config.json'
+
+# 初始化最终的无损合流大框架
+final_data = {
+    "spider": "./tvbox.jar",  # 默认强制锁死为兼容性更广的 tvbox 核心
+    "logo": "https://img.freepik.com/free-vector/cute-dolphin-swimming-cartoon-vector-icon-illustration-animal-nature-icon-isolated-flat-vector_138676-12582.jpg?semt=ais_hybrid&w=740&q=80",
+    "wallpaper": "http://tool.teyonds.com/api",
+    "warningText": "欢迎使用老杨自用全量缝合专线，本接口完全免费！",
+    "sites": [],
+    "parses": [],
+    "lives": [],
+    "rules": [],
+    "flags": [],
+    "ads": [],
+    "doh": [],
+    "ijk": []
+}
+
+# 强力文本提取器：用正则直接从文本中抠出指定数组中括号 [ ... ] 内部的所有对象块
+def extract_objects_from_array(content, key):
+    # 先定位到 "key": [
+    pattern = r'"' + key + r'"\s*:\s*\[(.*?)\]\s*(?=\s*,\s*"|\s*\})'
+    match = re.search(pattern, content, re.DOTALL)
+    if not match:
+        return []
+    
+    block = match.group(1).strip()
+    # 按照每个 {} 独立对象进行切分提取
+    # 针对 sites 做了防 ext 嵌套花括号切碎的高级匹配
+    if key == "sites":
+        items = re.findall(r'\{\s*"key"\s*:\s*".*?"\s*,.*?\}\s*(?=\s*,\s*\[|\s*,\s*\{|\s*$)', block, re.DOTALL)
+    else:
+        items = re.findall(r'\{.*?\}', block, re.DOTALL)
+        
+    return [item.strip().strip(',') for item in items if item.strip()]
 
 def read_file_text(path):
     if not os.path.exists(path):
@@ -14,73 +49,120 @@ def read_file_text(path):
 text_cnb = read_file_text(cnb_path)
 text_haitun = read_file_text(haitun_path)
 
-split_key = '"sites": ['
-extracted_cnb_lines = []
+# 全局去重字典集合
+seen_site_keys = set()
+seen_parse_urls = set()
+seen_live_urls = set()
 
-# ====================================================================
-# 1. 提取 CNB 仓库里的【所有】站点（不做任何过滤，全量无损提取）
-# ====================================================================
-if split_key in text_cnb:
-    cnb_sites_block = text_cnb.split(split_key, 1)[1].split(']', 1)[0]
+# ==================== 【1. 全量提取与网络化升级 CNB 的站点】 ====================
+cnb_sites = extract_objects_from_array(text_cnb, "sites")
+for site_text in cnb_sites:
+    # 自动修复括号闭合
+    if site_text.count('{') > site_text.count('}'):
+        site_text += "}"
+        
+    # 核心网络路径升级，保证 CNB 的内容异地独立运行不失效
+    if '"jar"' not in site_text:
+        site_text = site_text.replace('{', '{\n      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",', 1)
+        
+    site_text = site_text.replace('./XBPQ/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/')
+    site_text = site_text.replace('./XYQHiker/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/')
+    site_text = site_text.replace('./js/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/')
+    site_text = site_text.replace('./json/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/')
+    site_text = site_text.replace('./py/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/')
     
-    # 精确匹配每一个完整的站点花括号块 { ... }，强力保护 ext 内部嵌套的复杂大括号
-    cnb_sites_list = re.findall(r'\{\s*"key"\s*:\s*".*?"\s*,.*?\}\s*(?=\s*,\s*\[|\s*,\s*\{|\s*$)', cnb_sites_block, re.DOTALL)
-    if not cnb_sites_list:
-        cnb_sites_list = re.findall(r'\{.*?\}', cnb_sites_block, re.DOTALL)
+    # 用正则抓出 key 用来去重
+    key_match = re.search(r'"key"\s*:\s*"(.*?)"', site_text)
+    if key_match:
+        key_val = key_match.group(1)
+        if key_val not in seen_site_keys:
+            seen_site_keys.add(key_val)
+            final_data["sites"].append(site_text)
 
-    for site_text in cnb_sites_list:
-        cleaned_site = site_text.strip().strip(',')
-        if cleaned_site:
-            # 自动修复括号闭合瑕疵
-            if cleaned_site.count('{') > cleaned_site.count('}'):
-                cleaned_site += "}"
-            
-            # ====================================================================
-            # 【全线网络化打通】：由于是全量融合，所有站点的相对路径都必须升级为网络绝对路径
-            # ====================================================================
-            # 1. 如果站点本身没有指定 jar 爬虫包，强制让它认回 CNB 官方亲生的 spider.jar
-            if '"jar"' not in cleaned_site:
-                cleaned_site = cleaned_site.replace('{', '{\n      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",', 1)
-            
-            # 2. 批量补全所有相对路径前缀，确保全量线路的子配置文件全线复活
-            cleaned_site = cleaned_site.replace('./XBPQ/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/')
-            cleaned_site = cleaned_site.replace('./XYQHiker/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/')
-            cleaned_site = cleaned_site.replace('./js/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/')
-            cleaned_site = cleaned_site.replace('./json/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/')
-            cleaned_site = cleaned_site.replace('./py/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/')
-            
-            extracted_cnb_lines.append(cleaned_site)
+# ==================== 【2. 全量提取海豚源的站点并合流（去重）】 ====================
+haitun_sites = extract_objects_from_array(text_haitun, "sites")
+for site_text in haitun_sites:
+    if site_text.count('{') > site_text.count('}'):
+        site_text += "}"
+    key_match = re.search(r'"key"\s*:\s*"(.*?)"', site_text)
+    if key_match:
+        key_val = key_match.group(1)
+        if key_val not in seen_site_keys:
+            seen_site_keys.add(key_val)
+            final_data["sites"].append(site_text)
 
-# 重组 CNB 的全量站点板块
-cnb_final_block = ",\n    ".join(extracted_cnb_lines)
+# ==================== 【3. 全量融合去重解析接口 (parses)】 ====================
+cnb_parses = extract_objects_from_array(text_cnb, "parses")
+haitun_parses = extract_objects_from_array(text_haitun, "parses")
 
-# ====================================================================
-# 2. 注入海豚大配置框架的最前面（让海豚的直播、解析、核心规则安全打底）
-# ====================================================================
-if split_key in text_haitun and cnb_final_block:
-    parts_haitun = text_haitun.split(split_key, 1)
-    haitun_front = parts_haitun[0] + split_key
-    haitun_back = parts_haitun[1].strip().lstrip(',')
-    
-    # 终极无缝硬缝合
-    final_json_text = haitun_front + "\n    " + cnb_final_block + ",\n    " + haitun_back
-else:
-    final_json_text = text_haitun
+for parse_text in (cnb_parses + haitun_parses):
+    url_match = re.search(r'"url"\s*:\s*"(.*?)"', parse_text)
+    if url_match:
+        url_val = url_match.group(1)
+        if url_val not in seen_parse_urls:
+            seen_parse_urls.add(url_val)
+            final_data["parses"].append(parse_text)
 
-# ====================================================================
-# 3. 全局品牌定制与规整
-# ====================================================================
-final_json_text = final_json_text.replace('"spider": "./spider.jar"', '"spider": "./tvbox.jar"')
-final_json_text = final_json_text.replace(
-    '"warningText": "注意:如果别人倒卖海豚影视接口收费的都是骗子,没有qq群微信群，只有tg官方交流群 TG：@hshsjk"', 
-    '"warningText": "欢迎使用老杨自用全量缝合专线，本接口完全免费！"'
-)
+# ==================== 【4. 全量融合去重直播源 (lives)】 ====================
+cnb_lives = extract_objects_from_array(text_cnb, "lives")
+haitun_lives = extract_objects_from_array(text_haitun, "lives")
 
-# 消除合并可能导致的末尾多余逗号瑕疵
+for live_text in (cnb_lives + haitun_lives):
+    url_match = re.search(r'"url"\s*:\s*"(.*?)"', live_text)
+    if url_match:
+        url_val = url_match.group(1)
+        if url_val not in seen_live_urls:
+            seen_live_urls.add(url_val)
+            final_data["lives"].append(live_text)
+
+# ==================== 【5. 完整并入 rules, flags, ads, doh, ijk】 ====================
+for array_name in ["rules", "flags", "ads", "doh", "ijk"]:
+    block_cnb = extract_objects_from_array(text_cnb, array_name)
+    block_ht = extract_objects_from_array(text_haitun, array_name)
+    # 合并两边的规则段
+    combined_blocks = list(set(block_cnb + block_ht))
+    final_data[array_name] = combined_blocks
+
+# ==================== 【6. 硬核字符串纯文本组装生成最终文件】 ====================
+def make_json_array_text(item_list):
+    return ",\n    ".join(item_list)
+
+final_json_text = f"""{{
+  "spider": "{final_data['spider']}",
+  "logo": "{final_data['logo']}",
+  "wallpaper": "{final_data['wallpaper']}",
+  "warningText": "{final_data['warningText']}",
+  "sites": [
+    {make_json_array_text(final_data['sites'])}
+  ],
+  "parses": [
+    {make_json_array_text(final_data['parses'])}
+  ],
+  "lives": [
+    {make_json_array_text(final_data['lives'])}
+  ],
+  "rules": [
+    {make_json_array_text(final_data['rules'])}
+  ],
+  "flags": [
+    {make_json_array_text(final_data['flags'])}
+  ],
+  "ads": [
+    {make_json_array_text(final_data['ads'])}
+  ],
+  "doh": [
+    {make_json_array_text(final_data['doh'])}
+  ],
+  "ijk": [
+    {make_json_array_text(final_data['ijk'])}
+  ]
+}}"""
+
+# 强效清洗行尾可能留下的语法瑕疵（比如空数组导致 [ , ] 错位）
+final_json_text = re.sub(r'\[\s*,', '[', final_json_text)
 final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
 
-# 4. 写入 local_config.json 存盘
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(final_json_text)
 
-print("⚡ 【全量无损融合版】CNB 所有内容已完美并入海豚框架，网络依赖全面打通！")
+print("⚡ 真正意义上的全内容无损缝合大融合完成！")
