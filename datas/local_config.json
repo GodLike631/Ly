@@ -5,6 +5,7 @@
     "warningText": "欢迎使用老杨自用缝合专线，本接口完全免费！",
     "sites": [
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "Nostr",
             "name": "Nostr推荐",
             "type": 3,
@@ -12,6 +13,7 @@
             "homePage": "https://www.252035.xyz/xs/tvbox/nostr.html"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "热播影视",
             "name": "热播｜APP",
             "type": 3,
@@ -24,12 +26,14 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "三秋影视",
             "name": "三秋｜APP",
             "type": 3,
             "api": "csp_App3Q"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "韩圈",
             "name": "韩圈｜APP",
             "type": 3,
@@ -37,6 +41,7 @@
             "ext": "http://www.小不点.com/api/2026/fishhxq.php"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "无极99",
             "name": "无极丨APP",
             "type": 3,
@@ -54,6 +59,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "听心99",
             "name": "听心｜APP",
             "type": 3,
@@ -70,6 +76,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "橙子99",
             "name": "橙子丨APP",
             "type": 3,
@@ -86,6 +93,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "追番99",
             "name": "追番｜APP",
             "type": 3,
@@ -102,6 +110,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "咕噜99",
             "name": "咕噜丨APP",
             "type": 3,
@@ -118,6 +127,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "剧圈99",
             "name": "剧圈丨APP",
             "type": 3,
@@ -133,6 +143,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "双星99",
             "name": "双星丨APP",
             "type": 3,
@@ -149,6 +160,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "顾我99",
             "name": "顾我丨APP",
             "type": 3,
@@ -165,6 +177,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "天堂",
             "name": "天堂｜APP",
             "type": 3,
@@ -185,6 +198,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "橘汁",
             "name": "橘汁｜APP",
             "type": 3,
@@ -205,6 +219,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "华谊",
             "name": "华谊｜APP",
             "type": 3,
@@ -225,6 +240,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "苹果",
             "name": "苹果｜APP",
             "type": 3,
@@ -245,6 +261,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "薯条",
             "name": "薯条｜APP",
             "type": 3,
@@ -265,6 +282,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "久久",
             "name": "久久｜APP",
             "type": 3,
@@ -275,6 +293,7 @@
             "ext": "http://99cms.jj99.icu:8199/api.php/app/"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "闪影",
             "name": "闪影｜APP",
             "type": 3,
@@ -285,6 +304,7 @@
             "ext": "http://38.47.213.61:41271/mogai_api.php/v1.vod"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "飞飞",
             "name": "飞飞丨APP",
             "type": 3,
@@ -295,6 +315,7 @@
             "ext": "https://qpcj.69mini.com/api.php/app/"
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "云播",
             "name": "云播｜APP",
             "type": 3,
@@ -306,6 +327,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "首发",
             "name": "首发｜APP",
             "type": 3,
@@ -321,6 +343,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "金牌",
             "name": "金牌｜APP",
             "type": 3,
@@ -337,6 +360,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "老鹰",
             "name": "老鹰｜APP",
             "type": 3,
@@ -351,6 +375,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "蓝鹰",
             "name": "蓝鹰｜APP",
             "type": 3,
@@ -366,6 +391,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "猎豹",
             "name": "猎豹｜APP",
             "type": 3,
@@ -379,6 +405,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "映画",
             "name": "映画｜APP",
             "type": 3,
@@ -392,6 +419,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "王子",
             "name": "王子｜APP",
             "type": 3,
@@ -405,6 +433,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "秒看",
             "name": "秒看｜APP",
             "type": 3,
@@ -419,6 +448,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "茉莉",
             "name": "茉莉｜APP",
             "type": 3,
@@ -432,6 +462,7 @@
             }
         },
     {
+      "jar": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
             "key": "灵虎",
             "name": "灵虎｜APP",
             "type": 3,
