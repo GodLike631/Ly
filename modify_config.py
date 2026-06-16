@@ -3,7 +3,7 @@ import re
 
 cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
-output_path = 'datas/local_config.json'  # 保持原文件名不变，老订阅无缝升级
+output_path = 'datas/老杨TV.json'  # 🌟 已经精准修改为你的专属后缀文件名
 
 def read_file_text(path):
     if not os.path.exists(path):
@@ -49,7 +49,6 @@ if haitun_lives_text and '"lives": [' in final_json_text:
 # ====================================================================
 # 3. 靶向拦截手术：揪出这两个瘫痪的 4K 线路，强行切断 CNB 依赖，锁死海豚核心
 # ====================================================================
-# 强行给 🐬腾讯4K 和 🐬芒果4K 独立注入特权 spider 属性，让他们绕过全局，直接调用最懂他们的本地核心
 final_json_text = final_json_text.replace(
     '"key": "hajim-腾讯备"', 
     '"spider": "./tvbox.jar",\n           "key": "hajim-腾讯备"'
@@ -60,7 +59,7 @@ final_json_text = final_json_text.replace(
 )
 
 # ====================================================================
-# 【全方位无死角路径清洗】：让 CNB 的其余线路走官方绝对网络链接
+# 【全方位无死角路径清洗】：让 CNB 的其余线路走官方绝对 network 链接
 # ====================================================================
 final_json_text = final_json_text.replace('./spider.jar', 'https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar')
 final_json_text = final_json_text.replace('./XBPQ/', 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/')
@@ -82,4 +81,4 @@ final_json_text = re.sub(r',\s*\]', '\n  ]', final_json_text)
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(final_json_text)
 
-print("🎉 【回归版完成】依然输出为 local_config.json，老订阅完美满血升级！")
+print("🎉 【专属定制版】已经成功输出为 老杨TV.json！")
