@@ -457,10 +457,18 @@
             "api": "https://91md.me/api.php/provide/vod/",
             "searchable": 1,
             "changeable": 1
-        }
-        ],
+        },
+		{
+      "key": "push_agent",
+      "name": "推送",
+      "type": 3,
+      "api": "csp_PushGuard",
+      "searchable": 1,
+      "changeable": 0
+       }
+    ],
     "parses": [ 
-       {
+		{
       "name": "极速",
       "type": 0,
       "url": "https://jiexi.789jiexi.net:4433/?url="
@@ -682,6 +690,7 @@
     }
    ],
     "ads": [
+		"mozai.4gtv.tv",
         "static-mozai.4gtv.tv",
         "pv.vipwm.cc"
     ],
