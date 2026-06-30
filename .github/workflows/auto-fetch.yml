@@ -5,7 +5,7 @@ on:
     - cron: '43 0,12 * * *'
   workflow_dispatch: 
 
-# 🛠️ 关键修复：显式赋予 GitHub Actions 写入和提交权限，解决 exit code 128
+# ✨ 双重保险：在代码中强制声明该工作流拥有写权限
 permissions:
   contents: write
 
@@ -16,6 +16,9 @@ jobs:
     steps:
     - name: Checkout own repo
       uses: actions/checkout@v4
+      with:
+        # 使用当前工作流的 Token 进行鉴权
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -31,8 +34,7 @@ jobs:
 
     - name: Text Merge JSON
       run: |
-        # 💡 提示：请确保你仓库中的 Python 脚本文件名是 modify_config.py
-        # 如果脚本名字是 ly.py，请把下面这一行改成 python ly.py
+        # 💡 提示：如果你的 Python 脚本文件名是 ly.py，请把下行改为 python ly.py
         python modify_config.py
 
     - name: Commit and Push changes
@@ -40,6 +42,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
+        # 追踪所有新生成的文件和旧线大轰炸后的过期文件
         git add datas/控制开关.txt
         git add datas/最新接口文件名.txt
         git add datas/蝴蝶影视*.json
@@ -49,5 +52,6 @@ jobs:
           echo "文件没有变化，无需更新。"
         else
           git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列): $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+          # 🚀 强制指定推送到当前分支
+          git push origin HEAD:${{ github.ref_name }}
         fi
