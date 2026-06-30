@@ -5,8 +5,8 @@ on:
     - cron: '43 0,12 * * *'
   workflow_dispatch: 
 
-permissions:
-  contents: write
+# 🌟 显式强制赋予工作流全部写权限，解决 128 报错的关键
+permissions: write-all
 
 jobs:
   fetch-and-sync:
@@ -39,7 +39,7 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
-        # 🛠️ 终极改动：直接添加整个 datas 文件夹，不再由于找不到“老杨TV”等历史文件而导致 Git 崩溃
+        # 🛠️ 终极改动：直接添加整个 datas 文件夹，不再由于找不到历史文件而导致 Git 崩溃
         git add datas/
         
         # 🛠️ 终极保险：即使由于网络延迟导致内容无变化，也优雅退出而不报错
