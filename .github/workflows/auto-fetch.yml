@@ -1,9 +1,10 @@
-name: 自动双源无损强行合并
+name: 自动双源无损强行合并-备用线
 
 on:
   schedule:
-    - cron: '0 0,12 * * *'
-  workflow_dispatch:
+    # 🎯 彻底避开整点塞车！换算北京时间为早上 8:43 和晚上 20:43 准时全自动合流
+    - cron: '43 0,12 * * *'
+  workflow_dispatch: 
 
 jobs:
   fetch-and-sync:
@@ -18,28 +19,37 @@ jobs:
       with:
         python-version: '3.10'
 
-    # 1. 下载两个源
+    # 1. 下载三个源（标准接口底座）
     - name: Fetch target files
       run: |
         mkdir -p datas
         curl -L "https://cnb.cool/fish2018/xs/-/git/raw/main/api.json" -o datas/cnb.json
         curl -L "https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/海豚666.json" -o datas/haitun.json
+        curl -L "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py.json" -o datas/lz.json
 
-    # 2. 强行文本拼接合并
+    # 2. 执行自适应对象级合流脚本（处理核心逻辑与防报错机制）
+    # 💡 提示：请确保你仓库中的 Python 脚本文件名与下方执行的文件名一致
     - name: Text Merge JSON
       run: |
         python modify_config.py
 
-    # 3. 提交
+    # 3. 核心修正：大写 name 补全、强制精准添加控制开关、实现防洗牌死循环
     - name: Commit and Push changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
-        git add .
-        if [ -z "$(git status --porcelain)" ]; then
+        # 🌟 必须精准添加控制开关文件！否则 1 号早上换的密码无法同步回仓库，晚上就会重复洗牌
+        git add datas/控制开关.txt
+        git add datas/最新接口文件名.txt
+        
+        # 🔄 已同步变更为蝴蝶影视，同时保留老杨TV的匹配以确保历史过期文件重写后能顺利提交
+        git add datas/蝴蝶影视*.json
+        git add datas/老杨TV*.json
+        
+        if git diff-index --quiet HEAD; then
           echo "文件没有变化，无需更新。"
         else
-          git commit -m "双源文本级硬核合并: $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列): $(date +'%Y-%m-%d %H:%M:%S')"
           git push
         fi
