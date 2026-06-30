@@ -15,36 +15,26 @@ lock_file_path = 'datas/控制开关.txt'
 tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
-# ⏰ 【每月 1 号自动大洗牌与控制开关清空自动生成逻辑】
+# ⏰ 【自适应控制开关逻辑：手动内容绝对优先】
 # ====================================================================
-today = datetime.datetime.now()
-is_reset_day = (today.day == 1)
-
-current_token = "全量版"
+current_token = ""
 
 # 1. 尝试读取现有的开关状态
 if os.path.exists(lock_file_path):
     with open(lock_file_path, 'r', encoding='utf-8') as f:
         current_token = f.read().strip()
 
-# 🎯 如果控制开关被手动清空了（或全是空格）
+# 🎯 只有当控制开关完全为空（你手动清空了它，或者新仓库第一次跑）时，才触发随机洗牌
 if not current_token:
     current_token = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(current_token)
     print(f"🎲 【探测到开关为空】已自动随机生成 3 位新密码并写入开关: {current_token}")
+else:
+    # 🔒 如果里面有内容（无论是不是1号，无论长短），绝对尊重手动设置，不进行任何洗牌重写
+    print(f"🔒 【手动控制阀生效】探测到开关已有内容，直接锁定当前暗号: {current_token}")
 
-# 2. 如果是 1 号，且目前开关里还不是 3 位随机暗号（说明是当月第一次跑，或者是全量版/纯净版字样）
-# 🛠️ 【已修复此处的断行语法错误】
-if is_reset_day and (current_token in ["全量版", "纯净版"] or len(current_token) != 3):
-    current_token = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
-    with open(lock_file_path, 'w', encoding='utf-8') as f:
-        f.write(current_token)
-    print(f"⏰ 【每月1号全自动洗牌】已触发！自动抽签生成本月新密锁并写入开关: {current_token}")
-elif is_reset_day:
-    print(f"🔒 【安全阀拦截】今日 1 号已完成过大洗牌，本次保持原暗号不再重复抽签: {current_token}")
-
-# 3. 🎯 严格判定最终输出的文件名（固定带上“全量版”，并重命名为 蝴蝶影视）
+# 2. 🎯 严格判定最终输出的文件名
 if current_token in ["全量版", "纯净版"]:
     output_filename = "蝴蝶影视全量版.json"
 else:
@@ -172,7 +162,7 @@ for src, dst in path_replacements.items():
     final_json_text = final_json_text.replace(src, dst)
 
 # 开机公告注入
-thanks_warning = "👑 特别致谢与版权声明\n本接口的诞生离不开大后方几位业内顶流技术大佬的无私奉献，特此致谢：\n🐋 感谢鱼佬的付出\n源码基础与发布主页: fish2018/webhtv\n版本发布绝对地址: fish2018/webhtv/releases\nTelegram 官方群组: 👉 https://t.me/webhtv\n 感谢佬的付出\n核心仓库主页: FGBLH/GHK\n数据源直链地址: FGBLH/GHK/.json\nTelegram 官方群组: 👉 https://t.me/hshsjk9"
+thanks_warning = "👑 特别致谢与版权声明\n本接口的诞生离不开大后方几位业内顶流技术大佬 of 无私奉献，特此致谢：\n🐋 感谢鱼佬的付出\n源码基础与发布主页: fish2018/webhtv\n版本发布绝对地址: fish2018/webhtv/releases\nTelegram 官方群组: 👉 https://t.me/webhtv\n 感谢佬的付出\n核心仓库主页: FGBLH/GHK\n数据源直链地址: FGBLH/GHK/.json\nTelegram 官方群组: 👉 https://t.me/hshsjk9"
 welcome_notice = "👑 欢迎使用【蝴蝶影视粉丝专属缝合专线】！本接口由蝴蝶影视结合海豚佬&鱼佬的优质核心资源缝合而成，纯净无广告！🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码！"
 
 try:
