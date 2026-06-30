@@ -35,6 +35,7 @@ if not current_token:
     print(f"🎲 【探测到开关为空】已自动随机生成 3 位新密码并写入开关: {current_token}")
 
 # 2. 如果是 1 号，且目前开关里还不是 3 位随机暗号（说明是当月第一次跑，或者是全量版/纯净版字样）
+# 🛠️ 【已修复此处的断行语法错误】
 if is_reset_day and (current_token in ["全量版", "纯净版"] or len(current_token) != 3):
     current_token = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
     with open(lock_file_path, 'w', encoding='utf-8') as f:
@@ -55,7 +56,6 @@ print(f"🎯 最终结算 -> 目标输出：{output_filename}")
 # ====================================================================
 # 🛡️ 【金蝉脱壳：全量版过期旧线自动全文字大轰炸】
 # ====================================================================
-# 同时也扫描可能遗留的历史老杨旧线和新的蝴蝶影视旧线
 old_configs = glob.glob('datas/蝴蝶影视全量版*.json') + glob.glob('datas/蝴蝶影视*.json') + glob.glob('datas/老杨TV*.json')
 for old_file in old_configs:
     if os.path.basename(old_file) != output_filename:
@@ -75,7 +75,7 @@ for old_file in old_configs:
             with open(old_file, 'w', encoding='utf-8') as f:
                 json.dump(trap_json, f, ensure_ascii=False, indent=4)
             print(f"📡 【金蝉脱壳】已成功将过期旧线调包为纯文字大轰炸: {old_file}")
-        except:
+        except Exception as e:
             pass
 
 for garbage in glob.glob('datas/config_*.json'):
@@ -171,7 +171,7 @@ path_replacements = {
 for src, dst in path_replacements.items():
     final_json_text = final_json_text.replace(src, dst)
 
-# 开机公告注入（字样同步更新为 蝴蝶影视）
+# 开机公告注入
 thanks_warning = "👑 特别致谢与版权声明\n本接口的诞生离不开大后方几位业内顶流技术大佬的无私奉献，特此致谢：\n🐋 感谢鱼佬的付出\n源码基础与发布主页: fish2018/webhtv\n版本发布绝对地址: fish2018/webhtv/releases\nTelegram 官方群组: 👉 https://t.me/webhtv\n 感谢佬的付出\n核心仓库主页: FGBLH/GHK\n数据源直链地址: FGBLH/GHK/.json\nTelegram 官方群组: 👉 https://t.me/hshsjk9"
 welcome_notice = "👑 欢迎使用【蝴蝶影视粉丝专属缝合专线】！本接口由蝴蝶影视结合海豚佬&鱼佬的优质核心资源缝合而成，纯净无广告！🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码！"
 
