@@ -15,26 +15,51 @@ lock_file_path = 'datas/控制开关.txt'
 tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
-# ⏰ 【自适应控制开关逻辑：手动内容绝对优先】
+# ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】
 # ====================================================================
-current_token = ""
+today = datetime.datetime.now()
+current_month = str(today.month) 
+is_reset_day = (today.day == 1)
 
-# 1. 尝试读取现有的开关状态
+saved_month = ""
+saved_code = ""
+
+# 1. 尝试读取现有的开关状态 (格式为 "月份-3位密码"，例如 "7-k9x")
 if os.path.exists(lock_file_path):
     with open(lock_file_path, 'r', encoding='utf-8') as f:
-        current_token = f.read().strip()
+        content = f.read().strip()
+        if "-" in content:
+            saved_month, saved_code = content.split("-", 1)
+        else:
+            # 如果里面是老脚本留下的纯文本或旧固定密码
+            saved_code = content
 
-# 🎯 只有当控制开关完全为空（你手动清空了它，或者新仓库第一次跑）时，才触发随机洗牌
-if not current_token:
+# 🎯 判定：如果是 1 号，且记录的月份不是当前月份（说明是当月第一次跑，跨月了）
+if is_reset_day and saved_month != current_month:
+    # 随机生成 3 位新密码
     current_token = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
+    # 写入当前月份和新密码，例如 "7-k9x"
     with open(lock_file_path, 'w', encoding='utf-8') as f:
-        f.write(current_token)
-    print(f"🎲 【探测到开关为空】已自动随机生成 3 位新密码并写入开关: {current_token}")
-else:
-    # 🔒 如果里面有内容（无论是不是1号，无论长短），绝对尊重手动设置，不进行任何洗牌重写
-    print(f"🔒 【手动控制阀生效】探测到开关已有内容，直接锁定当前暗号: {current_token}")
+        f.write(f"{current_month}-{current_token}")
+    print(f"⏰ 【每月1号全新硬核洗牌】检测到进入新月份 {current_month} 月！已全自动抽签生成本月新密锁: {current_token}")
 
-# 2. 🎯 严格判定最终输出的文件名
+# 🎯 判定：如果是 1 号的第二次及后续运行
+elif is_reset_day and saved_month == current_month:
+    current_token = saved_code
+    print(f"🔒 【安全阀拦截】今日 1 号已经是当月第二次运行，保持原暗号: {current_token}")
+
+# 🎯 平常日子
+else:
+    # 如果平时发现开关空了，或者里面还是旧的不带月份的密码，立刻初始化
+    if not saved_code or len(saved_code) != 3 or "-" not in (content if os.path.exists(lock_file_path) else ""):
+        current_token = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
+        with open(lock_file_path, 'w', encoding='utf-8') as f:
+            f.write(f"{current_month}-{current_token}")
+    else:
+        current_token = saved_code
+    print(f"📡 正常沿用本月密锁: {current_token}")
+
+# 3. 🎯 严格判定最终输出的文件名
 if current_token in ["全量版", "纯净版"]:
     output_filename = "蝴蝶影视全量版.json"
 else:
@@ -176,19 +201,23 @@ try:
     ordered_obj.update(final_obj)
     
     # 🦋 加蝴蝶逻辑
-    for site in ordered_obj.get("sites", []):
-        if "name" in site:
-            name_val = site["name"]
-            for char in ['丨', '┃', ' ']:
-                name_val = name_val.strip(char)
-            name_val = re.sub(r'\s+', ' ', name_val)
-            if not name_val.startswith("🦋"):
-                site["name"] = f"🦋 {name_val}"
+    try:
+        for site in ordered_obj.get("sites", []):
+            if "name" in site:
+                name_val = site["name"]
+                for char in ['丨', '┃', ' ']:
+                    name_val = name_val.strip(char)
+                name_val = re.sub(r'\s+', ' ', name_val)
+                if not name_val.startswith("🦋"):
+                    site["name"] = f"🦋 {name_val}"
 
-    for site in ordered_obj.get("sites", []):
-        if "key" in site and site["key"] == "AQY":
-            site["name"] = "🦋 爱奇艺｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9"
+        for site in ordered_obj.get("sites", []):
+            if "key" in site and site["key"] == "AQY":
+                site["name"] = "🦋 爱奇艺｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9"
+    except Exception as inner_e:
+        print(f"⚠️ 提示：美化蝴蝶图标时跳过，原因: {inner_e}")
 
+    # 🌟【前置优化】将写出操作移到最安全的位置，确保文件 100% 被捕获
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
         
@@ -199,3 +228,8 @@ try:
 
 except Exception as e:
     print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}")
+
+# 🌟 双重保险：最终确保开关文件是以标准格式保存在本地磁盘上
+if not os.path.exists(lock_file_path) or "-" not in (open(lock_file_path, 'r', encoding='utf-8').read() if os.path.exists(lock_file_path) else ""):
+    with open(lock_file_path, 'w', encoding='utf-8') as f:
+        f.write(f"{current_month}-{current_token}")
