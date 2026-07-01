@@ -59,7 +59,7 @@ else:
         current_token = saved_code
     print(f"📡 正常沿用本月密锁: {current_token}")
 
-# 3. 🎯 严格判定最终输出的文件名
+# 3. 🎯 严格判定最终输出的文件名 (保持蝴蝶影视原生命名)
 if current_token in ["全量版", "纯净版"]:
     output_filename = "蝴蝶影视全量版.json"
 else:
@@ -186,7 +186,7 @@ path_replacements = {
 for src, dst in path_replacements.items():
     final_json_text = final_json_text.replace(src, dst)
 
-# 开机公告注入
+# 开机公告注入 (原生保留蝴蝶公告内容)
 thanks_warning = "👑 特别致谢与版权声明\n本接口的诞生离不开大后方几位业内顶流技术大佬 of 无私奉献，特此致谢：\n🐋 感谢鱼佬的付出\n源码基础与发布主页: fish2018/webhtv\n版本发布绝对地址: fish2018/webhtv/releases\nTelegram 官方群组: 👉 https://t.me/webhtv\n 感谢佬的付出\n核心仓库主页: FGBLH/GHK\n数据源直链地址: FGBLH/GHK/.json\nTelegram 官方群组: 👉 https://t.me/hshsjk9"
 welcome_notice = "👑 欢迎使用【蝴蝶影视粉丝专属缝合专线】！本接口由蝴蝶影视结合海豚佬&鱼佬的优质核心资源缝合而成，纯净无广告！🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码！"
 
@@ -200,24 +200,92 @@ try:
     if "warningText" in final_obj: ordered_obj["warningText"] = final_obj.pop("warningText")
     ordered_obj.update(final_obj)
     
-    # 🦋 加蝴蝶逻辑
+    # ====================================================================
+    # 🌟【全新深度体验优化区】（在原代码蝴蝶美化区平滑嵌套扩展）
+    # ====================================================================
     try:
+        # --- 1. 注入国内低延迟高防 AliDNS 到 doh 的最前列 ---
+        if "doh" in ordered_obj and isinstance(ordered_obj["doh"], list):
+            ali_doh = {
+                "name": "AliDNS",
+                "url": "https://dns.alidns.com/dns-query",
+                "ips": ["223.5.5.5", "223.6.6.6"]
+            }
+            if not any(d.get("name") == "AliDNS" for d in ordered_obj["doh"]):
+                ordered_obj["doh"].insert(0, ali_doh)
+
+        # --- 2. 彻底扫除直播 lives 列表末端隐蔽的空对象 {}，杜绝闪退 ---
+        if "lives" in ordered_obj and isinstance(ordered_obj["lives"], list):
+            ordered_obj["lives"] = [live for live in ordered_obj["lives"] if live]
+
+        # --- 3. 站点名称美化与精准裁剪尾巴 + 智能排版自动分类 ---
+        tg_tail_count = 0  # 追踪计数器
+        
         for site in ordered_obj.get("sites", []):
             if "name" in site:
                 name_val = site["name"]
+                
+                # A. 基础去噪过滤
                 for char in ['丨', '┃', ' ']:
                     name_val = name_val.strip(char)
                 name_val = re.sub(r'\s+', ' ', name_val)
-                if not name_val.startswith("🦋"):
-                    site["name"] = f"🦋 {name_val}"
+                
+                # B. 【精确留存】前5个保留 TG 后缀
+                if "｜Tg：@huliys9" in name_val:
+                    tg_tail_count += 1
+                    if tg_tail_count > 5:
+                        name_val = name_val.replace("｜Tg：@huliys9", "").strip()
+                elif "｜Tg:@huliys9" in name_val:
+                    tg_tail_count += 1
+                    if tg_tail_count > 5:
+                        name_val = name_val.replace("｜Tg:@huliys9", "").strip()
 
+                # C. 前缀强制补全蝴蝶图标
+                if not name_val.startswith("🦋"):
+                    name_val = f"🦋 {name_val}"
+                
+                site["name"] = name_val
+
+                # D. 【大屏UI聚合】站点自动匹配左侧大类
+                s_key = site.get("key", "")
+                s_api = str(site.get("api", ""))
+                s_genre = site.get("genre", "")
+                
+                if s_genre == "shortdrama" or "短剧" in name_val or "dj" in s_key.lower():
+                    site["category"] = "短剧"
+                elif "🔞" in name_val or "色播" in name_val or "av" in s_key.lower() or "瓜" in name_val or "爆料" in name_val:
+                    site["category"] = "福利"
+                    site["searchable"] = 0  # 防止福利、少儿内容把搜索弄乱
+                    site["quickSearch"] = 0
+                elif "少儿" in name_val or "课堂" in name_val or "教学" in name_val:
+                    site["category"] = "少儿"
+                    site["searchable"] = 0
+                    site["quickSearch"] = 0
+                elif "音乐" in name_val or "网易云" in name_val or "听书" in name_val or "唱会" in name_val or "FM" in name_val:
+                    site["category"] = "音乐"
+                    site["searchable"] = 0
+                    site["quickSearch"] = 0
+                elif "动漫" in name_val or "新番" in name_val or "Anime" in s_key:
+                    site["category"] = "动漫"
+                elif "磁力" in name_val or "索" in name_val or "盘" in name_val or "云盘" in name_val or "4K" in name_val:
+                    site["category"] = "网盘/磁力"
+                elif "体育" in name_val or "球" in name_val or "直播" in name_val:
+                    site["category"] = "体育/直播"
+                else:
+                    site["category"] = "综合"
+
+        # E. 固定还原大厂专站的特定命名
         for site in ordered_obj.get("sites", []):
             if "key" in site and site["key"] == "AQY":
                 site["name"] = "🦋 爱奇艺｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9"
+                site["category"] = "综合"
+                
     except Exception as inner_e:
-        print(f"⚠️ 提示：美化蝴蝶图标时跳过，原因: {inner_e}")
+        print(f"⚠️ 提示：高级大屏排版美化阶段跳过，原因: {inner_e}")
 
-    # 🌟【前置优化】将写出操作移到最安全的位置，确保文件 100% 被捕获
+    # ====================================================================
+    # 🌟【数据安全落盘】
+    # ====================================================================
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
         
