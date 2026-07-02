@@ -137,6 +137,20 @@
             "category": "综合"
         },
         {
+            "key": "qw",
+            "name": "🦋 七味.py(关梯)",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/七味.py",
+            "category": "综合"
+        },
+        {
+            "key": "cjjh",
+            "name": "🦋 采集聚合.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/采集聚合.py",
+            "category": "综合"
+        },
+        {
             "key": "kf",
             "name": "🦋 咖啡体育直播.py",
             "type": 3,
@@ -501,10 +515,10 @@
             "category": "综合"
         },
         {
-            "key": "XFDM",
-            "name": "🦋 稀饭动漫.py",
+            "key": "MiFun",
+            "name": "🦋 MiFun动漫.py",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/稀饭动漫.py",
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/MiFun动漫.py",
             "category": "动漫"
         },
         {
@@ -591,7 +605,7 @@
             "key": "stripchat",
             "name": "🦋 stripchat直播.py｜🔞",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly/refs/heads/main/datas/stripchat.py",
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/stripchat.py",
             "category": "福利",
             "searchable": 0,
             "quickSearch": 0
@@ -700,15 +714,6 @@
             "name": "🦋 123AV.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/123AV.py",
-            "category": "福利",
-            "searchable": 0,
-            "quickSearch": 0
-        },
-        {
-            "key": "hanime1",
-            "name": "🦋 hanime1.py｜🔞",
-            "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/hanime1.py",
             "category": "福利",
             "searchable": 0,
             "quickSearch": 0
