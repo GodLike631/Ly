@@ -238,7 +238,7 @@ try:
                     if h not in ad_hosts: ad_hosts.append(h)
 
         js_injection_rule = {
-            "name": "老楊TV·雲端高級去廣告JS注入",
+            "name": "蝴蝶影视·雲端高級去廣告JS注入",
             "hosts": ad_hosts,
             "script": custom_js_rules
         }
