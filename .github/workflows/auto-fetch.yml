@@ -39,13 +39,16 @@ jobs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
+        # 🛠️ 修复：禁止 Git 对中文路径进行转义，彻底解决乱码匹配不到文件的问题
+        git config --global core.quotepath false
+        
         # 🛠️ 终极改动：直接添加整个 datas 文件夹，不再由于找不到历史文件而导致 Git 崩溃
         git add datas/
         
-        # 🛠️ 终极保险：即使由于网络延迟导致内容无变化，也优雅退出而不报错
-        if git diff-index --quiet HEAD; then
-          echo "文件没有变化，无需更新。"
-        else
+        # 🛠️ 终极保险：改用 --cached 精准比对暂存区行内容。只有内容真正改变才 commit，即便时间戳变了也绝不误报
+        if ! git diff --cached --exit-code --quiet; then
           git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列): $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD:${{ github.ref_name }}
+        else
+          echo "文件内容没有发生实际变化，无需更新，优雅退出。"
         fi
