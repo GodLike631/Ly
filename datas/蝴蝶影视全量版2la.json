@@ -1439,6 +1439,14 @@
             "searchable": 0
         },
         {
+            "key": "djjh",
+            "name": "🦋 短剧聚合.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/短剧聚合.py",
+            "category": "音乐",
+            "searchable": 0
+        },
+        {
             "key": "捡的音乐",
             "name": "🦋 爱听音乐[音乐]",
             "type": 3,
@@ -2288,6 +2296,24 @@
             "quickSearch": 0
         },
         {
+            "key": "51vm",
+            "name": "🦋 51视频.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/51视频.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "818hlw",
+            "name": "🦋 818黑料网.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/818黑料网.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
             "key": "91bl",
             "name": "🦋 91爆料.py｜🔞",
             "type": 3,
@@ -2315,7 +2341,43 @@
             "quickSearch": 0
         },
         {
-            "key": "xmzb",
+            "key": "mrdld",
+            "name": "🦋 每日大乱斗.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/每日大乱斗.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "jrkl",
+            "name": "🦋 今日看料.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/今日看料.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "hl",
+            "name": "🦋 黑料不打烊.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/黑料不打烊.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "dj",
+            "name": "🦋 妲己高清视频.py(关梯)｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/妲己.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "xmvm",
             "name": "🦋 熊猫视频.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/熊猫视频.py",
@@ -2324,10 +2386,10 @@
             "quickSearch": 0
         },
         {
-            "key": "hstv",
-            "name": "🦋 好色TV.py｜🔞",
+            "key": "shvm",
+            "name": "🦋 四虎视频.py｜🔞",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/好色TV.py",
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/四虎视频.py",
             "category": "福利",
             "searchable": 0,
             "quickSearch": 0
