@@ -16,7 +16,7 @@ tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
 # ✍️ 【通道一：老杨专属点播手工加线区】
-# 提示：单独加点播爬虫线贴在这里，自动享受后面的方阵分类美化和洗牌规则[cite: 8]。
+# 提示：单独加点播爬虫线贴在这里，如果上游有同 key 线路，脚本会自动蒸发上游、以此处为准。
 # ====================================================================
 MY_CUSTOM_SITES = [
     {
@@ -38,22 +38,28 @@ MY_CUSTOM_SITES = [
 ]
 
 # ====================================================================
-# 📺 【通道二：老杨专属直播手工加线区（精准插入第 6 位）】
-# 提示：以后你想添加任何单独的 M3U 直连线路，直接用你最习惯的字典格式贴在这里！
-# 贴在这里的线路，在打包落盘时，会被脚本雷打不动地强行插到最终 lives 列表的第 6 位！
+# 📺 【通道二：老杨专属直播手工加线区（从第 6 位开始正向依序后排）】
+# 提示：乡村电视已完美收录在此！第一个手工源(乡村电视)占第 6 位，第二个(最新电影)自动顺延排第 7 位！
+# 如果手工加的直播线路名字与上游重复，脚本同样会自动触发“特权锁”全自动蒸发上游同名源！
 # ====================================================================
 MY_CUSTOM_LIVES = [
     {
-        # "name": "地方直播2｜Tg：@huliys9",
-        # "type": 0,
-        # "ua": "okhttp/5.3.2",
-        # "url": "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u"
+        "name": "乡村电视 ｜Tg：@huliys9",
+        "type": 0,
+        "playerType": 2,
+        "ua": "okhttp/5.3.2",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E4%B9%A1%E6%9D%91%E7%94%B5%E8%A7%86.txt"
+    },
+    {
+        "name": "最新电影｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"
     }
-    # 以后想加第二条，大括号后面加个逗号，继续往下贴就行
 ]
 
 # ====================================================================
-# ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】 (原汁原味保留)[cite: 8]
+# ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】 (原汁原味保留)
 # ====================================================================
 today = datetime.datetime.now()
 current_month = str(today.month) 
@@ -96,7 +102,7 @@ output_path = f"datas/{output_filename}"
 print(f"🎯 最终结算 -> 目标输出：{output_filename}")
 
 # ====================================================================
-# 🛡️ 【金蝉脱壳：全量版过期旧线自动全文字大轰炸】 (原汁原味保留)[cite: 8]
+# 🛡️ 【金蝉脱壳：全量版过期旧线自动全文字大轰炸】 (原汁原味保留)
 # ====================================================================
 old_configs = glob.glob('datas/蝴蝶影视全量版*.json') + glob.glob('datas/蝴蝶影视*.json') + glob.glob('datas/老杨TV*.json')
 for old_file in old_configs:
@@ -126,7 +132,7 @@ for garbage in glob.glob('datas/config_*.json'):
 
 
 # ====================================================================
-# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)[cite: 8]
+# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)
 # ====================================================================
 def load_json_safe(path):
     if not os.path.exists(path):
@@ -168,34 +174,29 @@ for item in haitun_lives:
     if "name" in item:
         item["name"] = f"{item['name']}｜Tg：@huliys9"
 
-country_live_dict = {
-    "name": "乡村电视 ｜Tg：@huliys9",
-    "type": 0,
-    "playerType": 2,
-    "ua": "okhttp/5.3.2",
-    "url": "https://gh-proxy.com/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E4%B9%A1%E6%9D%91%E7%94%B5%E8%A7%86.txt"
-}
-if len(haitun_lives) >= 5:
-    haitun_lives.insert(5, country_live_dict)
-else:
-    haitun_lives.append(country_live_dict)
-
 cnb_sites = json_cnb.get("sites", [])
 cnb_lives = json_cnb.get("lives", [])
 
 combined_parses = json_haitun.get("parses", []) + json_lz.get("parses", []) + json_cnb.get("parses", [])
 
-# ➕ 【核心合流：点播合并逻辑】
-json_cnb["sites"] = haitun_sites + lz_nsfw_list + cnb_sites + MY_CUSTOM_SITES
+# ➕ 【手工特权点播去重锁】智能检测上游，若有冲突，物理蒸发上游重名 key 线路
+custom_keys = {site.get("key") for site in MY_CUSTOM_SITES if site.get("key")}
+upstream_sites = haitun_sites + lz_nsfw_list + cnb_sites
+clean_upstream_sites = [site for site in upstream_sites if site.get("key") not in custom_keys]
+json_cnb["sites"] = clean_upstream_sites + MY_CUSTOM_SITES
 
-# ➕ 【核心置中：直播精准第 6 位合并逻辑】
+# ➕ 【手工特权直播去重锁 & 从第6位正向依序后排核心算法】
+custom_live_names = {live.get("name") for live in MY_CUSTOM_LIVES if live.get("name")}
 base_lives = haitun_lives + cnb_lives
-for custom_live in reversed(MY_CUSTOM_LIVES):
-    if len(base_lives) >= 5:
-        base_lives.insert(5, custom_live)  # 👈 强行让你的单条大字典完全插入到 Index 5（也就是第 6 位）
+clean_base_lives = [live for live in base_lives if live.get("name") not in custom_live_names]
+
+# 使用正向切片递增算法，手工第一条排在第 6 位（Index 5），后续依序正向后排展开
+for i, custom_live in enumerate(MY_CUSTOM_LIVES):
+    if len(clean_base_lives) >= (5 + i):
+        clean_base_lives.insert(5 + i, custom_live)
     else:
-        base_lives.append(custom_live)
-json_cnb["lives"] = base_lives
+        clean_base_lives.append(custom_live)
+json_cnb["lives"] = clean_base_lives
 
 final_json_text = json.dumps(json_cnb, ensure_ascii=False, indent=4)
 
@@ -231,7 +232,7 @@ try:
     ordered_obj.update(final_obj)
     
     # ====================================================================
-    # 🌟【全新黑科技注入區：大屏体验極致優化】 (原汁原味保留)[cite: 8]
+    # 🌟【全新黑科技注入區：大屏体验極致優化】 (原汁原味保留)
     # ====================================================================
     try:
         # --- 1. 解析器去重與優化加载 ---
@@ -268,7 +269,7 @@ try:
                     clean_lives.append(live)
             ordered_obj["lives"] = clean_lives
 
-        # --- 4. 雲端高級去廣告 WebView JS 腳本強勢注入 ---
+        # --- 4. 雲端高級去廣告 WebView JS 腳本強勢注入（已全行合并避免引号中断） ---
         custom_js_rules = [
             "console.log('蝴蝶影視高級WebView攔截器啟動');",
             "window.addEventListener('DOMContentLoaded', function() {",
@@ -276,10 +277,7 @@ try:
             "   Function.prototype.__constructor__ = Function.prototype.constructor;",
             "   Function.prototype.constructor = function() { if (arguments && typeof arguments[0] === 'string' && arguments[0].includes('debugger')) { return function(){}; } return Function.prototype.__constructor__.apply(this, arguments); };",
             "});",
-            "setInterval(() => {",
-            "   let selectors = ['.adv-class', '.pop-banner', '#notice-modal', '[id*=\"partner\"]', '[class*=\"baidu\"]', 'iframe[src*=\"game\"]', 'iframe[src*=\"bet\"]', '#pop-ad', '.sidebar-ads', 'a[href*=\"999\"]'];",
-            "   selectors.forEach(sel => { document.querySelectorAll(sel).forEach(el => el.remove()); });",
-            "}, 400);"
+            "setInterval(() => { let selectors = ['.adv-class', '.pop-banner', '#notice-modal', '[id*=\"partner\"]', '[class*=\"baidu\"]', 'iframe[src*=\"game\"]', 'iframe[src*=\"bet\"]', '#pop-ad', '.sidebar-ads', 'a[href*=\"999\"]']; selectors.forEach(sel => { document.querySelectorAll(sel).forEach(el => el.remove()); }); }, 400);"
         ]
 
         current_rules = ordered_obj.get("rules", [])
@@ -299,7 +297,7 @@ try:
         }
         ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去廣告JS注入"]
 
-        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 (原汁原味保留)[cite: 8] ---
+        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 (原汁原味保留) ---
         block_1_rebo = []         # 1. 🏆 热播影视专属置顶方阵 (仅限 key: 热播影视)
         block_2_yingshi = []      # 2. 影视/追剧/APP大类
         block_3_duanju = []       # 3. 短剧/剧场
@@ -455,7 +453,7 @@ try:
         print(f"⚠️ 提示：高级大屏排版美化阶段跳过，原因: {inner_e}")
 
     # ====================================================================
-    # 🌟【数据安全落盘】[cite: 8]
+    # 🌟【数据安全落盘】
     # ====================================================================
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
@@ -463,10 +461,10 @@ try:
     with open(tracker_path, 'w', encoding='utf-8') as f:
         f.write(output_filename)
         
-    print(f"🎉 全量版更新成功！配置已写出至: {output_path}[cite: 8]")
+    print(f"🎉 全量版更新成功！配置已写出至: {output_path}")
 
 except Exception as e:
-    print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}[cite: 8]")
+    print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}")
 
 if not os.path.exists(lock_file_path) or "-" not in (open(lock_file_path, 'r', encoding='utf-8').read() if os.path.exists(lock_file_path) else ""):
     with open(lock_file_path, 'w', encoding='utf-8') as f:
