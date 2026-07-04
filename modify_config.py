@@ -15,9 +15,8 @@ lock_file_path = 'datas/控制开关.txt'
 tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
-# ✍️ 【老杨专属：手工便捷加线区】
-# 提示：以后你想添加任何单独的爬虫线路，直接按照标准格式贴在下面中括号里即可！
-# 贴在这里的线路会雷打不动地并入总池子，并自动享受后面的方阵分类美化和洗牌规则。
+# ✍️ 【通道一：老杨专属点播手工加线区】
+# 提示：单独加点播爬虫线贴在这里，自动享受后面的方阵分类美化和洗牌规则[cite: 8]。
 # ====================================================================
 MY_CUSTOM_SITES = [
     {
@@ -31,7 +30,22 @@ MY_CUSTOM_SITES = [
 ]
 
 # ====================================================================
-# ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】 (原汁原味保留)
+# 📺 【通道二：老杨专属直播手工加线区（精准插入第 6 位）】
+# 提示：以后你想添加任何单独的 M3U 直连线路，直接用你最习惯的字典格式贴在这里！
+# 贴在这里的线路，在打包落盘时，会被脚本雷打不动地强行插到最终 lives 列表的第 6 位！
+# ====================================================================
+MY_CUSTOM_LIVES = [
+    {
+        # "name": "地方直播2｜Tg：@huliys9",
+        # "type": 0,
+        # "ua": "okhttp/5.3.2",
+        # "url": "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u"
+    }
+    # 以后想加第二条，大括号后面加个逗号，继续往下贴就行
+]
+
+# ====================================================================
+# ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】 (原汁原味保留)[cite: 8]
 # ====================================================================
 today = datetime.datetime.now()
 current_month = str(today.month) 
@@ -74,7 +88,7 @@ output_path = f"datas/{output_filename}"
 print(f"🎯 最终结算 -> 目标输出：{output_filename}")
 
 # ====================================================================
-# 🛡️ 【金蝉脱壳：全量版过期旧线自动全文字大轰炸】 (原汁原味保留)
+# 🛡️ 【金蝉脱壳：全量版过期旧线自动全文字大轰炸】 (原汁原味保留)[cite: 8]
 # ====================================================================
 old_configs = glob.glob('datas/蝴蝶影视全量版*.json') + glob.glob('datas/蝴蝶影视*.json') + glob.glob('datas/老杨TV*.json')
 for old_file in old_configs:
@@ -104,7 +118,7 @@ for garbage in glob.glob('datas/config_*.json'):
 
 
 # ====================================================================
-# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)
+# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)[cite: 8]
 # ====================================================================
 def load_json_safe(path):
     if not os.path.exists(path):
@@ -163,9 +177,17 @@ cnb_lives = json_cnb.get("lives", [])
 
 combined_parses = json_haitun.get("parses", []) + json_lz.get("parses", []) + json_cnb.get("parses", [])
 
-# ➕ 【核心合流】将预设的手工自定义线路合并到上游总池子里
+# ➕ 【核心合流：点播合并逻辑】
 json_cnb["sites"] = haitun_sites + lz_nsfw_list + cnb_sites + MY_CUSTOM_SITES
-json_cnb["lives"] = haitun_lives + cnb_lives
+
+# ➕ 【核心置中：直播精准第 6 位合并逻辑】
+base_lives = haitun_lives + cnb_lives
+for custom_live in reversed(MY_CUSTOM_LIVES):
+    if len(base_lives) >= 5:
+        base_lives.insert(5, custom_live)  # 👈 强行让你的单条大字典完全插入到 Index 5（也就是第 6 位）
+    else:
+        base_lives.append(custom_live)
+json_cnb["lives"] = base_lives
 
 final_json_text = json.dumps(json_cnb, ensure_ascii=False, indent=4)
 
@@ -201,7 +223,7 @@ try:
     ordered_obj.update(final_obj)
     
     # ====================================================================
-    # 🌟【全新黑科技注入區：大屏体验極致優化】
+    # 🌟【全新黑科技注入區：大屏体验極致優化】 (原汁原味保留)[cite: 8]
     # ====================================================================
     try:
         # --- 1. 解析器去重與優化加载 ---
@@ -228,9 +250,15 @@ try:
             if not any(d.get("name") == "AliDNS" for d in ordered_obj["doh"]):
                 ordered_obj["doh"].insert(0, ali_doh)
 
-        # --- 3. 彻底扫除直播 lives 列表末端隐蔽的空对象 {}，杜绝闪退 ---
+        # --- 3. 彻底扫除直播 lives 列表末端隐蔽的空对象 {}，并自动给手工直播线武装补齐稳健 UA ---
         if "lives" in ordered_obj and isinstance(ordered_obj["lives"], list):
-            ordered_obj["lives"] = [live for live in ordered_obj["lives"] if live]
+            clean_lives = []
+            for live in ordered_obj["lives"]:
+                if live and isinstance(live, dict):
+                    if not live.get("ua") or live.get("ua") == "okhttp":
+                        live["ua"] = "okhttp/5.3.2"
+                    clean_lives.append(live)
+            ordered_obj["lives"] = clean_lives
 
         # --- 4. 雲端高級去廣告 WebView JS 腳本強勢注入 ---
         custom_js_rules = [
@@ -263,7 +291,7 @@ try:
         }
         ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去廣告JS注入"]
 
-        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 ---
+        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 (原汁原味保留)[cite: 8] ---
         block_1_rebo = []         # 1. 🏆 热播影视专属置顶方阵 (仅限 key: 热播影视)
         block_2_yingshi = []      # 2. 影视/追剧/APP大类
         block_3_duanju = []       # 3. 短剧/剧场
@@ -330,10 +358,7 @@ try:
 
             elif is_nsfw:
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                
-                # 靶向打标：针对手工加入或上游包含 🔞 特征却漏掉小尾巴的线，自动规范补上
                 if "🔞" not in raw_name: raw_name = f"{raw_name}｜🔞"
-                
                 site["name"] = raw_name
                 site["category"] = "福利"
                 site["searchable"] = 0  
@@ -341,7 +366,6 @@ try:
                 block_9_fuli.append(site)
                 
             elif "短剧" in raw_name or "剧场" in raw_name:
-                # 包含 DJ/dj 关键词的线一律强行分流进入音乐阵营
                 if "dj" in raw_name.lower() or "dj" in s_key.lower():
                     if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
                     site["name"] = raw_name
@@ -365,8 +389,6 @@ try:
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
                 site["name"] = raw_name
                 site["category"] = "网盘/磁力"
-                
-                # 锁定网盘被动检索，强制实施沉底降权以免疫本地历史死锁
                 site["searchable"] = 0
                 site["quickSearch"] = 0
                 site["changeable"] = 1
@@ -396,25 +418,21 @@ try:
                 block_8_yinyue.append(site)
                 
             else:
-                # 默认综合大类（保留包含 key: rb 在内的其余非置顶影视普适线路位置）
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
                 site["name"] = raw_name
                 site["category"] = "综合"
                 block_2_yingshi.append(site)
 
-            # 🛠️ 7. 补齐非音乐少儿类的全局搜索功能开关
             if site.get("category") not in ["少儿", "音乐"] and "searchable" not in site:
                 site["searchable"] = 1
 
-        # 🛠️ 8. 爱奇艺官方名称规格对齐
         for site in block_2_yingshi:
             if site.get("key") == "AQY":
                 site["name"] = "🦋 爱奇艺 ｜Tg：@huliys9"
 
-        # 👑 【新首页硬组装】"key": "热播影视" 携长致谢完美置顶（Index 0），另一个热播"key": "rb"随大部队在综合影视区排列
         ordered_obj["sites"] = (
             block_1_rebo +         # 1. 🎯 "key": "热播影视" 绝对置顶
-            block_2_yingshi +      # 2. 传统综合影视单线路 (包含回归的豆瓣首页和保留原位的 key: rb 线路)
+            block_2_yingshi +      # 2. 传统综合影视单线路
             block_3_duanju +       # 3. 独立短剧
             block_4_dongman +      # 4. 动漫新番
             block_6_tiyu +         # 5. 体育直播
@@ -423,13 +441,13 @@ try:
             block_5_cili +         # 8. 网盘/磁力/4K降权沉底区
             block_9_fuli           # 9. 福利18禁安全坠尾
         )
-        print(f"🚀 【洗牌结算】蝴蝶影视全量版合并重组完成！热播 APP 已精准承接置顶，网盘依赖全面洗白降权。")
+        print(f"🚀 【洗牌结算】双通道完全体融合重组完成！")
 
     except Exception as inner_e:
         print(f"⚠️ 提示：高级大屏排版美化阶段跳过，原因: {inner_e}")
 
     # ====================================================================
-    # 🌟【数据安全落盘】
+    # 🌟【数据安全落盘】[cite: 8]
     # ====================================================================
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
@@ -437,10 +455,10 @@ try:
     with open(tracker_path, 'w', encoding='utf-8') as f:
         f.write(output_filename)
         
-    print(f"🎉 全量版更新成功！配置已写出至: {output_path}")
+    print(f"🎉 全量版更新成功！配置已写出至: {output_path}[cite: 8]")
 
 except Exception as e:
-    print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}")
+    print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}[cite: 8]")
 
 if not os.path.exists(lock_file_path) or "-" not in (open(lock_file_path, 'r', encoding='utf-8').read() if os.path.exists(lock_file_path) else ""):
     with open(lock_file_path, 'w', encoding='utf-8') as f:
