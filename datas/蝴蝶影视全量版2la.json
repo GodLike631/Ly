@@ -1140,6 +1140,16 @@
             "category": "短剧"
         },
         {
+            "key": "红果短剧",
+            "name": "🦋 红果短剧.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E7%BA%A2%E6%9E%9C%E7%9F%AD%E5%89%A7.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "category": "短剧",
+            "genre": "shortdrama"
+        },
+        {
             "key": "MiFun",
             "name": "🦋 MiFun动漫.py",
             "type": 3,
