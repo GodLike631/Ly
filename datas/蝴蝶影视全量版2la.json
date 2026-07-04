@@ -1053,6 +1053,15 @@
             "category": "综合"
         },
         {
+            "key": "山楂影视",
+            "name": "🦋 山楂影视.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E5%B1%B1%E6%A5%82%E5%BD%B1%E8%A7%86.py",
+            "searchable": 1,
+            "quickSearch": 1,
+            "category": "综合"
+        },
+        {
             "key": "cj_360资源",
             "name": "🦋 360丨短剧",
             "type": 1,
@@ -2216,7 +2225,7 @@
         },
         {
             "key": "smdj",
-            "name": "🦋 星芽短剧.py",
+            "name": "🦋 星芽短剧.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/星芽短剧.py",
             "category": "福利",
