@@ -53,7 +53,7 @@ if is_reset_day and saved_month != current_month:
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(f"{current_month}-{current_token}")
     print(f"⏰ 【每月1号全新硬核洗牌】检测到进入新月份 {current_month} 月！已全自动抽签生成本月新密锁: {current_token}")
-elif is_reset_day winsaved_month == current_month:
+elif is_reset_day and saved_month == current_month:
     current_token = saved_code
     print(f"🔒 【安全阀拦截】今日 1 号已经是当月第二次运行，保持原暗号: {current_token}")
 else:
