@@ -15,6 +15,22 @@ lock_file_path = 'datas/控制开关.txt'
 tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
+# ✍️ 【老杨专属：手工便捷加线区】
+# 提示：以后你想添加任何单独的爬虫线路，直接按照标准格式贴在下面中括号里即可！
+# 贴在这里的线路会雷打不动地并入总池子，并自动享受后面的方阵分类美化和洗牌规则。
+# ====================================================================
+MY_CUSTOM_SITES = [
+    {
+        "key": "山楂影视",
+        "name": "山楂影视.py",  
+        "type": 3,
+        "api": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E5%B1%B1%E6%A5%82%E5%BD%B1%E8%A7%86.py",
+        "searchable": 1,
+        "quickSearch": 1
+    }
+]
+
+# ====================================================================
 # ⏰ 【每月 1 号自动大洗牌与控制开关自动生成逻辑】 (原汁原味保留)
 # ====================================================================
 today = datetime.datetime.now()
@@ -37,7 +53,7 @@ if is_reset_day and saved_month != current_month:
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(f"{current_month}-{current_token}")
     print(f"⏰ 【每月1号全新硬核洗牌】检测到进入新月份 {current_month} 月！已全自动抽签生成本月新密锁: {current_token}")
-elif is_reset_day and saved_month == current_month:
+elif is_reset_day winsaved_month == current_month:
     current_token = saved_code
     print(f"🔒 【安全阀拦截】今日 1 号已经是当月第二次运行，保持原暗号: {current_token}")
 else:
@@ -147,7 +163,8 @@ cnb_lives = json_cnb.get("lives", [])
 
 combined_parses = json_haitun.get("parses", []) + json_lz.get("parses", []) + json_cnb.get("parses", [])
 
-json_cnb["sites"] = haitun_sites + lz_nsfw_list + cnb_sites
+# ➕ 【核心合流】将预设的手工自定义线路合并到上游总池子里
+json_cnb["sites"] = haitun_sites + lz_nsfw_list + cnb_sites + MY_CUSTOM_SITES
 json_cnb["lives"] = haitun_lives + cnb_lives
 
 final_json_text = json.dumps(json_cnb, ensure_ascii=False, indent=4)
@@ -184,7 +201,7 @@ try:
     ordered_obj.update(final_obj)
     
     # ====================================================================
-    # 🌟【全新黑科技注入區：大屏體驗極致優化】
+    # 🌟【全新黑科技注入區：大屏体验極致優化】
     # ====================================================================
     try:
         # --- 1. 解析器去重與優化加载 ---
@@ -313,6 +330,10 @@ try:
 
             elif is_nsfw:
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+                
+                # 靶向打标：针对手工加入或上游包含 🔞 特征却漏掉小尾巴的线，自动规范补上
+                if "🔞" not in raw_name: raw_name = f"{raw_name}｜🔞"
+                
                 site["name"] = raw_name
                 site["category"] = "福利"
                 site["searchable"] = 0  
