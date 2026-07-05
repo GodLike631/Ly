@@ -37,6 +37,14 @@
             "searchable": 1
         },
         {
+            "key": "YK",
+            "name": "🦋 优酷视频.py｜Tg：@huliys9",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/优酷视频.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "TX",
             "name": "🦋 腾讯视频｜Tg：@huliys9",
             "type": 3,
@@ -47,7 +55,7 @@
         },
         {
             "key": "MG",
-            "name": "🦋 芒果TV｜Tg：@huliys9",
+            "name": "🦋 芒果TV",
             "type": 3,
             "api": "https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
             "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002108-a4795930ec.js",
@@ -73,17 +81,17 @@
         },
         {
             "key": "fY",
-            "name": "🦋 枫叶影院(关梯子使用)",
+            "name": "🦋 枫叶影院.py(关梯子使用)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/枫叶影院.py",
             "category": "综合",
             "searchable": 1
         },
         {
-            "key": "JP",
-            "name": "🦋 金牌APP.py",
+            "key": "ww",
+            "name": "🦋 哇哇APP.py(关梯)",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/金牌APP.py",
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/哇哇APP.py",
             "category": "综合",
             "searchable": 1
         },
@@ -96,10 +104,74 @@
             "searchable": 1
         },
         {
+            "key": "JP",
+            "name": "🦋 金牌APP.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/金牌APP.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "GZ",
             "name": "🦋 瓜子APP.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/瓜子APP.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "QU",
+            "name": "🦋 奇优影院.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/奇优影院.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "UVOD",
+            "name": "🦋 优视频.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/优视频.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "MH",
+            "name": "🦋 麻花影视.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/麻花影视.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "XH",
+            "name": "🦋 星河影视.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/星河影视.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "guanfeng",
+            "name": "🦋 观风影视.py(关梯)",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/观风影视.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "SZ",
+            "name": "🦋 山楂影视.py(关梯)",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/山楂影视.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "qmvm",
+            "name": "🦋 七猫影视.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/七猫影视.py",
             "category": "综合",
             "searchable": 1
         },
@@ -2214,6 +2286,15 @@
             "changeable": 1
         },
         {
+            "key": "xyzkk",
+            "name": "🦋 小鸭子看看.py 有🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/小鸭子看看.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
             "key": "aidan",
             "name": "🦋 艾旦影视(聚)(有三级片)🔞",
             "type": 1,
@@ -2387,6 +2468,15 @@
             "quickSearch": 0
         },
         {
+            "key": "xj",
+            "name": "🦋 香蕉视频.py(关梯)｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/香蕉视频.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
             "key": "dj",
             "name": "🦋 妲己高清视频.py(关梯)｜🔞",
             "type": 3,
@@ -2445,6 +2535,15 @@
             "name": "🦋 Xvideos.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/Xvideos.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "Pornhub",
+            "name": "🦋 Pornhub.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/Pornhub.py",
             "category": "福利",
             "searchable": 0,
             "quickSearch": 0
@@ -3005,6 +3104,12 @@
             "type": 0,
             "ua": "okhttp/5.3.2",
             "url": "http://47.120.41.246:8025/vip/jar/zb.php"
+        },
+        {
+            "name": "超稳定流畅｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
         },
         {
             "name": "海燕直播｜Tg：@huliys9",
