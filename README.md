@@ -27,7 +27,7 @@
 
 | 接口版本 | 动态订阅链接 (实时更新) | 说明 |
 | :--- | :--- | :--- |
-| **⭐ 动态主线** | `https://raw.githubusercontent.com/GodLike631/test/main/datas/蝴蝶影视全量版.json` | 包含置顶长鸣谢、综合影视、短剧、动漫、体育等完整版专线。 |
+| **⭐ 动态主线** | `https://raw.githubusercontent.com/GodLike631/test/main/datas/蝴蝶影视全量版.json` | 包含综合影视、短剧、动漫、体育等完整版专线。 |
 
 > 🚨 **重要提示：** 
 > 本接口的暗号密锁会全自动更换！如果遇到失效或断流，请及时回 Telegram 频道 [👉 @huliys9](https://t.me/huliys9) 获取最新接口密码！
