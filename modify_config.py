@@ -63,11 +63,11 @@ MY_CUSTOM_LIVES = [
         "playerType": 2
     },
     {
-      "name": "综合直播",
-      "type": 0,
-      "playerType": 2,
-      "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
-      "ua": "bingcha/1.1 (mianfeifenxiang) "
+        "name": "综合直播",
+        "type": 0,
+        "playerType": 2,
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
+        "ua": "bingcha/1.1 (mianfeifenxiang) "
     },
     {
         "name": "央卫TV｜Tg：@huliys9",
@@ -157,7 +157,7 @@ for garbage in glob.glob('datas/config_*.json'):
 
 
 # ====================================================================
-# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)
+# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】
 # ====================================================================
 def load_json_safe(path):
     if not os.path.exists(path):
@@ -204,9 +204,17 @@ cnb_lives = json_cnb.get("lives", [])
 
 combined_parses = json_haitun.get("parses", []) + json_lz.get("parses", []) + json_cnb.get("parses", [])
 
+# ➕ 【上游多源合并与智能冲突锁】去重合并三个接口的点播线路，防止 key 重复产生死锁
+seen_upstream_keys = set()
+upstream_sites = []
+for site in (haitun_sites + lz_nsfw_list + cnb_sites):
+    s_key = site.get("key")
+    if s_key and s_key not in seen_upstream_keys:
+        upstream_sites.append(site)
+        seen_upstream_keys.add(s_key)
+
 # ➕ 【手工特权点播去重锁】智能检测上游，若有冲突，物理蒸发上游重名 key 线路
 custom_keys = {site.get("key") for site in MY_CUSTOM_SITES if site.get("key")}
-upstream_sites = haitun_sites + lz_nsfw_list + cnb_sites
 clean_upstream_sites = [site for site in upstream_sites if site.get("key") not in custom_keys]
 json_cnb["sites"] = clean_upstream_sites + MY_CUSTOM_SITES
 
@@ -223,265 +231,271 @@ for i, custom_live in enumerate(MY_CUSTOM_LIVES):
         clean_base_lives.append(custom_live)
 json_cnb["lives"] = clean_base_lives
 
-final_json_text = json.dumps(json_cnb, ensure_ascii=False, indent=4)
-
-final_json_text = final_json_text.replace('"key": "hajim-腾讯备"', '"spider": "./tvbox.jar",\n            "key": "hajim-腾讯备"')
-final_json_text = final_json_text.replace('"key": "茫茫"', '"spider": "./tvbox.jar",\n            "key": "茫茫"')
-
-final_json_text = final_json_text.replace('🐬', '').replace('海豚影视', '').replace('海豚', '')
-final_json_text = final_json_text.replace('完全免费，如有收费的都是骗子', '').replace('交流群 TG：@hshsjk9', '')
-
-path_replacements = {
-    './spider.jar': 'https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar',
-    './XBPQ/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/',
-    './XYQHiker/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/',
-    './js/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/',
-    './json/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/',
-    './py/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/',
-    'http://127.0.0.1:9978/file/TVBox/logo.png': 'https://img.naixiai.cn/2026/06/18/IMG_6638.jpeg'
-}
-for src, dst in path_replacements.items():
-    final_json_text = final_json_text.replace(src, dst)
-
+# ====================================================================
+# 🌟【全新黑科技注入區：大屏体验極致優化】
+# ====================================================================
+ordered_obj = {}
 thanks_warning = "👑 🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码!"
 welcome_notice = "👑 欢迎使用【蝴蝶影视粉丝专属缝合专线】！本接口由蝴蝶影视结合海豚佬&鱼佬的优质核心资源缝合而成，纯净无广告！🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码！"
 
+ordered_obj["notice"] = welcome_notice
+ordered_obj["warningText"] = thanks_warning
+
+# 复制其它必要的基础属性
+for key, val in json_cnb.items():
+    if key not in ["notice", "warningText", "sites", "lives", "parses", "rules", "doh"]:
+        ordered_obj[key] = val
+
 try:
-    final_obj = json.loads(final_json_text)
-    final_obj["notice"] = welcome_notice
-    final_obj["warningText"] = thanks_warning
-    
-    ordered_obj = {}
-    if "notice" in final_obj: ordered_obj["notice"] = final_obj.pop("notice")
-    if "warningText" in final_obj: ordered_obj["warningText"] = final_obj.pop("warningText")
-    ordered_obj.update(final_obj)
-    
-    # ====================================================================
-    # 🌟【全新黑科技注入區：大屏体验極致優化】 (原汁原味保留)
-    # ====================================================================
-    try:
-        # --- 1. 解析器去重與優化加载 ---
-        unique_parses = []
-        seen_names = set()
-        for p in combined_parses:
-            name = p.get("name", "")
-            if name and name not in seen_names:
-                unique_parses.append(p)
-                seen_names.add(name)
-        ordered_obj["parses"] = unique_parses
+    # --- 1. 解析器去重與優化加载 ---
+    unique_parses = []
+    seen_names = set()
+    for p in combined_parses:
+        name = p.get("name", "")
+        if name and name not in seen_names:
+            unique_parses.append(p)
+            seen_names.add(name)
+    ordered_obj["parses"] = unique_parses
 
-        # --- 2. 注入国内低延迟高防 AliDNS 到 doh 的最前列 并纠正潜在拼写错误 ---
-        if "doh" in ordered_obj and isinstance(ordered_obj["doh"], list):
-            for doh_item in ordered_obj["doh"]:
-                if doh_item.get("url", "").endswith("/dns-quer"):
-                    doh_item["url"] = doh_item["url"] + "y"
-            
-            ali_doh = {
-                "name": "AliDNS",
-                "url": "https://dns.alidns.com/dns-query",
-                "ips": ["223.5.5.5", "223.6.6.6"]
-            }
-            if not any(d.get("name") == "AliDNS" for d in ordered_obj["doh"]):
-                ordered_obj["doh"].insert(0, ali_doh)
-
-        # --- 3. 彻底扫除直播 lives 列表末端隐蔽的空对象 {}，并自动给手工直播线武装补齐稳健 UA ---
-        if "lives" in ordered_obj and isinstance(ordered_obj["lives"], list):
-            clean_lives = []
-            for live in ordered_obj["lives"]:
-                if live and isinstance(live, dict):
-                    if not live.get("ua") or live.get("ua") == "okhttp":
-                        live["ua"] = "okhttp/5.3.2"
-                    clean_lives.append(live)
-            ordered_obj["lives"] = clean_lives
-
-        # --- 4. 雲端高級去廣告 WebView JS 腳本強勢注入（已全行合并避免引号中断） ---
-        custom_js_rules = [
-            "console.log('蝴蝶影視高級WebView攔截器啟動');",
-            "window.addEventListener('DOMContentLoaded', function() {",
-            "   document.querySelectorAll('video').forEach(v => { v.muted = true; v.play().catch(e=>{}); });",
-            "   Function.prototype.__constructor__ = Function.prototype.constructor;",
-            "   Function.prototype.constructor = function() { if (arguments && typeof arguments[0] === 'string' && arguments[0].includes('debugger')) { return function(){}; } return Function.prototype.__constructor__.apply(this, arguments); };",
-            "});",
-            "setInterval(() => { let selectors = ['.adv-class', '.pop-banner', '#notice-modal', '[id*=\"partner\"]', '[class*=\"baidu\"]', 'iframe[src*=\"game\"]', 'iframe[src*=\"bet\"]', '#pop-ad', '.sidebar-ads', 'a[href*=\"999\"]']; selectors.forEach(sel => { document.querySelectorAll(sel).forEach(el => el.remove()); }); }, 400);"
-        ]
-
-        current_rules = ordered_obj.get("rules", [])
-        if not isinstance(current_rules, list):
-            current_rules = []
-            
-        ad_hosts = ["vip.wwgz.cn", "lziplayer.com", "m3u8.apibdzy.com", "cj.ffzyapi.com", "api.hbzyapi.com"]
-        for rule in current_rules:
-            if isinstance(rule, dict) and "hosts" in rule:
-                for h in rule["hosts"]:
-                    if h not in ad_hosts: ad_hosts.append(h)
-
-        js_injection_rule = {
-            "name": "蝴蝶影视·雲端高級去廣告JS注入",
-            "hosts": ad_hosts,
-            "script": custom_js_rules
+    # --- 2. 注入国内低延迟高防 AliDNS 到 doh 的最前列 并纠正潜在拼写错误 ---
+    orig_doh = json_cnb.get("doh", json_haitun.get("doh", []))
+    if isinstance(orig_doh, list):
+        ordered_obj["doh"] = orig_doh
+        for doh_item in ordered_obj["doh"]:
+            if doh_item.get("url", "").endswith("/dns-quer"):
+                doh_item["url"] = doh_item["url"] + "y"
+        
+        ali_doh = {
+            "name": "AliDNS",
+            "url": "https://dns.alidns.com/dns-query",
+            "ips": ["223.5.5.5", "223.6.6.6"]
         }
-        ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去廣告JS注入"]
+        if not any(d.get("name") == "AliDNS" for d in ordered_obj["doh"]):
+            ordered_obj["doh"].insert(0, ali_doh)
 
-        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 (原汁原味保留) ---
-        block_1_rebo = []         # 1. 🏆 热播影视专属置顶方阵 (仅限 key: 热播影视)
-        block_2_yingshi = []      # 2. 影视/追剧/APP大类
-        block_3_duanju = []       # 3. 短剧/剧场
-        block_4_dongman = []      # 4. 动漫类
-        block_5_cili = []         # 5. 网盘/磁力/4K (配合Token未配自动不加载特性)
-        block_6_tiyu = []         # 6. 体育/看球/直播
-        block_7_shaoer = []       # 7. 少儿课堂/教育
-        block_8_yinyue = []       # 8. 音乐/听书/功能线/DJ
-        block_9_fuli = []         # 9. 福利/18禁 (绝对大沉底)
+    # --- 3. 彻底扫除直播 lives 列表末端隐蔽的空对象 {}，并自动给手工直播线武装补齐稳健 UA ---
+    if "lives" in json_cnb and isinstance(json_cnb["lives"], list):
+        clean_lives = []
+        for live in json_cnb["lives"]:
+            if live and isinstance(live, dict):
+                if not live.get("ua") or live.get("ua") == "okhttp":
+                    live["ua"] = "okhttp/5.3.2"
+                clean_lives.append(live)
+        ordered_obj["lives"] = clean_lives
 
-        tg_tail_count = 0  
-        for site in ordered_obj.get("sites", []):
-            if "name" not in site:
-                continue
-                
-            raw_name = site["name"]
-            s_key = site.get("key", "")
-            s_genre = site.get("genre", "")
-            s_api = site.get("api", "")
+    # --- 4. 雲端高級去廣告 WebView JS 腳本強勢注入 ---
+    custom_js_rules = [
+        "console.log('蝴蝶影視高級WebView攔截器啟動');",
+        "window.addEventListener('DOMContentLoaded', function() {",
+        "   document.querySelectorAll('video').forEach(v => { v.muted = true; v.play().catch(e=>{}); });",
+        "   Function.prototype.__constructor__ = Function.prototype.constructor;",
+        "   Function.prototype.constructor = function() { if (arguments && typeof arguments[0] === 'string' && arguments[0].includes('debugger')) { return function(){}; } return Function.prototype.__constructor__.apply(this, arguments); };",
+        "});",
+        "setInterval(() => { let selectors = ['.adv-class', '.pop-banner', '#notice-modal', '[id*=\"partner\"]', '[class*=\"baidu\"]', 'iframe[src*=\"game\"]', 'iframe[src*=\"bet\"]', '#pop-ad', '.sidebar-ads', 'a[href*=\"999\"]']; selectors.forEach(sel => { document.querySelectorAll(sel).forEach(el => el.remove()); }); }, 400);"
+    ]
 
-            # 🛠️ 1. 清洗名称里的脏字符
-            for char in ['丨', '┃', ' ']:
-                raw_name = raw_name.strip(char)
-            raw_name = re.sub(r'\s+', ' ', raw_name)
+    current_rules = json_cnb.get("rules", [])
+    if not isinstance(current_rules, list):
+        current_rules = []
+    
+    ad_hosts = ["vip.wwgz.cn", "lziplayer.com", "m3u8.apibdzy.com", "cj.ffzyapi.com", "api.hbzyapi.com"]
+    for rule in current_rules:
+        if isinstance(rule, dict) and "hosts" in rule:
+            for h in rule["hosts"]:
+                if h not in ad_hosts: ad_hosts.append(h)
+
+    js_injection_rule = {
+        "name": "蝴蝶影视·雲端高級去廣告JS注入",
+        "hosts": ad_hosts,
+        "script": custom_js_rules
+    }
+    ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去廣告JS注入"]
+
+    # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 ---
+    block_1_rebo = []         # 1. 🏆 热播影视专属置顶方阵
+    block_2_yingshi = []      # 2. 影视/追剧/APP大类
+    block_3_duanju = []       # 3. 短剧/剧场
+    block_4_dongman = []      # 4. 动漫类
+    block_5_cili = []         # 5. 网盘/磁力/4K
+    block_6_tiyu = []         # 6. 体育/看球/直播
+    block_7_shaoer = []       # 7. 少儿课堂/教育
+    block_8_yinyue = []       # 8. 音乐/听书/功能线/DJ
+    block_9_fuli = []         # 9. 福利/18禁 (绝对大沉底)
+
+    tg_tail_count = 0  
+    for site in json_cnb.get("sites", []):
+        if "name" not in site or not site["name"]:
+            continue
             
-            if "｜Tg：@huliys9" in raw_name:
-                tg_tail_count += 1
-                if tg_tail_count > 5: raw_name = raw_name.replace("｜Tg：@huliys9", "").strip()
-            elif "｜Tg:@huliys9" in raw_name:
-                tg_tail_count += 1
-                if tg_tail_count > 5: raw_name = raw_name.replace("｜Tg:@huliys9", "").strip()
+        raw_name = site["name"]
+        s_key = site.get("key", "")
+        s_genre = site.get("genre", "")
+        s_api = site.get("api", "")
 
-            if "ext" in site and site["ext"] == {}:
-                site["ext"] = ""
+        # 🛠️ 1. 清洗名称里的脏字符
+        for char in ['丨', '┃', ' ']:
+            raw_name = raw_name.strip(char)
+        raw_name = re.sub(r'\s+', ' ', raw_name)
+        
+        if "｜Tg：@huliys9" in raw_name:
+            tg_tail_count += 1
+            if tg_tail_count > 5: raw_name = raw_name.replace("｜Tg：@huliys9", "").strip()
+        elif "｜Tg:@huliys9" in raw_name:
+            tg_tail_count += 1
+            if tg_tail_count > 5: raw_name = raw_name.replace("｜Tg:@huliys9", "").strip()
 
-            # 🛠️ 2. 【网盘净化】网盘组件去后缀强行洗白，完美解决Token未配引发的死锁漏洞
-            if isinstance(s_api, str) and "PanWebShare" in s_api:
-                site["api"] = "csp_PanWebShare"
-                if "jar" in site:
-                    site.pop("jar")
+        if "ext" in site and site["ext"] == {}:
+            site["ext"] = ""
 
-            # 🛠️ 3. 瓜子靶向保护：防误伤，强力摘出
-            is_guazi = "瓜子" in raw_name or "GZ" == s_key
+        # 🛠️ 2. 【网盘净化】网盘组件去后缀强行洗白
+        if isinstance(s_api, str) and "PanWebShare" in s_api:
+            site["api"] = "csp_PanWebShare"
+            if "jar" in site:
+                site.pop("jar")
 
-            # 🛠️ 4. 精准捕获福利关键字（排除瓜子后）
-            is_nsfw = False if is_guazi else ("🔞" in raw_name or "色播" in raw_name or "av" in s_key.lower() or "瓜" in raw_name or "爆料" in raw_name or "chat" in raw_name.lower() or "cam" in raw_name.lower() or "panda" in raw_name.lower() or "video" in raw_name.lower() or "md" in s_key.lower())
+        # 🛠️ 3. 瓜子靶向保护
+        is_guazi = "瓜子" in raw_name or "GZ" == s_key
 
-            # 🛠️ 5. 【硬核硬对齐】判定是否为唯一的特定置顶源 "key": "热播影视"
-            is_target_rebo_main = (s_key == "热播影视")
+        # 🛠️ 4. 精准捕获福利关键字
+        is_nsfw = False if is_guazi else ("🔞" in raw_name or "色播" in raw_name or "av" in s_key.lower() or "瓜" in raw_name or "爆料" in raw_name or "chat" in raw_name.lower() or "cam" in raw_name.lower() or "panda" in raw_name.lower() or "video" in raw_name.lower() or "md" in s_key.lower())
 
-            # 🛠️ 6. 彻底完成洗牌分流与名字特调
-            if is_target_rebo_main:
-                # 🎯 热播影视登顶：注入大长鸣谢词后缀，推入置顶第一位 block_1
-                site["name"] = "热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9"
-                site["category"] = "综合"
-                block_1_rebo.append(site)
+        # 🛠️ 5. 【硬核硬对齐】判定是否为唯一的特定置顶源
+        is_target_rebo_main = (s_key == "热播影视")
 
-            elif "豆瓣" in raw_name and "首页" in raw_name:
-                # 豆瓣解绑：恢复其原本清净名，归队普通影视区 block_2
-                site["name"] = "🦋 豆瓣 • 首页"
-                site["category"] = "综合"
-                site["searchable"] = 0
-                block_2_yingshi.append(site)
+        # 🛠️ 6. 彻底完成洗牌分流与名字特调
+        if is_target_rebo_main:
+            site["name"] = "热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9"
+            site["category"] = "综合"
+            block_1_rebo.append(site)
 
-            elif is_nsfw:
-                if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                if "🔞" not in raw_name: raw_name = f"{raw_name}｜🔞"
-                site["name"] = raw_name
-                site["category"] = "福利"
-                site["searchable"] = 0  
-                site["quickSearch"] = 0
-                block_9_fuli.append(site)
-                
-            elif "短剧" in raw_name or "剧场" in raw_name:
-                if "dj" in raw_name.lower() or "dj" in s_key.lower():
-                    if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                    site["name"] = raw_name
-                    site["category"] = "音乐"
-                    site["searchable"] = 0
-                    block_8_yinyue.append(site)
-                else:
-                    if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                    site["name"] = raw_name
-                    site["category"] = "短剧"
-                    site["genre"] = "shortdrama"
-                    block_3_duanju.append(site)
-                
-            elif "动漫" in raw_name or "新番" in raw_name or "anime" in s_key.lower() or "a1" in raw_name.lower():
+        elif "豆瓣" in raw_name and "首页" in raw_name:
+            site["name"] = "🦋 豆瓣 • 首页"
+            site["category"] = "综合"
+            site["searchable"] = 0
+            block_2_yingshi.append(site)
+
+        elif is_nsfw:
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            if "🔞" not in raw_name: raw_name = f"{raw_name}｜🔞"
+            site["name"] = raw_name
+            site["category"] = "福利"
+            site["searchable"] = 0  
+            site["quickSearch"] = 0
+            block_9_fuli.append(site)
+            
+        elif "短剧" in raw_name or "剧场" in raw_name:
+            if "dj" in raw_name.lower() or "dj" in s_key.lower():
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
                 site["name"] = raw_name
-                site["category"] = "动漫"
-                block_4_dongman.append(site)
-                
-            elif "磁力" in raw_name or "索" in raw_name or "盘" in raw_name or "云盘" in raw_name or "4k" in raw_name.lower() or "PanWebShare" in str(s_api):
-                if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                site["name"] = raw_name
-                site["category"] = "网盘/磁力"
-                site["searchable"] = 0
-                site["quickSearch"] = 0
-                site["changeable"] = 1
-                block_5_cili.append(site)
-                
-            elif "体育" in raw_name or "球" in raw_name or "直播" in raw_name:
-                if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                site["name"] = raw_name
-                site["category"] = "体育/直播"
-                block_6_tiyu.append(site)
-                
-            elif "少儿" in raw_name or "课堂" in raw_name or "教学" in raw_name or "教育" in raw_name:
-                if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                site["name"] = raw_name
-                site["category"] = "少儿"
-                site["searchable"] = 0
-                block_7_shaoer.append(site)
-                
-            elif "音乐" in raw_name or "网易云" in raw_name or "听书" in raw_name or "唱会" in raw_name or "fm" in raw_name.lower() or "相声" in raw_name or "小品" in raw_name or "戏曲" in raw_name or "推送" in raw_name or "配置" in raw_name or "版本" in raw_name or "本地" in raw_name or "dj" in raw_name.lower() or "dj" in s_key.lower():
-                if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
-                site["name"] = raw_name
-                if "音乐" in raw_name or "网易云" in raw_name or "听书" in raw_name or "fm" in raw_name.lower() or "dj" in raw_name.lower() or "dj" in s_key.lower():
-                    site["category"] = "音乐"
-                else:
-                    site["category"] = "综合"
+                site["category"] = "音乐"
                 site["searchable"] = 0
                 block_8_yinyue.append(site)
-                
             else:
                 if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
                 site["name"] = raw_name
+                site["category"] = "短剧"
+                site["genre"] = "shortdrama"
+                block_3_duanju.append(site)
+            
+        elif "动漫" in raw_name or "新番" in raw_name or "anime" in s_key.lower() or "a1" in raw_name.lower():
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            site["category"] = "动漫"
+            block_4_dongman.append(site)
+            
+        elif "磁力" in raw_name or "索" in raw_name or "盘" in raw_name or "云盘" in raw_name or "4k" in raw_name.lower() or "PanWebShare" in str(s_api):
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            site["category"] = "网盘/磁力"
+            site["searchable"] = 0
+            site["quickSearch"] = 0
+            site["changeable"] = 1
+            block_5_cili.append(site)
+            
+        elif "体育" in raw_name or "球" in raw_name or "直播" in raw_name:
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            site["category"] = "体育/直播"
+            block_6_tiyu.append(site)
+            
+        elif "少儿" in raw_name or "课堂" in raw_name or "教学" in raw_name or "教育" in raw_name:
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            site["category"] = "少儿"
+            site["searchable"] = 0
+            block_7_shaoer.append(site)
+            
+        elif "音乐" in raw_name or "网易云" in raw_name or "听书" in raw_name or "唱会" in raw_name or "fm" in raw_name.lower() or "相声" in raw_name or "小品" in raw_name or "戏曲" in raw_name or "推送" in raw_name or "配置" in raw_name or "版本" in raw_name or "本地" in raw_name or "dj" in raw_name.lower() or "dj" in s_key.lower():
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            if "音乐" in raw_name or "网易云" in raw_name or "听书" in raw_name or "fm" in raw_name.lower() or "dj" in raw_name.lower() or "dj" in s_key.lower():
+                site["category"] = "音乐"
+            else:
                 site["category"] = "综合"
-                block_2_yingshi.append(site)
+            site["searchable"] = 0
+            block_8_yinyue.append(site)
+            
+        else:
+            if not raw_name.startswith("🦋"): raw_name = f"🦋 {raw_name}"
+            site["name"] = raw_name
+            site["category"] = "综合"
+            block_2_yingshi.append(site)
 
-            if site.get("category") not in ["少儿", "音乐"] and "searchable" not in site:
-                site["searchable"] = 1
+        if site.get("category") not in ["少儿", "音乐"] and "searchable" not in site:
+            site["searchable"] = 1
 
-        for site in block_2_yingshi:
-            if site.get("key") == "AQY":
-                site["name"] = "🦋 爱奇艺 ｜Tg：@huliys9"
+    for site in block_2_yingshi:
+        if site.get("key") == "AQY":
+            site["name"] = "🦋 爱奇艺 ｜Tg：@huliys9"
 
-        ordered_obj["sites"] = (
-            block_1_rebo +         # 1. 🎯 "key": "热播影视" 绝对置顶
-            block_2_yingshi +      # 2. 传统综合影视单线路
-            block_3_duanju +       # 3. 独立短剧
-            block_4_dongman +      # 4. 动漫新番
-            block_6_tiyu +         # 5. 体育直播
-            block_7_shaoer +       # 6. 少儿课堂
-            block_8_yinyue +       # 7. 音乐/听书/功能辅助线
-            block_5_cili +         # 8. 网盘/磁力/4K降权沉底区
-            block_9_fuli           # 9. 福利18禁安全坠尾
-        )
-        print(f"🚀 【洗牌结算】双通道完全体融合重组完成！")
+    ordered_obj["sites"] = (
+        block_1_rebo +         # 1. 🎯 "key": "热播影视" 绝对置顶
+        block_2_yingshi +      # 2. 传统综合影视单线路
+        block_3_duanju +       # 3. 独立短剧
+        block_4_dongman +      # 4. 动漫新番
+        block_6_tiyu +         # 5. 体育直播
+        block_7_shaoer +       # 6. 少儿课堂
+        block_8_yinyue +       # 7. 音乐/听书/功能辅助线
+        block_5_cili +         # 8. 网盘/磁力/4K降权沉底区
+        block_9_fuli           # 9. 福利18禁安全坠尾
+    )
+    print(f"🚀 【洗牌结算】双通道完全体融合重组完成！")
 
-    except Exception as inner_e:
-        print(f"⚠️ 提示：高级大屏排版美化阶段跳过，原因: {inner_e}")
+except Exception as inner_e:
+    print(f"⚠️ 提示：高级大屏排版美化阶段跳过，原因: {inner_e}")
 
-    # ====================================================================
-    # 🌟【数据安全落盘】
-    # ====================================================================
+# ====================================================================
+# 🌟【数据序列化与最后的“海豚”关键字文本擦除】
+# ====================================================================
+try:
+    final_json_text = json.dumps(ordered_obj, ensure_ascii=False, indent=4)
+
+    # 针对特定 key 的硬修补
+    final_json_text = final_json_text.replace('"key": "hajim-腾讯备"', '"spider": "./tvbox.jar",\n            "key": "hajim-腾讯备"')
+    final_json_text = final_json_text.replace('"key": "茫茫"', '"spider": "./tvbox.jar",\n            "key": "茫茫"')
+
+    # 🚨 在这里安全擦除“海豚”标志，此时分类早已分配妥当，不会造成海豚接口线路丢失！
+    final_json_text = final_json_text.replace('🐬', '').replace('海豚影视', '').replace('海豚', '')
+    final_json_text = final_json_text.replace('完全免费，如有收费的都是骗子', '').replace('交流群 TG：@hshsjk9', '')
+
+    # 统一路径替换
+    path_replacements = {
+        './spider.jar': 'https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar',
+        './XBPQ/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/',
+        './XYQHiker/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/',
+        './js/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/',
+        './json/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/',
+        './py/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/',
+        'http://127.0.0.1:9978/file/TVBox/logo.png': 'https://img.naixiai.cn/2026/06/18/IMG_6638.jpeg'
+    }
+    for src, dst in path_replacements.items():
+        final_json_text = final_json_text.replace(src, dst)
+
+    # 将替换完路径的文本重新载入为 JSON 对象落盘
+    final_ordered_obj = json.loads(final_json_text)
+
     with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
+        json.dump(final_ordered_obj, f, ensure_ascii=False, indent=4)
         
     with open(tracker_path, 'w', encoding='utf-8') as f:
         f.write(output_filename)
@@ -489,8 +503,9 @@ try:
     print(f"🎉 全量版更新成功！配置已写出至: {output_path}")
 
 except Exception as e:
-    print(f"❌ 严重错误：最后的本地渲染失败，原因: {e}")
+    print(f"❌ 严重错误：最后的本地渲染或落盘失败，原因: {e}")
 
+# 保底密锁同步逻辑
 if not os.path.exists(lock_file_path) or "-" not in (open(lock_file_path, 'r', encoding='utf-8').read() if os.path.exists(lock_file_path) else ""):
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(f"{current_month}-{current_token}")
