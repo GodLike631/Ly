@@ -41,6 +41,7 @@ MY_CUSTOM_SITES = [
 # 📺 【通道二：老杨专属直播手工加线区（从第 6 位开始正向依序后排）】
 # 提示：乡村电视已完美收录在此！第一个手工源(乡村电视)占第 6 位，第二个(最新电影)自动顺延排第 7 位！
 # 如果手工加的直播线路名字与上游重复，脚本同样会自动触发“特权锁”全自动蒸发上游同名源！
+# 🌟 特别规则：若线路名称中含有 🔞，则放弃前排特权，自动融入大池子并追加到末尾进行沉底。
 # ====================================================================
 MY_CUSTOM_LIVES = [
     {
@@ -80,6 +81,30 @@ MY_CUSTOM_LIVES = [
         "type": 0,
         "ua": "okhttp/5.3.2",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
+    },
+    {
+        "name": "国产直播🔞｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%9B%B4%E6%92%AD_20260417_024507.m3u"
+    },
+    {
+        "name": "国产精品🔞｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%B2%BE%E5%93%81_20260417_024507.m3u"
+    },
+    {
+        "name": "4K福利🔞｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/4k%E7%A6%8F%E5%88%A9.m3u"
+    },
+    {
+        "name": "探花🔞｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"
     }
 ]
 
@@ -213,14 +238,31 @@ json_cnb["sites"] = clean_upstream_sites + MY_CUSTOM_SITES
 # ➕ 【手工特权直播去重锁 & 从第6位正向依序后排核心算法】
 custom_live_names = {live.get("name") for live in MY_CUSTOM_LIVES if live.get("name")}
 base_lives = haitun_lives + cnb_lives
-clean_base_lives = [live for live in base_lives if live.get("name") not in custom_live_names]
 
-# 使用正向切片递增算法，手工第一条排在第 6 位（Index 5），后续依序正向后排展开
-for i, custom_live in enumerate(MY_CUSTOM_LIVES):
-    if len(clean_base_lives) >= (5 + i):
-        clean_base_lives.insert(5 + i, custom_live)
-    else:
+# 🛠️ 精准清洗：同时剔除上游直播源中名称含有“日本女优”或“日本女友”的线路
+clean_base_lives = [
+    live for live in base_lives 
+    if live.get("name") not in custom_live_names 
+    and "日本女优" not in live.get("name", "") 
+    and "日本女友" not in live.get("name", "")
+]
+
+# 🛠️ 核心修改：使用正向切片递增算法。如果手工直播源带 🔞 则不占前排黄金位，直接归入大池子末尾。
+inserted_count = 0  # 追踪真正插入前排的手工源数量，确保后排递增索引连续
+for custom_live in MY_CUSTOM_LIVES:
+    live_name = custom_live.get("name", "")
+    if "🔞" in live_name:
+        # 带有 🔞 的线路：不给前排特权，直接融入大池子追加到末尾沉底
         clean_base_lives.append(custom_live)
+    else:
+        # 普通线路：依然享受原规则，从第 6 位（索引 5）开始正向依序插入
+        insert_idx = 5 + inserted_count
+        if len(clean_base_lives) >= insert_idx:
+            clean_base_lives.insert(insert_idx, custom_live)
+        else:
+            clean_base_lives.append(custom_live)
+        inserted_count += 1
+
 json_cnb["lives"] = clean_base_lives
 
 final_json_text = json.dumps(json_cnb, ensure_ascii=False, indent=4)
@@ -270,7 +312,7 @@ try:
                 seen_names.add(name)
         ordered_obj["parses"] = unique_parses
 
-        # --- 2. 注入国内低延迟高防 AliDNS 到 doh 的最前列 并纠正潜在拼写错误 ---
+        # --- 2. 注入国内低延迟高防 AliDNS 到 doh 的最前列 并纠正潜在拼写错误 (已完美修正 and 语法) ---
         if "doh" in ordered_obj and isinstance(ordered_obj["doh"], list):
             for doh_item in ordered_obj["doh"]:
                 if doh_item.get("url", "").endswith("/dns-quer"):
@@ -320,9 +362,9 @@ try:
             "hosts": ad_hosts,
             "script": custom_js_rules
         }
-        ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去廣告JS注入"]
+        ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去广告JS注入"]
 
-        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 (原汁原味保留) ---
+        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌 与 热播影视精准置顶长鸣谢算法】 ---
         block_1_rebo = []         # 1. 🏆 热播影视专属置顶方阵 (仅限 key: 热播影视)
         block_2_yingshi = []      # 2. 影视/追剧/APP大类
         block_3_duanju = []       # 3. 短剧/剧场
