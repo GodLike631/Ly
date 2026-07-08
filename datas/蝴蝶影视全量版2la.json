@@ -54,6 +54,14 @@
             "searchable": 1
         },
         {
+            "key": "txvm",
+            "name": "🦋 腾讯视频.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/腾讯视频.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "MG",
             "name": "🦋 芒果TV",
             "type": 3,
