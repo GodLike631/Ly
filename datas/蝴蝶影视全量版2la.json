@@ -1586,18 +1586,6 @@
             "searchable": 0
         },
         {
-            "key": "捡的音乐",
-            "name": "🦋 爱听音乐[音乐]",
-            "type": 3,
-            "api": "csp_Music1",
-            "searchable": 0,
-            "quickSearch": 1,
-            "ext": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/Music1.json",
-            "jar": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/so.jar",
-            "filterable": 1,
-            "category": "音乐"
-        },
-        {
             "key": "配置中心",
             "name": "🦋 配置 • 中心",
             "type": 3,
@@ -2520,6 +2508,15 @@
             "name": "🦋 黑料不打烊.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料不打烊.py",
+            "category": "福利",
+            "searchable": 0,
+            "quickSearch": 0
+        },
+        {
+            "key": "wyt",
+            "name": "🦋 五月天.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/五月天.py",
             "category": "福利",
             "searchable": 0,
             "quickSearch": 0
