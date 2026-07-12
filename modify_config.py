@@ -52,6 +52,14 @@ MY_CUSTOM_LIVES = [
         "url": "https://gh-proxy.com/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E4%B9%A1%E6%9D%91%E7%94%B5%E8%A7%86.txt"
     },
     {
+      "name": "锋云直播｜Tg：@huliys9",
+      "type": 3,
+      "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
+      "ua": "okhttp/5.3.2",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
         "name": "最新电影｜Tg：@huliys9",
         "type": 0,
         "ua": "okhttp/5.3.2",
@@ -104,20 +112,55 @@ MY_CUSTOM_LIVES = [
         "name": "探花🔞｜Tg：@huliys9",
         "type": 0,
         "ua": "okhttp/5.3.2",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"
+        "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"
     },
     {
         "name": "欧美🔞｜Tg：@huliys9",
         "type": 0,
         "ua": "okhttp/5.3.2",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/%E6%AC%A7%E7%BE%8E%E9%A2%91%E9%81%93.m3u"
+    },
+    {
+        "name": "咪咕｜Tg：@huliys9",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://develop202.github.io/migu_video/interface.txt"
+    },
+    {
+      "name": "Gather「IPTV」｜Tg：@huliys9",
+      "type": 3,
+      "url": "https://iptv.yang-1989.xyz/playlist.m3u",
+      "epg":"https://material.yang-1989.xyz/epg.xml.gz",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": "Live「直播」｜Tg：@huliys9",
+      "type": 3,
+      "url": "https://live.yang-1989.eu.org/Live.m3u",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": "myTV「香港」｜Tg：@huliys9",
+      "type": 3,
+      "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
+      "epg":"https://material.yang-1989.xyz/epg.xml.gz",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": "Sport「体育」｜Tg：@huliys9",
+      "type": 3,
+      "url": "https://cdn-1.yang-1989.xyz/sprt/playlist.m3u",
+      "epg":"https://material.yang-1989.xyz/epg.xml.gz",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
     }
-   
-
-
-
-
-    
 ]
 
 # ====================================================================
