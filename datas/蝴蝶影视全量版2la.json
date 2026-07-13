@@ -71,6 +71,14 @@
             "searchable": 1
         },
         {
+            "key": "youtube",
+            "name": "🦋 油管,py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/油管.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "MGtv",
             "name": "🦋 芒果TV.py",
             "type": 3,
@@ -1370,14 +1378,6 @@
             "searchable": 1
         },
         {
-            "key": "youtube",
-            "name": "🦋 油管直播,py",
-            "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/油管.py",
-            "category": "体育/直播",
-            "searchable": 1
-        },
-        {
             "key": "kf",
             "name": "🦋 咖啡体育直播.py",
             "type": 3,
@@ -1406,6 +1406,14 @@
             "name": "🦋 聚合直播.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/聚合直播.py",
+            "category": "体育/直播",
+            "searchable": 1
+        },
+        {
+            "key": "youtube",
+            "name": "🦋 油管直播,py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/油管直播.py",
             "category": "体育/直播",
             "searchable": 1
         },
