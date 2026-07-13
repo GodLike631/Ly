@@ -48,17 +48,24 @@ jobs:
           
           CURRENT_TIME=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M")
           
-          # 🧠 从暂存区的 diff 中强力捕获新增的线路名 ("name": "xxx")
-          ADDED_SITES=$(git diff --cached -U0 | grep '^[+][[:space:]]*"name":' | head -n 10 | sed -E 's/^[+][[:space:]]*"name":[[:space:]]*"([^"]+)".*/➕ `\1`/g' || true)
+          # 🧠 从暂存区的 diff 中捕获新增和删除的线路名 ("name": "xxx")
+          ADDED_SITES=$(git diff --cached -U0 | grep '^[+][[:space:]]*"name":' | head -n 5 | sed -E 's/^[+][[:space:]]*"name":[[:space:]]*"([^"]+)".*/➕ `\1`/g' || true)
+          DELETED_SITES=$(git diff --cached -U0 | grep '^[-][[:space:]]*"name":' | head -n 5 | sed -E 's/^[-][[:space:]]*"name":[[:space:]]*"([^"]+)".*/➖ `\1`/g' || true)
           
           # 拼装基础通知文案
           MSG="🔔 *老杨TV 接口变更明细通知* 🔔%0A%0A"
           MSG="${MSG}📅 *更新时间*：${CURRENT_TIME} (北京时间)%0A"
           MSG="${MSG}🚀 *变动说明*：检测到上游数据源更新或手工区线路调整，新接口配置已全自动编译上链！%0A"
           
-          # 如果成功捕获到了新加的线路明细，则以列表形式优雅展示
-          if [ ! -z "$ADDED_SITES" ]; then
-            MSG="${MSG}%0A📝 *部分新增线路明细预览*：%0A${ADDED_SITES}%0A"
+          # 如果有新增或删除的线路，优雅展示明细
+          if [ ! -z "$ADDED_SITES" ] || [ ! -z "$DELETED_SITES" ]; then
+            MSG="${MSG}%0A📝 *变动明细预览*：%0A"
+            if [ ! -z "$ADDED_SITES" ]; then
+              MSG="${MSG}${ADDED_SITES}%0A"
+            fi
+            if [ ! -z "$DELETED_SITES" ]; then
+              MSG="${MSG}${DELETED_SITES}%0A"
+            fi
           fi
           
           MSG="${MSG}%0A👑 纯净版与全量版链接已在后台无缝更新，若电视端遇到断流请尝试重启软件或及时前往频道（@huliys9）获取当前最新密码锁！"
@@ -83,7 +90,6 @@ jobs:
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --global core.quotepath false
         
-        # 🛠️ 终极防崩溃保险：若内容无变化优雅退出，有变化则 commit 并推送
         if ! git diff --cached --exit-code --quiet; then
           git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列): $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD:${{ github.ref_name }}
