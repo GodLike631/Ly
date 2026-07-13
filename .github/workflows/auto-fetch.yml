@@ -30,7 +30,7 @@ jobs:
         curl -L "https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/ok%E6%B5%B7%E8%B1%9A.json" -o datas/haitun.json
         curl -L "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py.json" -o datas/lz.json
 
-    # 🛠️ 【核心修复】必须先跑 Python 脚本，生成最新的 JSON，后面才能抓取到变动内容！
+    # 🛠️ 严格前置运行合并脚本，生成最新的 JSON 文件
     - name: Text Merge JSON
       run: |
         python modify_config.py
@@ -49,11 +49,15 @@ jobs:
           
           CURRENT_TIME=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M")
           
-          # 🧠 升级版提取：用 Markdown 等宽代码语法包裹线路名称，让其在手机频道呈现高亮背景底色块
+          # 🧠 用 Markdown 等宽代码语法包裹线路名称，让其在手机频道呈现高亮背景底色块
           ADDED_SITES=$(git diff --cached -U0 | grep '^[+][[:space:]]*"name":' | head -n 5 | sed -E 's/^[+][[:space:]]*"name":[[:space:]]*"([^"]+)".*/➕ ` \1 `/g' || true)
           DELETED_SITES=$(git diff --cached -U0 | grep '^[-][[:space:]]*"name":' | head -n 5 | sed -E 's/^[-][[:space:]]*"name":[[:space:]]*"([^"]+)".*/➖ ` \1 `/g' || true)
           
-          # 拼装基础通知文案（精确指定为：蝴蝶影视纯净版）
+          # 读取 Python 脚本生成的最新加密文件名，动态生成全量版专属订阅链接
+          LATEST_FILE=$(cat datas/最新接口文件名.txt || echo "蝴蝶影视全量版.json")
+          SUBSCRIBE_URL="https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/main/datas/${LATEST_FILE}"
+          
+          # 拼装全量版通知文案
           MSG="🔔 *蝴蝶影视全量版接口变更明细通知* 🔔%0A%0A"
           MSG="${MSG}📅 *更新时间*：${CURRENT_TIME} (北京时间)%0A"
           MSG="${MSG}🚀 *变动说明*：检测到上游数据源更新或手工区线路调整，新接口配置已全自动编译上链！%0A"
@@ -70,8 +74,11 @@ jobs:
             MSG="${MSG}📊 *━━━━━━━━━━━━━━━*%0A"
           fi
           
-          # 精确指定你的专属结尾文案
-          MSG="${MSG}%0A👑 全量版链接已在后台无缝更新，更新接口即可，若电视端遇到断流请尝试重启软件或及时前往频道（@huliys9）获取当前最新密码锁！"
+          # 🌟 强力注入全量版专用链接（支持单点自动复制）
+          MSG="${MSG}%0A🔗 *【 全量版专用链接 】* (点击可自动复制)：%0A\`${SUBSCRIBE_URL}\`%0A"
+          
+          # 专属全量版结尾文案
+          MSG="${MSG}%0A👑 全量版链接已在后台无缝更新，更新接口即可！若电视端遇到断流请尝试重启软件或及时前往频道（@huliys9）获取当前最新密码锁！"
           
           # 🚀 通过 curl 发射到 Telegram
           if [ ! -z "$TG_TOKEN" ] && [ ! -z "$TG_CHAT_ID" ]; then
