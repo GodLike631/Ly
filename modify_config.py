@@ -120,7 +120,7 @@ MY_CUSTOM_LIVES = [
       "type": 3,
       "url": "https://iptv.yang-1989.xyz/playlist.m3u",
       "epg":"https://material.yang-1989.xyz/epg.xml.gz",
-      "ua": "okhttp/3.8.1",
+      "ua": "okhttp/5.3.2",
       "timeout": 10,
       "playerType": 2
     },
@@ -128,7 +128,7 @@ MY_CUSTOM_LIVES = [
       "name": "Live「直播」｜Tg：@huliys9",
       "type": 3,
       "url": "https://live.yang-1989.eu.org/Live.m3u",
-      "ua": "okhttp/3.8.1",
+      "ua": "okhttp/5.3.2",
       "timeout": 10,
       "playerType": 2
     },
@@ -137,7 +137,7 @@ MY_CUSTOM_LIVES = [
       "type": 3,
       "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
       "epg":"https://material.yang-1989.xyz/epg.xml.gz",
-      "ua": "okhttp/3.8.1",
+      "ua": "okhttp/5.3.2",
       "timeout": 10,
       "playerType": 2
     },
@@ -214,9 +214,6 @@ for garbage in glob.glob('datas/config_*.json'):
     try: os.remove(garbage)
     except: pass
 
-# ====================================================================
-# 🧠 【核心逻辑：正统 JSON 对象读取与合并逻辑】 (原汁原味保留)
-# ====================================================================
 def load_json_safe(path):
     if not os.path.exists(path):
         return {}
@@ -323,9 +320,6 @@ try:
     if "warningText" in final_obj: ordered_obj["warningText"] = final_obj.pop("warningText")
     ordered_obj.update(final_obj)
     
-    # ====================================================================
-    # 🌟【全新黑科技注入區：大屏体验極致優化】 (原汁原味保留)
-    # ====================================================================
     try:
         unique_parses = []
         seen_names = set()
@@ -385,7 +379,6 @@ try:
         }
         ordered_obj["rules"] = [js_injection_rule] + [r for r in current_rules if r.get("name") != "老楊TV·雲端高級去广告JS注入"]
 
-        # --- 5 & 6. 🏆【核心重写：九大方阵智能清洗洗牌】 ---
         block_1_rebo = []         
         block_2_yingshi = []      
         block_3_duanju = []       
@@ -513,9 +506,6 @@ try:
     except Exception as inner_e:
         print(f"⚠️ 提示：高级大屏排版美化阶段跳过: {inner_e}")
 
-    # ====================================================================
-    # 🌟【数据安全落盘】
-    # ====================================================================
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
         
