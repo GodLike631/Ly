@@ -149,6 +149,9 @@ is_reset_day = (today.day == 1)
 saved_month = ""
 saved_code = ""
 
+# 新增：新密码锁生成触发标记，默认关闭
+is_new_token_generated = False
+
 if os.path.exists(lock_file_path):
     with open(lock_file_path, 'r', encoding='utf-8') as f:
         content = f.read().strip()
@@ -162,6 +165,8 @@ if is_reset_day and saved_month != current_month:
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(f"{current_month}-{current_token}")
     print(f"⏰ 【每月1号全新硬核洗牌】已生成本月新密锁: {current_token}")
+    # 🎯 触发核心改动点：满足1号且月份不一致，证明重新生成了新密码
+    is_new_token_generated = True
 elif is_reset_day and saved_month == current_month:
     current_token = saved_code
     print(f"🔒 【安全阀拦截】保持当月原暗号: {current_token}")
@@ -493,8 +498,35 @@ try:
         print(f"⚠️ 提示：高级大屏排版美化阶段跳过: {inner_e}")
 
     # ====================================================================
-    # 🎯 【超高精度对比：新旧 JSON 最终文件的 Sites 与 Lives 精准中文名录对比】
+    # 🎯 【超高精度对比与推送板块】
     # ====================================================================
+    tg_token = os.getenv("TG_TOKEN")
+    tg_chat_id = os.getenv("TG_CHAT_ID")
+    github_repo = os.getenv("GITHUB_REPO", "GodLike631/Ly_18")
+    
+    # 动态构建最新生成的接口订阅链接
+    subscribe_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/main/datas/{output_filename}"
+
+    # ------------------------------------------------------------------
+    # 🌟 【新增核心功能：新密码专属推送通道（完全独立解耦）】
+    # ------------------------------------------------------------------
+    if is_new_token_generated and tg_token and tg_chat_id:
+        try:
+            pwd_msg = f"🔔 *蝴蝶影视全量版 · 全新月份硬核密码锁发布* 🔔\n\n"
+            pwd_msg += f"📅 *生效时间*：{(datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime('%Y年%m月01日')} (北京时间)\n"
+            pwd_msg += f"🔑 *本月全新蝴蝶全量版密锁*：`{current_token}`\n\n"
+            pwd_msg += f"🚀 *重要提示*：\n旧接口已全线开启【金蝉脱壳】大轰炸提示，原蝴蝶全量版链接已彻底作废断流！\n\n"
+            pwd_msg += f"🔗 *最新蝴蝶全量版订阅链接 (点击即可自动复制)*：\n`{subscribe_url}`\n\n"
+            pwd_msg += f"👑 蝴蝶全量版链接已在后台全自动换锁，请及时更新电视端接口。若电视端遇到断流请尝试重启软件或前往频道（@huliys9）获取最新支持！"
+
+            pwd_url = f"https://api.telegram.org/bot{tg_token}/sendMessage"
+            pwd_data = urllib.parse.urlencode({"chat_id": tg_chat_id, "parse_mode": "Markdown", "text": pwd_msg}).encode("utf-8")
+            pwd_req = urllib.request.Request(pwd_url, data=pwd_data)
+            with urllib.request.urlopen(pwd_req, timeout=15) as response:
+                print("🚀 [专属密码通道] 蝴蝶全量版每月1号新密锁独立通知通过 Python 直发成功！")
+        except Exception as pwd_err:
+            print(f"❌ [专属密码通道] 蝴蝶全量版发送通知失败: {pwd_err}")
+
     try:
         old_sites_names, old_lives_names = set(), set()
         if os.path.exists(tracker_path):
@@ -543,19 +575,11 @@ try:
                     msg_lines.append("➖ *剔除直播*：")
                     msg_lines.extend([f"🔴 {name}" for name in deleted_lives])
                 msg_lines.append("📊 *━━━━━━━━━━━━━━━*")
-
-            # 抓取工作流注入的 TG 变量，开启 Python 高速网络直发
-            tg_token = os.getenv("TG_TOKEN")
-            tg_chat_id = os.getenv("TG_CHAT_ID")
-            github_repo = os.getenv("GITHUB_REPO", "GodLike631/Ly_18")
             
             if tg_token and tg_chat_id:
                 current_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
                 detail_msg = "\n".join(msg_lines)
                 
-                # 动态捕捉最新的加密后或大洗牌后的接口链接
-                subscribe_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/main/datas/{output_filename}"
-
                 # 完美复现和组装您原始文件里的报头和报尾结构
                 full_msg = f"🔔 *蝴蝶影视全量版接口变更明细通知* 🔔\n\n"
                 full_msg += f"📅 *更新时间*：{current_time} (北京时间)\n"
