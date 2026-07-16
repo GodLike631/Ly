@@ -82,6 +82,24 @@
             "searchable": 1
         },
         {
+            "name": "🦋 弹幕",
+            "key": "弹幕豆瓣",
+            "type": 3,
+            "api": "csp_SecureDanmu",
+            "searchable": 1,
+            "jar": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/danmu-spider-native.jar",
+            "ext": {
+                "apiUrls": [
+                    "https://danmu.iyo.us.ci/theft-dastardly-prognosis-hula-agenda2-dropkick|公益源",
+                    "https://logo.saodu.work:8888/87654321|公益源1",
+                    "https://dm.ljiaovm.com/luosen|公益源2"
+                ],
+                "titleMappingsUrl": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/yins.json",
+                "filter": "./lib/douban.json"
+            },
+            "category": "综合"
+        },
+        {
             "key": "youtube",
             "name": "🦋 油管.py",
             "type": 3,
@@ -287,6 +305,14 @@
             "name": "🦋 蛋挞TV.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/蛋挞TV.py",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "wstv",
+            "name": "🦋 威视TV.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/威视TV.py",
             "category": "综合",
             "searchable": 1
         },
@@ -2504,6 +2530,14 @@
             "searchable": 1
         },
         {
+            "key": "mtvm",
+            "name": "🦋 蜜桃视频.py(羊壳观看)｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/蜜桃视频.py",
+            "category": "福利",
+            "searchable": 1
+        },
+        {
             "key": "wyt",
             "name": "🦋 五月天.py｜🔞",
             "type": 3,
@@ -3111,7 +3145,13 @@
             "url": "https://raw.githubusercontent.com/fleung49/star/refs/heads/main/mit"
         },
         {
-            "name": "各大源合集 永久免费如有收费的都是骗子｜Tg：@huliys9",
+            "name": "风云源 永久免费如有收费的都是骗子｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "http://iptv.4666888.xyz/FYTV.txt"
+        },
+        {
+            "name": "各大源合集｜Tg：@huliys9",
             "type": 0,
             "ua": "okhttp/5.3.2",
             "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/sese.txt"
@@ -3128,12 +3168,6 @@
             "type": 0,
             "ua": "okhttp/5.3.2",
             "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt"
-        },
-        {
-            "name": "地方直播2｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u"
         },
         {
             "name": "锋云直播｜Tg：@huliys9",
@@ -3206,6 +3240,12 @@
             "ua": "okhttp/5.3.2",
             "timeout": 10,
             "playerType": 2
+        },
+        {
+            "name": "地方直播2｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/ipv4/result.m3u"
         },
         {
             "name": "薄荷直播｜Tg：@huliys9",
@@ -3308,12 +3348,6 @@
             "type": 0,
             "ua": "okhttp/5.3.2",
             "url": "http://ge.html-5.me//ii/黄蚂蚁先锋推流源.txt"
-        },
-        {
-            "name": "风云源｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "http://iptv.4666888.xyz/FYTV.txt"
         },
         {
             "name": "易发源 有🔞｜Tg：@huliys9",
