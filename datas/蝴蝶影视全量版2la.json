@@ -90,24 +90,6 @@
             "searchable": 1
         },
         {
-            "name": "🦋 弹幕",
-            "key": "弹幕豆瓣",
-            "type": 3,
-            "api": "csp_SecureDanmu",
-            "searchable": 1,
-            "jar": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/danmu-spider-native.jar",
-            "ext": {
-                "apiUrls": [
-                    "https://danmu.iyo.us.ci/theft-dastardly-prognosis-hula-agenda2-dropkick|公益源",
-                    "https://logo.saodu.work:8888/87654321|公益源1",
-                    "https://dm.ljiaovm.com/luosen|公益源2"
-                ],
-                "titleMappingsUrl": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/yins.json",
-                "filter": "./lib/douban.json"
-            },
-            "category": "综合"
-        },
-        {
             "key": "youtube",
             "name": "🦋 油管.py",
             "type": 3,
@@ -2534,14 +2516,6 @@
             "name": "🦋 黑料不打烊.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料不打烊.py",
-            "category": "福利",
-            "searchable": 1
-        },
-        {
-            "key": "mtvm",
-            "name": "🦋 蜜桃视频.py(羊壳观看)｜🔞",
-            "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/蜜桃视频.py",
             "category": "福利",
             "searchable": 1
         },
