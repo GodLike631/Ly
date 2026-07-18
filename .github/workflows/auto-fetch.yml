@@ -46,9 +46,10 @@ jobs:
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --global core.quotepath false
         
+        # 核心变动：确保把生成的备份文件（_backup.json）也安全添加并上传到仓库
         git add datas/
         if ! git diff --cached --exit-code --quiet; then
-          git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列): $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "双源自适应硬核合并 (蝴蝶影视全量版系列 & 容灾备份系统): $(date +'%Y-%m-%d %H:%M:%S')"
           git push origin HEAD:${{ github.ref_name }}
         else
           echo "文件内容没有发生实际变化，无需更新，优雅退出。"
