@@ -23,8 +23,7 @@
             "name": "🦋 优酷视频.py ｜Tg：@huliys9",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/优酷视频.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "YK",
@@ -32,8 +31,7 @@
             "type": 3,
             "api": "https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
             "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002200-507c3e8aae.js",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "AQY",
@@ -41,8 +39,7 @@
             "type": 3,
             "api": "https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
             "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002031-6064033c16.js",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "TX",
@@ -50,8 +47,7 @@
             "type": 3,
             "api": "https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
             "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002144-0e40887294.js",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "spider": "./tvbox.jar",
@@ -69,8 +65,7 @@
             "name": "🦋 腾讯视频.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/腾讯视频.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "MG",
@@ -78,40 +73,35 @@
             "type": 3,
             "api": "https://file.icve.com.cn/file_doc/249/899/3E7E0C8A023B624CEC6BDCC200F06F02.js",
             "ext": "https://cdn.waimaimingtang.com/file/images/bwc/20251023002108-a4795930ec.js",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "MGtv",
             "name": "🦋 芒果TV.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/芒果TV.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "youtube",
             "name": "🦋 油管.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/油管.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "ddvm",
             "name": "🦋 低端影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/低端影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "cbh",
             "name": "🦋 茶杯狐.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/茶杯狐.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "ppx",
@@ -119,232 +109,203 @@
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/皮皮虾.py",
             "ext": "http://43.248.117.123:4680",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "bbzj",
             "name": "🦋 布布追剧.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/布布追剧.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "fY",
             "name": "🦋 枫叶影院.py(关梯子使用)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/枫叶影院.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "ww",
             "name": "🦋 哇哇APP.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/哇哇APP.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "rb",
             "name": "🦋 热播APP.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/热播APP.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "JP",
             "name": "🦋 金牌APP.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/金牌APP.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "GZ",
             "name": "🦋 瓜子APP.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/瓜子APP.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "nnyy",
             "name": "🦋 努努影院.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/努努影院.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "nvm",
             "name": "🦋 泥视频.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/泥视频.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "QU",
             "name": "🦋 奇优影院.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/奇优影院.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "yl",
             "name": "🦋 永乐视频.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/永乐视频.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "mtyy",
             "name": "🦋 麦田影院.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/麦田影院.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "xhvm",
             "name": "🦋 骚火影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/骚火影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "ayf",
             "name": "🦋 爱壹帆影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/爱壹帆.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "MH",
             "name": "🦋 麻花影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/麻花影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "XH",
             "name": "🦋 星河影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/星河影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "guanfeng",
             "name": "🦋 观风影视.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/观风影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "SZ",
             "name": "🦋 山楂影视.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/山楂影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "qmvm",
             "name": "🦋 七猫影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/七猫影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "nmvm",
             "name": "🦋 农民影视.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/农民影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "xc",
             "name": "🦋 星辰影院.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/星辰影院.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "hstv",
             "name": "🦋 华数TV.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/华数TV.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "dttv",
             "name": "🦋 蛋挞TV.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/蛋挞TV.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "wstv",
             "name": "🦋 威视TV.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/威视TV.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "dsys",
             "name": "🦋 毒舌影视.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/毒舌影视.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "456dy",
             "name": "🦋 456电影网.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/456电影网.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "qw",
             "name": "🦋 七味.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/七味.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "8tdy",
             "name": "🦋 八天电影.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/八天电影.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "cjjh",
             "name": "🦋 采集聚合.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/采集聚合.py",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "ikun",
@@ -668,8 +629,7 @@
             "type": 3,
             "api": "csp_Nostr",
             "homePage": "https://cnb.cool/fish2018/lib/-/git/raw/main/nostr.min.html",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "豆瓣",
@@ -693,8 +653,7 @@
             "name": "🦋 三秋 • APP",
             "type": 3,
             "api": "csp_App3Q",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "韩圈",
@@ -702,8 +661,7 @@
             "type": 3,
             "api": "csp_Hxq",
             "ext": "http://www.小不点.com/api/2026/fishhxq.php",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "无极99",
@@ -721,8 +679,7 @@
                 "buildNumber": "2001",
                 "buildSignature": "A0859BDC35AD3E81D4051E2A4678C77C62773EDB3423DDF1DEFF94CB331D398E"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "橙子99",
@@ -739,8 +696,7 @@
                 "buildNumber": "2001",
                 "buildSignature": "99DA983CF878CEC016616175464A91A94775E20A489F07F76FCDEA1A0F2B6B45"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "剧圈99",
@@ -756,8 +712,7 @@
                 "buildNumber": "2002",
                 "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "双星99",
@@ -774,8 +729,7 @@
                 "buildNumber": "2003",
                 "buildSignature": "054FA8DDA4319C6B6A9B954CA5777541C993F00B1B0BD4394F7EDE48184C4594"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "顾我99",
@@ -792,8 +746,7 @@
                 "buildNumber": "2001",
                 "buildSignature": "5AD4436C4730FFE26910C86278B80F3E661C317FFC3616F702D20A729262624A"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "天堂",
@@ -1025,16 +978,14 @@
             "name": "🦋 三六零 • 视频",
             "type": 3,
             "api": "csp_SP360",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "独播影视",
             "name": "🦋 独播 • 影视",
             "type": 3,
             "api": "csp_Duboku",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "厂长影视",
@@ -1053,8 +1004,7 @@
             "type": 3,
             "api": "csp_Jpys",
             "ext": "https://y2s52n7.com,https://m.hkybqufgh.com,https://m.sizhengxt.com,https://m.9zhoukj.com,https://m.sizhengxt.com,https://m.jiabaide.cn",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "修罗影视",
@@ -1062,16 +1012,14 @@
             "api": "csp_Xlys",
             "type": 3,
             "ext": "https://www.xlysw.ggff.net",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "瓜子影视",
             "name": "🦋 瓜子 • 影视",
             "type": 3,
             "api": "csp_Gz360",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "骚火影视",
@@ -1079,8 +1027,7 @@
             "type": 3,
             "api": "csp_SaoHuo",
             "ext": "https://shdy5.us",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "农民影视",
@@ -1088,8 +1035,7 @@
             "type": 3,
             "api": "csp_Wwys",
             "ext": "https://vip.wwgz.cn:5200",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "爱看机器人",
@@ -1117,8 +1063,7 @@
                 "分类url": "https://www.cd-zj.com/cupfox-list/{cateId}-{area}--{class}-----{catePg}---{year}.html",
                 "分类": "电影$1#电视剧$2#综艺$3#动漫$4#短剧$5"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "小镇影视",
@@ -1131,8 +1076,7 @@
                 "分类url": "http://dyxz.tv/list/{cateId}_{catePg}.html",
                 "分类": "电影$1#电视剧$2#动漫$3#综艺$4"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "面包影视",
@@ -1146,8 +1090,7 @@
                 "分类": "电影$20#电视剧$21#动漫$23#综艺$22#短剧$47",
                 "简介": "简介：&&"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "永乐影视",
@@ -1161,8 +1104,7 @@
                 "类型": "动作片$6#喜剧片$7#爱情片$8#科幻片$9#奇幻片$10#恐怖片$11#剧情片$12#战争片$20#动画片$26#悬疑片$22#冒险片$23#犯罪片$24#惊悚片$45#歌舞片$46#灾难片$47#网络片$48||国产剧$13#港台剧$14#日剧$15#韩剧$33#欧美剧$16#泰剧$34#新马剧$35#其他剧$25||内地综艺$27#港台综艺$28#日本综艺$29#韩国综艺$36#欧美综艺$30#新马泰综艺$37#其他综艺$38||国产动漫$31#日本动漫$32#韩国动漫$39#港台动漫$40#新马泰动漫$41#欧美动漫$42#其他动漫$43",
                 "分类url": "https://www.ylys.tv/vodshow/{cateId}-{area}-{by}-{class}-{lang}-{letter}---{catePg}---{year}.html"
             },
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "剧圈影视",
@@ -1170,8 +1112,7 @@
             "type": 3,
             "api": "csp_XYQHiker",
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/剧圈影视.json",
-            "category": "综合",
-            "searchable": 1
+            "category": "综合"
         },
         {
             "key": "1905",
@@ -1252,8 +1193,7 @@
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/河马剧场.py",
             "category": "短剧",
-            "genre": "shortdrama",
-            "searchable": 1
+            "genre": "shortdrama"
         },
         {
             "key": "笒鬼短剧",
@@ -1318,8 +1258,7 @@
             "name": "🦋 MiFun动漫.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/MiFun动漫.py",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "哆啦新番社",
@@ -1330,8 +1269,7 @@
                 "type": "list"
             },
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/哆啦新番社.json",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "Anime1",
@@ -1339,8 +1277,7 @@
             "type": 3,
             "api": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/drpy2.min.js",
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/Anime1.js",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "漫国动漫",
@@ -1401,8 +1338,7 @@
             "type": 3,
             "api": "csp_XYQHiker",
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/巴士动漫.json",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "路漫漫",
@@ -1410,8 +1346,7 @@
             "type": 3,
             "api": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/drpy2.min.js",
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/路漫漫.js",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "去看吧",
@@ -1419,56 +1354,49 @@
             "type": 3,
             "api": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/drpy2.min.js",
             "ext": "https://cnb.cool/fish2018/xs/-/git/raw/main/js/去看吧.js",
-            "category": "动漫",
-            "searchable": 1
+            "category": "动漫"
         },
         {
             "key": "ysxq",
             "name": "🦋 映像星球.py(关梯)",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/映像星球.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "kf",
             "name": "🦋 咖啡体育直播.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/咖啡直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "sm",
             "name": "🦋 韩国熊猫直播",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/GHK/refs/heads/main/py/熊猫直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "blzb",
             "name": "🦋 哔哩直播.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/哔哩直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "jhzb",
             "name": "🦋 聚合直播.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/聚合直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "youtube2",
             "name": "🦋 油管直播,py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/油管直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "88看球",
@@ -1479,8 +1407,7 @@
             "style": {
                 "type": "list"
             },
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "球通体育",
@@ -1490,8 +1417,7 @@
             "style": {
                 "type": "list"
             },
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "瓜子体育",
@@ -1501,8 +1427,7 @@
             "style": {
                 "type": "list"
             },
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "咖啡体育",
@@ -1512,8 +1437,7 @@
             "style": {
                 "type": "list"
             },
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "919体育",
@@ -1523,24 +1447,21 @@
             "style": {
                 "type": "list"
             },
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "网络直播",
             "name": "🦋 网络 • 直播",
             "type": 3,
             "api": "https://cnb.cool/fish2018/xs/-/git/raw/main/py/网络直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "哔哩直播",
             "name": "🦋 哔哩 • 直播",
             "type": 3,
             "api": "https://cnb.cool/fish2018/xs/-/git/raw/main/py/哔哩直播.py",
-            "category": "体育/直播",
-            "searchable": 1
+            "category": "体育/直播"
         },
         {
             "key": "少儿教育",
@@ -1848,8 +1769,7 @@
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/IY-CPU/IY/main/lib/drpy2.min.js",
             "ext": "https://ghfast.top/https://raw.githubusercontent.com/IY-CPU/IY/main/lib/茫茫.png",
-            "category": "网盘/磁力",
-            "searchable": 1
+            "category": "网盘/磁力"
         },
         {
             "key": "玩偶",
@@ -2140,8 +2060,7 @@
             "name": "🦋 荐片 • 磁力",
             "api": "csp_JianPian",
             "type": 3,
-            "category": "网盘/磁力",
-            "searchable": 1
+            "category": "网盘/磁力"
         },
         {
             "key": "七味",
@@ -2352,16 +2271,14 @@
             "name": "🦋 优视频.py 有🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/优视频.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "xyzkk",
             "name": "🦋 小鸭子看看.py 有🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/小鸭子看看.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "aidan",
@@ -2388,312 +2305,273 @@
             "name": "🦋 星芽短剧.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/星芽短剧.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "shjb",
             "name": "🦋 色播聚合.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/色播聚合.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "stripchat",
             "name": "🦋 stripchat直播.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/stripchat.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "Cam4",
             "name": "🦋 Cam4直播.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Cam4直播.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "Pandalive",
             "name": "🦋 韩国Pandalive直播.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Pandalive直播.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "007qg",
             "name": "🦋 007吃瓜.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/007吃瓜.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "51qg",
             "name": "🦋 51吃瓜.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/51吃瓜.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "51dc",
             "name": "🦋 51大赛.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/51大赛.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "51bl",
             "name": "🦋 51爆料.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/51爆料.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "51vm",
             "name": "🦋 51视频.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/51视频.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "818hlw",
             "name": "🦋 818黑料网.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/818黑料网.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "91bl",
             "name": "🦋 91爆料.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/91爆料.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "91qgzx",
             "name": "🦋 91吃瓜中心.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/91吃瓜中心.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "mrds",
             "name": "🦋 每日大赛.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/每日大赛.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "mrdld",
             "name": "🦋 每日大乱斗.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/每日大乱斗.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "jrkl",
             "name": "🦋 今日看料.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/今日看料.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "hl",
             "name": "🦋 黑料不打烊.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料不打烊.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "wyt",
             "name": "🦋 五月天.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/五月天.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "jptt",
             "name": "🦋 禁片天堂.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/禁片天堂.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "hgsq",
             "name": "🦋 韩国色情电影.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/韩国色情电影.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "smvm",
             "name": "🦋 神秘电影.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/神秘电影.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "xj",
             "name": "🦋 香蕉视频.py(关梯)｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/香蕉视频.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "dj",
             "name": "🦋 妲己高清视频.py(关梯)｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/妲己.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "xmvm",
             "name": "🦋 熊猫视频.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/熊猫视频.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "shvm",
             "name": "🦋 四虎视频.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/四虎视频.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "scpd",
             "name": "🦋 香肠派对.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/香肠派对.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "llav",
             "name": "🦋 萝莉AV.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/萝莉AV.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "123av",
             "name": "🦋 123AV.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/123AV.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "Xvideos",
             "name": "🦋 Xvideos.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Xvideos.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "Pornhub",
             "name": "🦋 Pornhub.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/Pornhub.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "xhamster",
             "name": "🦋 xhamster.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/xhamster.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "eporner",
             "name": "🦋 EPORNER.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/EPORNER.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "91porn",
             "name": "🦋 91porn.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/91porn.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "fullhd",
             "name": "🦋 FullHD.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/FullHD.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "JAV36",
             "name": "🦋 JAV36.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/JAV36.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "ggsp",
             "name": "🦋 久久視頻.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/久久視頻.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "TOPTV",
             "name": "🦋 TOPTV.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/TOPTV.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "VHUB",
             "name": "🦋 VHUB.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/VHUB[成人].py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "MD",
             "name": "🦋 麻豆免费在线播放.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/麻豆免费在线播放.py",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "slyzy",
@@ -2880,8 +2758,7 @@
             "name": "🦋 AIvin｜🔞",
             "type": 0,
             "api": "http://lbapiby.com/api.php/provide/vod/at/xml",
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "香蕉资源",
@@ -2990,8 +2867,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/vf.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "MissAV-py",
@@ -3011,8 +2887,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/Hanime.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "91rb",
@@ -3020,8 +2895,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/91rb.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "DSYS",
@@ -3029,8 +2903,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/DSYS.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "lav",
@@ -3038,8 +2911,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/lav.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "色播聚合",
@@ -3047,8 +2919,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/色播聚合.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "一个区",
@@ -3056,8 +2927,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/一个区.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "九个区",
@@ -3065,8 +2935,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/九个区.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "香蕉视频",
@@ -3074,8 +2943,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/香蕉视频.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "js_madou",
@@ -3095,8 +2963,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/小红薯.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "推特",
@@ -3104,8 +2971,7 @@
             "type": 3,
             "api": "https://gh-proxy.com/https://raw.githubusercontent.com/ediart/tvbox/refs/heads/main/lz/py/推特.py",
             "changeable": 1,
-            "category": "福利",
-            "searchable": 1
+            "category": "福利"
         },
         {
             "key": "kemono",
