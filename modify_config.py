@@ -18,9 +18,6 @@ tracker_path = 'datas/最新接口文件名.txt'
 
 # ====================================================================
 # 🚫 【新增：自定义黑名单关键词过滤区】
-# 在下方列表中填入指定关键词（支持多个），脚本合并时会自动删除包含这些关键词的
-# 点播线路与直播源。如果不需要过滤，保持列表为空即可。
-# ====================================================================
 BLOCK_KEYWORDS = ["羊壳", "弹幕", "不可用"]
 
 # ====================================================================
@@ -156,7 +153,6 @@ is_reset_day = (today.day == 1)
 saved_month = ""
 saved_code = ""
 
-# 新增：新密码锁生成触发标记，默认关闭
 is_new_token_generated = False
 
 if os.path.exists(lock_file_path):
@@ -172,7 +168,6 @@ if is_reset_day and saved_month != current_month:
     with open(lock_file_path, 'w', encoding='utf-8') as f:
         f.write(f"{current_month}-{current_token}")
     print(f"⏰ 【每月1号全新硬核洗牌】已生成本月新密锁: {current_token}")
-    # 🎯 触发核心改动点：满足1号且月份不一致，证明重新生成了新密码
     is_new_token_generated = True
 elif is_reset_day and saved_month == current_month:
     current_token = saved_code
@@ -222,16 +217,62 @@ for garbage in glob.glob('datas/config_*.json'):
     try: os.remove(garbage)
     except: pass
 
+# ====================================================================
+# 🛡️ 【方案 B 核心升级：具备智能容灾和老本备份的 JSON 加载函数】
+# ====================================================================
 def load_json_safe(path):
-    if not os.path.exists(path):
-        return {}
-    with open(path, 'r', encoding='utf-8') as f:
-        try:
-            return json.load(f)
-        except Exception as e:
-            print(f"❌ 错误：{path} JSON 格式不正确！")
-            return {}
+    # 根据原路径自动推导备份路径，例如：datas/cnb.json -> datas/cnb_backup.json
+    dir_name = os.path.dirname(path)
+    base_name = os.path.basename(path)
+    name_part, ext_part = os.path.splitext(base_name)
+    backup_path = os.path.join(dir_name, f"{name_part}_backup{ext_part}")
 
+    current_data = None
+    is_current_valid = False
+
+    # 1. 尝试读取当前被 curl 覆写的文件
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            try:
+                current_data = json.load(f)
+                # 核心健康检查：必须是字典，且必须包含 tvbox 接口特有的核心字段（防范 404 网页或空壳文件）
+                if isinstance(current_data, dict) and ("sites" in current_data or "lives" in current_data or "parses" in current_data):
+                    is_current_valid = True
+                else:
+                    print(f"⚠️ 警告：{path} 虽是合法的 JSON，但未包含有效底包字段，判定为坏源！")
+            except Exception:
+                print(f"⚠️ 警告：{path} 文件损坏或为空，无法正常解析为 JSON！")
+
+    # 2. 判定与决策分流
+    if is_current_valid:
+        # 状况良好 -> 赶紧同步更新本地备份库
+        try:
+            with open(backup_path, 'w', encoding='utf-8') as b_f:
+                json.dump(current_data, b_f, ensure_ascii=False, indent=4)
+            print(f"✅ 成功：{path} 校验健康，已同步刷新本地容灾备份。")
+        except Exception as backup_err:
+            print(f"🚨 备份写入失败: {backup_err}")
+        return current_data
+    else:
+        # 状况恶劣（上游挂了） -> 智能启动容灾降级，调取历史老本
+        print(f"🚨 触发容灾机制：上游数据源 {path} 已失效！开始紧急调用本地历史备份...")
+        if os.path.exists(backup_path):
+            with open(backup_path, 'r', encoding='utf-8') as b_f:
+                try:
+                    backup_data = json.load(b_f)
+                    print(f"🥇 容灾成功！已成功加载上一次同步的历史健康数据: {backup_path}")
+                    # 将旧的备份写回原路径，防止下一轮流派误判
+                    with open(path, 'w', encoding='utf-8') as f:
+                        json.dump(backup_data, f, ensure_ascii=False, indent=4)
+                    return backup_data
+                except Exception:
+                    print(f"❌ 严重错误：本地历史备份 {backup_path} 也已损坏！")
+        else:
+            print(f"❌ 严重错误：未找到任何本地历史备份文件 {backup_path}！")
+        
+        return {}
+
+# 调用升级后的安全加载器
 json_cnb = load_json_safe(cnb_path)
 json_haitun = load_json_safe(haitun_path)
 json_lz = load_json_safe(lz_path)
@@ -271,9 +312,6 @@ custom_keys = {site.get("key") for site in MY_CUSTOM_SITES if site.get("key")}
 upstream_sites = haitun_sites + lz_nsfw_list + cnb_sites
 clean_upstream_sites = [site for site in upstream_sites if site.get("key") not in custom_keys]
 
-# ------------------------------------------------------------------
-# 🎯 【过滤点播区核心注入】：从源头过滤包含指定黑名单关键词的点播线路
-# ------------------------------------------------------------------
 if BLOCK_KEYWORDS:
     filtered_upstream_sites = []
     for site in clean_upstream_sites:
@@ -292,9 +330,6 @@ clean_base_lives = [
     live for live in base_lives if live.get("name") not in custom_live_names and "日本女优" not in live.get("name", "") and "日本女友" not in live.get("name", "")
 ]
 
-# ------------------------------------------------------------------
-# 🎯 【过滤直播区核心注入】：同步过滤包含指定黑名单关键词的直播源
-# ------------------------------------------------------------------
 if BLOCK_KEYWORDS:
     filtered_base_lives = []
     for live in clean_base_lives:
@@ -308,7 +343,6 @@ inserted_count = 0
 for custom_live in MY_CUSTOM_LIVES:
     live_name = custom_live.get("name", "")
     
-    # 手工手工定制区同样执行黑名单拦截
     if BLOCK_KEYWORDS and any(kw.lower() in live_name.lower() for kw in BLOCK_KEYWORDS if kw):
         continue
         
@@ -519,9 +553,6 @@ try:
                 site["category"] = "综合"
                 block_2_yingshi.append(site)
 
-            if site.get("category") not in ["少儿", "音乐"] and "searchable" not in site:
-                site["searchable"] = 1
-
         for site in block_2_yingshi:
             if site.get("key") == "AQY":
                 site["name"] = "🦋 爱奇艺 ｜Tg：@huliys9"
@@ -541,12 +572,8 @@ try:
     tg_chat_id = os.getenv("TG_CHAT_ID")
     github_repo = os.getenv("GITHUB_REPO", "GodLike631/Ly_18")
     
-    # 动态构建最新生成的接口订阅链接
     subscribe_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/main/datas/{output_filename}"
 
-    # ------------------------------------------------------------------
-    # 🌟 【新增核心功能：新密码专属推送通道（完全独立解耦）】
-    # ------------------------------------------------------------------
     if is_new_token_generated and tg_token and tg_chat_id:
         try:
             pwd_msg = f"🔔 *蝴蝶影视全量版 · 全新月份硬核密码锁发布* 🔔\n\n"
@@ -579,7 +606,6 @@ try:
         new_sites_names = {s.get("name", "").strip() for s in ordered_obj.get("sites", []) if s.get("name")}
         new_lives_names = {l.get("name", "").strip() for l in ordered_obj.get("lives", []) if l.get("name")}
 
-        # 分离点播与直播的实际中文名称名录增减
         added_sites = sorted(list(new_sites_names - old_sites_names))
         deleted_sites = sorted(list(old_sites_names - new_sites_names))
         added_lives = sorted(list(new_lives_names - old_lives_names))
@@ -588,7 +614,6 @@ try:
         if added_sites or deleted_sites or added_lives or deleted_lives:
             msg_lines = ["📝 *【 变动明细预览 】*", "📊 *━━━━━━━━━━━━━━━*"]
             
-            # 点播线变动展示
             if added_sites or deleted_sites:
                 msg_lines.append("📺 *【点播线路变动】*")
                 if added_sites:
@@ -600,7 +625,6 @@ try:
                     msg_lines.extend([f"🔴 {name}" for name in deleted_sites])
                 msg_lines.append("📊 *━━━━━━━━━━━━━━━*")
                 
-            # 直播线变动展示
             if added_lives or deleted_lives:
                 if len(msg_lines) > 2: msg_lines.append("")
                 msg_lines.append("📡 *【直播源站变动】*")
@@ -617,7 +641,6 @@ try:
                 current_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
                 detail_msg = "\n".join(msg_lines)
                 
-                # 完美复现和组装您原始文件里的报头和报尾结构
                 full_msg = f"🔔 *蝴蝶影视全量版接口变更明细通知* 🔔\n\n"
                 full_msg += f"📅 *更新时间*：{current_time} (北京时间)\n"
                 full_msg += f"🚀 *变动说明*：检测到上游数据源更新或手工区线路调整，新接口配置已全自动编译上链！\n\n"
@@ -625,7 +648,6 @@ try:
                 full_msg += f"🔗 *【 全量版专用链接 】* (点击可自动复制)：\n`{subscribe_url}`\n\n"
                 full_msg += f"👑 全量版链接已在后台无缝更新，更新接口即可！若电视端遇到断流请尝试重启软件或及时前往频道（@huliys9）获取当前最新密码锁！"
 
-                # 原生 urllib 安全投递，永不卡缓冲区死锁
                 url = f"https://api.telegram.org/bot{tg_token}/sendMessage"
                 data = urllib.parse.urlencode({"chat_id": tg_chat_id, "parse_mode": "Markdown", "text": full_msg}).encode("utf-8")
                 req = urllib.request.Request(url, data=data)
@@ -642,7 +664,6 @@ try:
     except Exception as diff_err:
         print(f"⚠️ 对比变动异常: {diff_err}")
 
-    # 原逻辑：写出最终生成的完整 JSON 字典并更新追踪器
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(ordered_obj, f, ensure_ascii=False, indent=4)
         
