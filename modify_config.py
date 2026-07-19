@@ -66,7 +66,7 @@ WALLPAPER_CLEAN = "https://img.naixiai.cn/2026/wallpapers/home_clean.jpg"
 HOT_VIDEO_KEY = "热播影视"
 
 # 2. 你想展示在电视端第一位的线路名称与版权声明（在这里直接改名字，比如改成金牌）
-HOT_VIDEO_SITE_NAME = f"热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜{MY_TG_SUFFIX.strip('｜')}"
+HOT_VIDEO_SITE_NAME = f"🦋热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜{MY_TG_SUFFIX.strip('｜')}"
 
 # 【🎯 新增功能：自定义线路名称批量替换映射表】
 # 可以在这里指定把线路名中的某些词替换成你指定的词，不想替换保持空字典即可
