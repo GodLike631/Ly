@@ -1,13 +1,13 @@
 {
-    "notice": "👑 欢迎使用【蝴蝶影视粉丝专属全量至尊专线】！本接口由蝴蝶影视结合多方大底包无损重排而成，干净流畅。🚨 重要提示：本接口密码不定期全自动更换！\n\n👑 🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码!",
+    "notice": "👑 欢迎使用【蝴蝶影视粉丝专属全量专线】！本接口由蝴蝶影视结合多方大底包无损重排而成，干净流畅。🚨 重要提示：本接口密码不定期全自动更换！\n\n👑 🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（@huliys9）获取当前最新密码!",
     "spider": "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar",
-    "wallpaper": "http://127.0.0.1:9978/proxy?do=wallpaper",
+    "wallpaper": "https://img.naixiai.cn/2026/wallpapers/full_vip.jpg",
     "logo": "https://img.naixiai.cn/2026/06/18/IMG_6638.jpeg",
     "danmaku": "http://127.0.0.1:9978/proxy?do=danmaku&name={name}&episode={episode}",
     "sites": [
         {
             "key": "热播影视",
-            "name": "热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜@huliys9",
+            "name": "热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜Tg：@huliys9",
             "type": 3,
             "api": "csp_AppRJ",
             "searchable": 1,
