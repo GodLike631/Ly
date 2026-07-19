@@ -16,7 +16,7 @@ cnb_path = 'datas/cnb.json'
 haitun_path = 'datas/haitun.json'
 lz_path = 'datas/lz.json'
 
-# 控制开关和追踪器文件路径
+# 控制开关和追踪器 file 路径
 lock_file_path = 'datas/控制开关.txt'
 tracker_path = 'datas/最新接口文件名.txt'
 
@@ -61,8 +61,12 @@ LOGO_PREFIX = "🦋"
 WALLPAPER_FULL = "https://img.naixiai.cn/2026/wallpapers/full_vip.jpg"
 WALLPAPER_CLEAN = "https://img.naixiai.cn/2026/wallpapers/home_clean.jpg"
 
-# 专属核心站点的版权声明与致谢文案
-HOT_VIDEO_SITE_NAME = f"🦋热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜{MY_TG_SUFFIX.strip('｜')}"
+# 【🎯 核心优化：只改这里，就能实现任意线路换名并强制置顶第一位】
+# 1. 强制置顶第一位的线路在上游底包中对应的唯一 key（如果上游变了，改这里即可）
+HOT_VIDEO_KEY = "热播影视"
+
+# 2. 你想展示在电视端第一位的线路名称与版权声明（在这里直接改名字，比如改成金牌）
+HOT_VIDEO_SITE_NAME = f"热播 • APP｜此接口非原创，合并自海豚佬 and 鱼佬接口，感谢两位大佬的付出，如有侵权，联系删除｜{MY_TG_SUFFIX.strip('｜')}"
 
 # 【🎯 新增功能：自定义线路名称批量替换映射表】
 # 可以在这里指定把线路名中的某些词替换成你指定的词，不想替换保持空字典即可
@@ -88,7 +92,7 @@ TRAP_LIVE_CHANNEL = f"👉 线路已过期 ➡️ 关注Tg频道（{MY_PROMO_CHA
 # ====================================================================
 thanks_warning = f"\n\n👑 🚨 重要提示：本接口密码不定期全自动更换！如果遇到失效或断流，请及时回 Telegram 频道（{MY_PROMO_CHANNEL}）获取当前最新密码!"
 
-WELCOME_NOTICE_FULL = "👑 欢迎使用【蝴蝶影视粉丝专属全量专线】！本接口由蝴蝶影视结合多方大底包无损重排而成，干净流畅。🚨 重要提示：本接口密码不定期全自动更换！"
+WELCOME_NOTICE_FULL = "👑 欢迎使用【蝴蝶影视粉丝专属全量专线】！本接口由蝴蝶影视结合多方大底包无损重排而成，干净流畅.🚨 重要提示：本接口密码不定期全自动更换！"
 WELCOME_NOTICE_CLEAN = "🏡 欢迎使用【蝴蝶影视专属绿色客厅专线】！本接口已全面过滤敏感、擦边和福利内容，全家老少看电视更安全、更绿色！"
 
 # DOH 注入项
@@ -539,7 +543,7 @@ try:
             is_guazi = "瓜子" in raw_name or "GZ" == s_key
             is_nsfw = False if is_guazi else ("🔞" in raw_name or "色播" in raw_name or "av" in s_key.lower() or "瓜" in raw_name or "爆料" in raw_name or "chat" in raw_name.lower() or "cam" in raw_name.lower() or "panda" in raw_name.lower() or "video" in raw_name.lower() or "md" in s_key.lower())
             
-            if s_key == "热播影视":
+            if s_key == HOT_VIDEO_KEY:
                 site["name"] = HOT_VIDEO_SITE_NAME
                 site["category"] = "综合"
                 block_1_rebo.append(site)
@@ -646,7 +650,7 @@ try:
     clean_raw_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/{branch_info}/datas/{clean_output_filename}"
     
     full_sub_url = f"{GITHUB_PROXY}{full_raw_url}" if GITHUB_PROXY else full_raw_url
-    clean_sub_url = f"{GITHUB_PROXY}{clean_raw_url}" if GITHUB_PROXY else clean_raw_url
+    clean_sub_url = f"{GITHUB_PROXY}{clean_raw_url}" if GITHUB_PROXY else clean_sub_url
     
     current_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
 
