@@ -165,5 +165,5 @@ MY_CUSTOM_LIVES = [
     {"name": "咪咕", "type": 0, "ua": "okhttp/5.3.2", "url": "https://develop202.github.io/migu_video/interface.txt"},
     {"name": "Gather「IPTV」", "type": 3, "url": "https://iptv.yang-1989.xyz/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
     {"name": "Live「直播」", "type": 3, "url": "https://live.yang-1989.eu.org/Live.m3u", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": "myTV「香港」", "type": 3, "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2}
+    {"name": "myTV「香港」1", "type": 3, "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2}
 ]
