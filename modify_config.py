@@ -37,7 +37,7 @@ UPSTREAM_DIRTY_WORDS = ['🐬', '海豚影视', '海豚', '完全免费，如有
 AD_HOSTS_LIST = ["vip.wwgz.cn", "lziplayer.com", "m3u8.apibdzy.com", "cj.ffzyapi.com", "api.hbzyapi.com"]
 
 # 1. 纯净版分流依据：全量版保留这些词，但“客厅纯净版”会根据这些词进行全面过滤
-NSFW_KEYWORDS = ["🔞", "福利", "探花", "约炮", "色播", "av", "爆料", "欧美", "蜜桃"]
+NSFW_KEYWORDS = ["🔞", "福利", "探花", "约炮", "色播", "av", "爆料", "欧美", "蜜桃", "三级片"]
 
 # 2. 上游全线杂质强力清洗：不管是全量版还是纯净版，只要点播或直播源名字包含以下词，直接永久丢弃
 BLOCK_MALICIOUS_KEYWORDS = ["日本女优", "日本女友"]
