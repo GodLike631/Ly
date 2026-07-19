@@ -172,7 +172,7 @@ MY_CUSTOM_LIVES = [
         "playerType": 2
     },
     {
-      "name": "综合直播",
+      "name": "f"综合直播{MY_TG_SUFFIX}"",
       "type": 0,
       "playerType": 2,
       "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
