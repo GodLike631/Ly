@@ -649,8 +649,9 @@ try:
     full_raw_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/{branch_info}/datas/{full_output_filename}"
     clean_raw_url = f"https://raw.githubusercontent.com/{github_repo}/refs/heads/{branch_info}/datas/{clean_output_filename}"
     
+    # 🎯 【核心修正】把变量定义提到 if 外面，确保全局生效，无论是换密还是日常更新都不会报错
     full_sub_url = f"{GITHUB_PROXY}{full_raw_url}" if GITHUB_PROXY else full_raw_url
-    clean_sub_url = f"{GITHUB_PROXY}{clean_raw_url}" if GITHUB_PROXY else clean_sub_url
+    clean_sub_url = f"{GITHUB_PROXY}{clean_raw_url}" if GITHUB_PROXY else clean_raw_url
     
     current_time = (datetime.datetime.utcnow() + datetime.timedelta(hours=8)).strftime("%Y-%m-%d %H:%M")
 
@@ -666,8 +667,8 @@ try:
 
     # 🟢 情况一：触发密码变更 ➡️ 推送高亮 Markdown 专属大通知，且不发名录变更
     if is_password_changed or is_new_token_generated:
-        try:
-            pwd_msg = "🔔 *蝴蝶影视全量版 · 全新硬核双通道密码锁发布* 🔔\n\n"
+        try:            
+            pwd_msg = "🔔 *蝴蝶影视全量版 · 全新硬核双通道密码锁发布* 🔔\n\n"           
             pwd_msg += f"📅 *生效时间*：`{current_time}` (北京时间)\n"
             pwd_msg += f"🔑 *全新专线密锁*：`{current_token}`\n\n"
             pwd_msg += "🚀 *重要提示*：\n密码锁已成功交替！旧接口已全线开启【金蝉脱壳】大轰炸，老链接彻底作废，请及时复制下方对应通道的最新链接！\n\n"
