@@ -144,18 +144,107 @@ MY_CUSTOM_SITES = [
 # 📺 【通道二：手工直播加线区】
 # ====================================================================
 MY_CUSTOM_LIVES = [
-    {"name": f"锋云直播{MY_TG_SUFFIX}", "type": 3, "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": f"最新电影{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"},
-    {"name": "Kimentanm", "type": 0, "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u", "playerType": 2},
-    {"name": "综合直播", "type": 0, "playerType": 2, "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt", "ua": "bingcha/1.1 (mianfeifenxiang) "},
-    {"name": f"央卫TV{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "http://47.120.41.246:8025/vip/jar/zb.php"},
-    {"name": f"超稳定流畅{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"},
-    {"name": f"国产直播🔞{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%9B%B4%E6%92%AD_20260417_024507.m3u"},
-    {"name": f"国产精品🔞{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%B2%BE%E5%93%81_20260417_024507.m3u"},
-    {"name": f"探花🔞{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"},
-    {"name": f"欧美🔞{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/%E6%AC%A7%E7%BE%8E%E9%A2%91%E9%81%93.m3u"},
-    {"name": f"咪咕{MY_TG_SUFFIX}", "type": 0, "ua": "okhttp/5.3.2", "url": "https://develop202.github.io/migu_video/interface.txt"},
-    {"name": f"Gather「IPTV」{MY_TG_SUFFIX}", "type": 3, "url": "https://iptv.yang-1989.xyz/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": f"Live「直播」{MY_TG_SUFFIX}", "type": 3, "url": "https://live.yang-1989.eu.org/Live.m3u", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": f"myTV「香港」{MY_TG_SUFFIX}", "type": 3, "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2}
+    {
+        "name": f"乡村电视 {MY_TG_SUFFIX}",
+        "type": 0,
+        "playerType": 2,
+        "ua": "okhttp/5.3.2",
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E4%B9%A1%E6%9D%91%E7%94%B5%E8%A7%86.txt"
+    },
+    {
+      "name": f"锋云直播{MY_TG_SUFFIX}",
+      "type": 3,
+      "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
+      "ua": "okhttp/5.3.2",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+        "name": f"最新电影{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"
+    },
+    {
+        "name": "Kimentanm",
+        "type": 0,
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+        "playerType": 2
+    },
+    {
+      "name": "综合直播",
+      "type": 0,
+      "playerType": 2,
+      "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
+      "ua": "bingcha/1.1 (mianfeifenxiang) "
+    },
+    {
+        "name": f"央卫TV{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "http://47.120.41.246:8025/vip/jar/zb.php"
+    },
+    {
+        "name": f"超稳定流畅{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
+    },
+    {
+        "name": f"国产直播🔞{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%9B%B4%E6%92%AD_20260417_024507.m3u"
+    },
+    {
+        "name": f"国产精品🔞{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%B2%BE%E5%93%81_20260417_024507.m3u"
+    },
+    {
+        "name": f"4K福利🔞{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/4k%E7%A6%8F%E5%88%A9.m3u"
+    },
+    {
+        "name": f"探花🔞{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"
+    },
+    {
+        "name": f"咪咕{MY_TG_SUFFIX}",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://develop202.github.io/migu_video/interface.txt"
+    },
+    {
+      "name": f"Gather「IPTV」{MY_TG_SUFFIX}",
+      "type": 3,
+      "url": "https://iptv.yang-1989.xyz/playlist.m3u",
+      "epg":"https://material.yang-1989.xyz/epg.xml.gz",
+      "ua": "okhttp/5.3.2",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": f"Live「直播」{MY_TG_SUFFIX}",
+      "type": 3,
+      "url": "https://live.yang-1989.eu.org/Live.m3u",
+      "ua": "okhttp/5.3.2",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": f"myTV「香港」{MY_TG_SUFFIX}",
+      "type": 3,
+      "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
+      "epg":"https://material.yang-1989.xyz/epg.xml.gz",
+      "ua": "okhttp/5.3.2",
+      "timeout": 10,
+      "playerType": 2
+    },
 ]
+
