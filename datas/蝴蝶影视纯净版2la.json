@@ -371,36 +371,6 @@
             "searchable": 1
         },
         {
-            "key": "ikun",
-            "name": "🦋 爱坤┃影视(有三级片)",
-            "type": 1,
-            "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/at/json",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "category": "综合"
-        },
-        {
-            "key": "U酷資源",
-            "name": "🦋 U酷資源(有三级片)",
-            "type": 1,
-            "api": "https://api.ukuapi.com/api.php/provide/vod/",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "category": "综合"
-        },
-        {
-            "key": "虎牙资源",
-            "name": "🦋 虎牙资源(有三级片)",
-            "type": 1,
-            "api": "https://www.huyaapi.com/api.php/provide/vod/",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "category": "综合"
-        },
-        {
             "key": "非凡",
             "name": "🦋 非凡影视",
             "type": 1,
@@ -438,24 +408,6 @@
                 "港台动漫",
                 "海外动漫"
             ],
-            "category": "综合"
-        },
-        {
-            "key": "天涯资源",
-            "name": "🦋 天涯资源(有三级片)",
-            "type": 0,
-            "api": "https://tyyszyapi.com/api.php/provide/vod/at/xml/?ac=list",
-            "searchable": 1,
-            "quickSearch": 1,
-            "category": "综合"
-        },
-        {
-            "key": "iKun资源",
-            "name": "🦋 iKun资源(有三级片)",
-            "type": 0,
-            "api": "https://ikunzyapi.com/api.php/provide/vod/at/xml",
-            "searchable": 1,
-            "quickSearch": 1,
             "category": "综合"
         },
         {
