@@ -1580,7 +1580,7 @@
             "name": "🦋 剧圈 • 影视",
             "type": 3,
             "api": "csp_XYQHiker",
-            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker//剧圈影视.json",
+            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker/剧圈影视.json",
             "category": "综合",
             "searchable": 1
         },
@@ -1848,7 +1848,7 @@
             "name": "🦋 巴士 • 动漫",
             "type": 3,
             "api": "csp_XYQHiker",
-            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker//巴士动漫.json",
+            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker/巴士动漫.json",
             "category": "动漫",
             "searchable": 1
         },
@@ -2311,7 +2311,7 @@
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
-            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker//电影港.json",
+            "ext": "https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker/电影港.json",
             "category": "网盘/磁力"
         },
         {
