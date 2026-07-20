@@ -79,7 +79,7 @@ CATEGORY_RULES = {
 PATH_REPLACEMENTS = {
     r'\./spider\.jar': 'https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar',
     r'\./XBPQ/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/',
-    r'\./XYQHiker/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/',  # 🎯 蝴蝶特异性：带尾部斜杠
+    r'\./XYQHiker': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/',  # 去掉尾部固定斜杠，兼容性更强
     r'\./js/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/',
     r'\./json/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/',
     r'\./py/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/',
