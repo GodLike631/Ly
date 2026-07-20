@@ -288,11 +288,30 @@ def object_level_wash_and_compile():
 
         site["name"] = name
 
+        # 🎯 【终极路径双向清洗补丁】：同时强力洗净 api 和 ext 两个核心字段
+        # 1. 优先清洗 api 字段
         api_field = site.get("api", "")
         if isinstance(api_field, str):
             for pattern, target in config.PATH_REPLACEMENTS.items():
                 api_field = re.sub(pattern, target, api_field)
             site["api"] = api_field
+
+        # 2. 深度清洗 ext 字段 (彻底干掉藏在里面的相对路径)
+        ext_field = site.get("ext", "")
+        if isinstance(ext_field, str):
+            # 如果 ext 是字符串路径，直接用正则替换
+            for pattern, target in config.PATH_REPLACEMENTS.items():
+                ext_field = re.sub(pattern, target, ext_field)
+            site["ext"] = ext_field
+        elif isinstance(ext_field, dict):
+            # 如果 ext 是字典（比如某些魔改壳的特殊配置），转成 JSON 字符串洗完再变回字典
+            try:
+                ext_str = json.dumps(ext_field, ensure_ascii=False)
+                for pattern, target in config.PATH_REPLACEMENTS.items():
+                    ext_str = re.sub(pattern, target, ext_str)
+                site["ext"] = json.loads(ext_str)
+            except Exception:
+                pass
             if "PanWebShare" in api_field:
                 site["api"] = "csp_PanWebShare"
                 site["changeable"] = 1
