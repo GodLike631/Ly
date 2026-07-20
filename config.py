@@ -82,7 +82,7 @@ CATEGORY_RULES = {
 PATH_REPLACEMENTS = {
     r'\./spider\.jar': 'https://cnb.cool/fish2035/xs/-/git/raw/main/spider.jar',
     r'\./XBPQ/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/XBPQ/',
-    r'\./XYQHiker': 'https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker/',  # 去掉尾部固定斜杠，兼容性更强
+    r'\./XYQHiker': 'https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker',  # 🎯 砍掉末尾斜杠，防止与底包自带的斜杠冲突
     r'\./js/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/js/',
     r'\./json/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/json/',
     r'\./py/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/py/',
