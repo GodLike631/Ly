@@ -426,8 +426,18 @@ def object_level_wash_and_compile():
         js_rule = {"name": "蝴蝶影视·云端高级去广告JS注入", "hosts": ad_hosts, "script": config.CUSTOM_AD_BLOCK_JS}
         final_obj["rules"] = [js_rule] + [r for r in current_rules if r.get("name") != "蝴蝶影视·云端高级去广告JS注入"]
 
-    # 🎯 终极修复：把生成文件最开头的本地相对 spider 路径，强行修正为远程绝对路径
-    final_obj["spider"] = "https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar"
+    # ====================================================================
+    # 🎯 【终极三源合流：Jar 高可用性绝对闭环补丁】
+    # ====================================================================
+    
+    # 1. 最外层总包定位：直接读取 config.py 里配置好的全局主 Jar 地址
+    final_obj["spider"] = config.GLOBAL_SPIDER_JAR
+
+    # 2. 站点层级微操：放行海豚底包特定的本地相对线路
+    for site in final_obj.get("sites", []):
+        s_key = site.get("key", "")
+        if s_key in ["hajim-腾讯备", "茫茫"]:
+            site["spider"] = "./tvbox.jar"[cite: 6]
 
     return final_obj
 
