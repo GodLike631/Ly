@@ -10,6 +10,9 @@ from pathlib import Path
 VERSION = "3.1.0"
 BUILD_DATE = "2026.07.20"
 
+# 🎯 专属外层大总包 Jar 远程绝对路径（以后想换直接在这里改网址就行）
+GLOBAL_SPIDER_JAR = "https://cnb.cool/fish2035/xs/-/git/raw/main/spider.jar"
+
 # 统一提取的 Magic Number (建议 ⑤)
 DEFAULT_TIMEOUT = 10     # 默认网络请求超时时间 (秒)
 TG_TIMEOUT = 15          # Telegram 通知专用超时时间 (秒)
@@ -77,12 +80,12 @@ CATEGORY_RULES = {
 
 # 核心路径与图标的正则/精准替换映射表 (建议 ④)
 PATH_REPLACEMENTS = {
-    r'\./spider\.jar': 'https://cnb.cool/fish2018/xs/-/git/raw/main/spider.jar',
-    r'\./XBPQ/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XBPQ/',
-    r'\./XYQHiker': 'https://cnb.cool/fish2018/xs/-/git/raw/main/XYQHiker/',  # 去掉尾部固定斜杠，兼容性更强
-    r'\./js/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/js/',
-    r'\./json/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/json/',
-    r'\./py/': 'https://cnb.cool/fish2018/xs/-/git/raw/main/py/',
+    r'\./spider\.jar': 'https://cnb.cool/fish2035/xs/-/git/raw/main/spider.jar',
+    r'\./XBPQ/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/XBPQ/',
+    r'\./XYQHiker': 'https://cnb.cool/fish2035/xs/-/git/raw/main/XYQHiker/',  # 去掉尾部固定斜杠，兼容性更强
+    r'\./js/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/js/',
+    r'\./json/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/json/',
+    r'\./py/': 'https://cnb.cool/fish2035/xs/-/git/raw/main/py/',
     r'http://127\.0\.0\.1:9978/file/TVBox/logo\.png': DEFAULT_LOGO_URL
 }
 
