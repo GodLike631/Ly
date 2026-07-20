@@ -437,7 +437,7 @@ def object_level_wash_and_compile():
     for site in final_obj.get("sites", []):
         s_key = site.get("key", "")
         if s_key in ["hajim-腾讯备", "茫茫"]:
-            site["spider"] = "./tvbox.jar"[cite: 6]
+            site["spider"] = "./tvbox.jar"
 
     return final_obj
 
