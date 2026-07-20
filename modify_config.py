@@ -427,9 +427,9 @@ def object_level_wash_and_compile():
         final_obj["rules"] = [js_rule] + [r for r in current_rules if r.get("name") != "蝴蝶影视·云端高级去广告JS注入"]
 
     # ====================================================================
-    # 🎯 【终极三源合流：Jar 高可用性绝对闭环补丁】
+    # 🎯 【终极三源合流：Jar 高可用性与直播源空对象闭环补丁】
     # ====================================================================
-    
+
     # 1. 最外层总包定位：直接读取 config.py 里配置好的全局主 Jar 地址
     final_obj["spider"] = config.GLOBAL_SPIDER_JAR
 
@@ -438,6 +438,16 @@ def object_level_wash_and_compile():
         s_key = site.get("key", "")
         if s_key in ["hajim-腾讯备", "茫茫"]:
             site["spider"] = "./tvbox.jar"
+
+    # 3. 直播源终极复核防御：彻底干掉合并中残留下来的空大括号 {} 对象
+    if "lives" in final_obj and isinstance(final_obj["lives"], list):
+        clean_lives = []
+        for live in final_obj["lives"]:
+        # 🚨 如果 live 是空的 {} 或者根本不是字典，直接跳过踢出队列，防止盒子卡死闪退
+            if not live or not isinstance(live, dict) or len(live) == 0:
+                continue
+            clean_lives.append(live)
+        final_obj["lives"] = clean_lives
 
     return final_obj
 
