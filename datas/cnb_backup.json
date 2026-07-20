@@ -9,7 +9,7 @@
             "name": "Nostr推荐",
             "type": 3,
             "api": "csp_Nostr",
-            "homePage": "https://cnb.cool/fish2018/lib/-/git/raw/main/nostr.min.html"
+            "homePage": "https://cnb.cool/fish2035/lib/-/git/raw/main/nostr.min.html"
         },
         {
             "key": "豆瓣",
@@ -37,7 +37,7 @@
             "name": "版本202607141117",
             "type": 3,
             "api": "csp_Nostr",
-            "homePage": "https://cnb.cool/fish2018/lib/-/git/raw/main/test.min.html"
+            "homePage": "https://cnb.cool/fish2035/lib/-/git/raw/main/test.min.html"
         },
         {
             "key": "本地",
