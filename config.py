@@ -169,8 +169,5 @@ MY_CUSTOM_LIVES = [
     {"name": "Gather「IPTV」", "type": 3, "url": "https://iptv.yang-1989.xyz/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
     {"name": "Live「直播」", "type": 3, "url": "https://live.yang-1989.eu.org/Live.m3u", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
     {"name": "myTV「香港」1", "type": 3, "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2}
-    {"name": "四季TV", "type": 3, "url": "http://xtvantsc.xyz/litv_ts.php", "epg": "http://diyp5.112114.xyz/?ch={name}&date={date}", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2}
-
-
-
+    {"name": "四季TV", "type": 0, "ua": "okhttp/5.3.2", "url": "http://xtvantsc.xyz/litv_ts.php"}
 ]
