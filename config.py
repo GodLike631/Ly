@@ -176,19 +176,74 @@ MY_CUSTOM_SITES = [
 # 📺 【通道二：手工直播加线区】 (🎯 蝴蝶特异性：包含专属“欧美🔞”源)
 # ====================================================================
 MY_CUSTOM_LIVES = [
-    {"name": "锋云直播", "type": 3, "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": "最新电影", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"},
-    {"name": "Kimentanm", "type": 0, "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u", "playerType": 2},
-    {"name": "综合直播", "type": 0, "playerType": 2, "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt", "ua": "bingcha/1.1 (mianfeifenxiang) "},
-    {"name": "央卫TV", "type": 0, "ua": "okhttp/5.3.2", "url": "http://47.120.41.246:8025/vip/jar/zb.php"},
-    {"name": "超稳定流畅", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"},
-    {"name": "国产直播🔞", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%9B%B4%E6%92%AD_20260417_024507.m3u"},
-    {"name": "国产精品🔞", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%B2%BE%E5%93%81_20260417_024507.m3u"},
-    {"name": "探花🔞", "type": 0, "ua": "okhttp/5.3.2", "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"},
-    {"name": "欧美🔞", "type": 0, "ua": "okhttp/5.3.2", "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/%E6%AC%A7%E7%BE%8E%E9%A2%91%E9%81%93.m3u"},
-    {"name": "咪咕", "type": 0, "ua": "okhttp/5.3.2", "url": "https://develop202.github.io/migu_video/interface.txt"},
-    {"name": "Gather「IPTV」", "type": 3, "url": "https://iptv.yang-1989.xyz/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": "Live「直播」", "type": 3, "url": "https://live.yang-1989.eu.org/Live.m3u", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": "myTV「香港」1", "type": 3, "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u", "epg": "https://material.yang-1989.xyz/epg.xml.gz", "ua": "okhttp/5.3.2", "timeout": 10, "playerType": 2},
-    {"name": "四季TV", "type": 0, "ua": "okhttp/5.3.2", "url": "http://xtvantsc.xyz/litv_ts.php"}
+	{
+        "name": "央卫TV",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "http://47.120.41.246:8025/vip/jar/zb.php"
+    },
+	{
+        "name": "咪咕",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://develop202.github.io/migu_video/interface.txt"
+    },
+	{
+        "name": "综合直播",
+        "type": 0,
+        "playerType": 2,
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
+        "ua": "bingcha/1.1 (mianfeifenxiang) "
+    },    
+	{
+        "name": "Kimentanm",
+        "type": 0,
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+        "playerType": 2
+    },
+    {
+        "name": "超稳定流畅",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
+    },
+    {
+        "name": "锋云直播",
+        "type": 3,
+        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
+        "ua": "okhttp/5.3.2",
+        "timeout": 10,
+        "playerType": 2
+    },
+    {
+        "name": "最新电影",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"
+    },        
+    {
+        "name": "国产直播🔞",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%9B%B4%E6%92%AD_20260417_024507.m3u"
+    },
+    {
+        "name": "国产精品🔞",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E5%9B%BD%E4%BA%A7%E7%B2%BE%E5%93%81_20260417_024507.m3u"
+    },
+    {
+        "name": "探花🔞",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/01%E6%8E%A2%E8%8A%B1%E7%BA%A6%E7%82%AE_20260417_024507.m3u"
+    },
+    {
+        "name": "欧美🔞",
+        "type": 0,
+        "ua": "okhttp/5.3.2",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/Ameria22/TV/refs/heads/main/data/%E6%AC%A7%E7%BE%8E%E9%A2%91%E9%81%93.m3u"
+    },
+    
 ]
