@@ -2457,6 +2457,51 @@
     ],
     "lives": [
         {
+            "name": "🦋 央卫TV｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "http://47.120.41.246:8025/vip/jar/zb.php"
+        },
+        {
+            "name": "🦋 咪咕｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "https://develop202.github.io/migu_video/interface.txt"
+        },
+        {
+            "name": "🦋 综合直播｜Tg：@huliys9",
+            "type": 0,
+            "playerType": 2,
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
+            "ua": "bingcha/1.1 (mianfeifenxiang) "
+        },
+        {
+            "name": "🦋 Kimentanm｜Tg：@huliys9",
+            "type": 0,
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
+            "playerType": 2
+        },
+        {
+            "name": "🦋 超稳定流畅｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
+        },
+        {
+            "name": "🦋 锋云直播｜Tg：@huliys9",
+            "type": 3,
+            "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
+            "ua": "okhttp/5.3.2",
+            "timeout": 10,
+            "playerType": 2
+        },
+        {
+            "name": "🦋 最新电影｜Tg：@huliys9",
+            "type": 0,
+            "ua": "okhttp/5.3.2",
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"
+        },
+        {
             "name": "综合直播｜Tg：@huliys9",
             "type": 0,
             "playerType": 2,
@@ -2487,83 +2532,6 @@
             "type": 0,
             "ua": "okhttp/5.3.2",
             "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt"
-        },
-        {
-            "name": "🦋 锋云直播｜Tg：@huliys9",
-            "type": 3,
-            "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
-            "ua": "okhttp/5.3.2",
-            "timeout": 10,
-            "playerType": 2
-        },
-        {
-            "name": "🦋 最新电影｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly_18/refs/heads/main/datas/%E6%9C%80%E6%96%B0%E7%94%B5%E5%BD%B1.m3u"
-        },
-        {
-            "name": "🦋 Kimentanm｜Tg：@huliys9",
-            "type": 0,
-            "url": "https://ghfast.top/https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u",
-            "playerType": 2
-        },
-        {
-            "name": "🦋 综合直播｜Tg：@huliys9",
-            "type": 0,
-            "playerType": 2,
-            "url": "https://ghfast.top/https://raw.githubusercontent.com/develop202/migu_video/refs/heads/main/interface.txt",
-            "ua": "bingcha/1.1 (mianfeifenxiang) "
-        },
-        {
-            "name": "🦋 央卫TV｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "http://47.120.41.246:8025/vip/jar/zb.php"
-        },
-        {
-            "name": "🦋 超稳定流畅｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
-        },
-        {
-            "name": "🦋 咪咕｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "https://develop202.github.io/migu_video/interface.txt"
-        },
-        {
-            "name": "🦋 Gather「IPTV」｜Tg：@huliys9",
-            "type": 3,
-            "url": "https://iptv.yang-1989.xyz/playlist.m3u",
-            "epg": "https://material.yang-1989.xyz/epg.xml.gz",
-            "ua": "okhttp/5.3.2",
-            "timeout": 10,
-            "playerType": 2
-        },
-        {
-            "name": "🦋 Live「直播」｜Tg：@huliys9",
-            "type": 3,
-            "url": "https://live.yang-1989.eu.org/Live.m3u",
-            "ua": "okhttp/5.3.2",
-            "timeout": 10,
-            "playerType": 2
-        },
-        {
-            "name": "🦋 myTV「香港」1｜Tg：@huliys9",
-            "type": 3,
-            "url": "https://iptv.yang-1989.xyz/myTV/playlist.m3u",
-            "epg": "https://material.yang-1989.xyz/epg.xml.gz",
-            "ua": "okhttp/5.3.2",
-            "timeout": 10,
-            "playerType": 2
-        },
-        {
-            "name": "🦋 四季TV｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp/5.3.2",
-            "url": "http://xtvantsc.xyz/litv_ts.php"
         },
         {
             "name": "地方直播2｜Tg：@huliys9",
