@@ -320,8 +320,6 @@ def object_level_wash_and_compile():
         if site.get("ext") == {}: site["ext"] = ""
         compiled_sites.append(site)
 
-    compiled_sites.extend(config.MY_CUSTOM_SITES)
-
     bucket_map = {category: [] for category in config.CATEGORY_RULES.keys()}
     bucket_map["综合"] = []
     bucket_map["福利"] = []
@@ -374,6 +372,37 @@ def object_level_wash_and_compile():
     for cate in ["综合", "短剧", "动漫", "体育/直播", "少儿", "音乐", "网盘/磁力", "福利"]:
         if cate in bucket_map:
             ordered_sites.extend(bucket_map[cate])
+
+    # 🎯 【读取配置文件中的位置进行插入（含首位置顶与顺序保障逻辑）】
+    target_pos = getattr(config, "SITE_INSERT_POS", 1)
+    hot_key = getattr(config, "HOT_VIDEO_KEY", "")
+    hot_name = getattr(config, "HOT_VIDEO_SITE_NAME", "")
+
+    # 存放置顶站点和普通站点
+    hot_sites = []
+    normal_sites = []
+
+    for custom_site in config.MY_CUSTOM_SITES:
+        site = custom_site.copy()  # 安全拷贝，避免修改原对象
+        s_key = site.get("key", "")
+        
+        if s_key and s_key == hot_key:
+            site["name"] = hot_name or site.get("name")
+            site["category"] = "综合"
+            hot_sites.append(site)
+        else:
+            if "searchable" not in site:
+                site["searchable"] = 1
+            normal_sites.append(site)
+
+    # 1. 先插入普通站点（逆序插入保障配置原顺序）
+    for site in reversed(normal_sites):
+        idx = min(target_pos, len(ordered_sites))
+        ordered_sites.insert(idx, site)
+
+    # 2. 无论普通站点怎么插，置顶站点统一最后插入到最前面（索引 0）
+    for site in reversed(hot_sites):
+        ordered_sites.insert(0, site)
 
     custom_live_names = {l.get("name") for l in config.MY_CUSTOM_LIVES if l.get("name")}
     clean_base_lives = [
@@ -484,7 +513,7 @@ def build_and_dispatch_matrix(ordered_obj, current_token, full_out_name, clean_o
 
     tg_token = os.getenv("TG_TOKEN")
     tg_chat_id = os.getenv("TG_CHAT_ID")
-    repo_info = os.getenv("GITHUB_REPOSITORY", "GodLike631/Ly_18")  # 🎯 蝴蝶影视库特异路径
+    repo_info = os.getenv("GITHUB_REPOSITORY", "GodLike631/Ly")  # 🎯 蝴蝶影视库特异路径
     branch_info = os.getenv("GITHUB_REF_NAME", "main")
     
     full_raw_url = f"https://raw.githubusercontent.com/{repo_info}/refs/heads/{branch_info}/datas/{full_out_name}"
