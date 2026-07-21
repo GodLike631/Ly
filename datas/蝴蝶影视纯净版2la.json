@@ -148,6 +148,15 @@
             "searchable": 1
         },
         {
+            "key": "ddvm",
+            "name": "🦋 嘀嗒影视.py(关梯)",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/嘀嗒影视.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "kkvm",
             "name": "🦋 可可影视.py",
             "type": 3,
@@ -2071,6 +2080,27 @@
             "category": "少儿"
         },
         {
+            "key": "kwms",
+            "name": "🦋 酷我音乐.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/酷我音乐.py",
+            "ext": "",
+            "category": "音乐",
+            "searchable": 0
+        },
+        {
+            "key": "捡的音乐",
+            "name": "🦋 爱听音乐",
+            "type": 3,
+            "api": "csp_Music1",
+            "searchable": 0,
+            "quickSearch": 1,
+            "ext": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/Music1.json",
+            "jar": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/so.jar",
+            "filterable": 1,
+            "category": "音乐"
+        },
+        {
             "key": "呦呦DJ",
             "name": "🦋 呦呦 • DJ",
             "type": 3,
@@ -2456,6 +2486,12 @@
         }
     ],
     "lives": [
+        {
+            "name": "🦋 蝴蝶影视｜Tg：@huliys9",
+            "type": 0,
+            "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/Ly/refs/heads/Live/datas/custom_lives.m3u",
+            "ua": "okhttp/5.3.2"
+        },
         {
             "name": "🦋 央卫TV｜Tg：@huliys9",
             "type": 0,
