@@ -1,0 +1,55 @@
+name: 定时巡检与清洗 custom_lives.m3u
+
+on:
+  schedule:
+    # ⏱️ 每天 UTC 19:00 (即北京时间凌晨 03:00) 自动触发
+    - cron: '0 19 * * *'
+  workflow_dispatch: # 支持手动点击 Run workflow 触发执行
+
+jobs:
+  clean-playlist:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. 拉取仓库最新代码
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 2. 配置 Python 3.10 环境
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    # 3. 安装 FFmpeg 工具
+    - name: Install FFmpeg
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+
+    # 4. 安装 Python 必备网络依赖
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    # 5. 执行 M3U 巡检脚本
+    - name: Run M3U Cleaner
+      run: |
+        python m3u_cleaner.py
+
+    # 6. 自动将更新后的 datas/custom_lives.m3u 提交保存回仓库
+    - name: Commit and Push Changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add datas/custom_lives.m3u
+        
+        if git status --porcelain | grep datas/custom_lives.m3u; then
+          git commit -m "🧹 自动化巡检：已清除 datas/ 目录下的失效与广告线路 [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git push
+        else
+          echo "所有线路正常，无需提交代码更新。"
+        fi
