@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. 拉取仓库最新代码
+    # 1. 明确指定拉取 Live 分支的代码
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        ref: Live
 
     # 2. 配置 Python 3.10 环境
     - name: Set up Python
@@ -33,12 +35,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
 
-    # 5. 执行 M3U 巡检脚本
+    # 5. 执行 Live 分支下的 M3U 巡检脚本
     - name: Run M3U Cleaner
       run: |
         python m3u_cleaner.py
 
-    # 6. 自动将更新后的 datas/custom_lives.m3u 提交保存回仓库
+    # 6. 自动将更新后的 datas/custom_lives.m3u 提交推送回 Live 分支
     - name: Commit and Push Changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,8 +50,8 @@ jobs:
         git add datas/custom_lives.m3u
         
         if git status --porcelain | grep datas/custom_lives.m3u; then
-          git commit -m "🧹 自动化巡检：已清除 datas/ 目录下的失效与广告线路 [$(date +'%Y-%m-%d %H:%M:%S')]"
-          git push
+          git commit -m "🧹 自动化巡检：已清除 Live 分支 datas/ 目录下的失效与广告线路 [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git push origin Live
         else
           echo "所有线路正常，无需提交代码更新。"
         fi
