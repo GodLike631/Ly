@@ -2,34 +2,34 @@ name: 定时巡检与清洗 custom_lives.m3u
 
 on:
   schedule:
-    # ⏱️ 每天 UTC 19:00 (即北京时间凌晨 03:00) 自动触发
-    - cron: '0 19 * * *'
-  workflow_dispatch: # 支持手动点击 Run workflow 触发执行
+    # ⏱️ 每 3 天的 UTC 19:00 (即北京时间凌晨 03:00) 自动运行一次
+    - cron: '0 19 */3 * *'
+  workflow_dispatch: # 支持在 GitHub 网页上手动点击按钮立即运行
 
 jobs:
   clean-playlist:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. 明确指定拉取 Live 分支的代码
+    # 1. 明确拉取 Live 分支代码
     - name: Checkout Code
       uses: actions/checkout@v4
       with:
         ref: Live
 
-    # 2. 配置 Python 3.10 环境
+    # 2. 配置 Python 环境
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
-    # 3. 安装 FFmpeg 工具
+    # 3. 安装 FFmpeg
     - name: Install FFmpeg
       run: |
         sudo apt-get update
         sudo apt-get install -y ffmpeg
 
-    # 4. 安装 Python 必备网络依赖
+    # 4. 安装 Python 依赖
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -40,7 +40,7 @@ jobs:
       run: |
         python m3u_cleaner.py
 
-    # 6. 自动将更新后的 datas/custom_lives.m3u 提交推送回 Live 分支
+    # 6. 检测到有线路剔除时自动提交回 Live 分支
     - name: Commit and Push Changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
