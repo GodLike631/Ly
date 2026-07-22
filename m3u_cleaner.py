@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TARGET_M3U = os.path.join(BASE_DIR, "datas", "custom_lives.m3u")
 
 # 配置项
-MAX_WORKERS = 15          # 并发检测线程数 (推荐 10-15)
+MAX_WORKERS = 40          # 并发检测线程数 (推荐 10-15)
 TIMEOUT = 3               # HTTP 超时时间 (秒)
 ENABLE_FFMPEG = True      # 是否开启 FFmpeg 深层视频流探测
 
