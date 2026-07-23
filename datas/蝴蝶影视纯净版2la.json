@@ -782,6 +782,15 @@
             "category": "综合"
         },
         {
+            "key": "ytb",
+            "name": "🦋 悦听吧.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/悦听吧.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "Nostr",
             "name": "🦋 Nostr推荐",
             "type": 3,
@@ -1728,15 +1737,6 @@
             "name": "🦋 河马剧场.py",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/河马剧场.py",
-            "ext": "",
-            "category": "短剧",
-            "searchable": 1
-        },
-        {
-            "key": "wddj",
-            "name": "🦋 黄豆短剧.py",
-            "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄豆短剧.py",
             "ext": "",
             "category": "短剧",
             "searchable": 1

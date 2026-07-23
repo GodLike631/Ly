@@ -835,6 +835,15 @@
             "category": "综合"
         },
         {
+            "key": "ytb",
+            "name": "🦋 悦听吧.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/悦听吧.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "Nostr",
             "name": "🦋 Nostr推荐",
             "type": 3,
@@ -1786,15 +1795,6 @@
             "searchable": 1
         },
         {
-            "key": "wddj",
-            "name": "🦋 黄豆短剧.py",
-            "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄豆短剧.py",
-            "ext": "",
-            "category": "短剧",
-            "searchable": 1
-        },
-        {
             "key": "djjh",
             "name": "🦋 短剧聚合.py",
             "type": 3,
@@ -2638,10 +2638,10 @@
             "category": "福利"
         },
         {
-            "key": "wddj18",
-            "name": "🦋 黄豆短剧(魔改).py｜🔞",
+            "key": "wddj",
+            "name": "🦋 黄豆短剧.py 有🔞",
             "type": 3,
-            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄豆短剧(魔改).py",
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄豆短剧.py",
             "ext": "",
             "category": "福利"
         },
@@ -2770,6 +2770,30 @@
             "name": "🦋 黑料不打烊.py｜🔞",
             "type": 3,
             "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料不打烊.py",
+            "ext": "",
+            "category": "福利"
+        },
+        {
+            "key": "hlw",
+            "name": "🦋 黑料网.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黑料网.py",
+            "ext": "",
+            "category": "福利"
+        },
+        {
+            "key": "prsd",
+            "name": "🦋 怦然心动.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/怦然心动.py",
+            "ext": "",
+            "category": "福利"
+        },
+        {
+            "key": "hsck",
+            "name": "🦋 黄色仓库.py｜🔞",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/黄色仓库.py",
             "ext": "",
             "category": "福利"
         },
