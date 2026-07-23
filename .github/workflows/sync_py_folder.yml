@@ -15,10 +15,28 @@ jobs:
       - name: Checkout My Repo
         uses: actions/checkout@v4
 
-      # 2. 使用 svn 导出对方 py 目录下的所有文件直接覆盖保存到你仓库的 py 文件夹下
-      - name: Download Remote Folder
+      # 2. 稀疏拉取对方仓库的 py 文件夹并覆盖保存到本地 py 目录
+      - name: Download Remote Py Folder
         run: |
-          svn export https://github.com/FGBLH/HKL/trunk/py py --force
+          # 创建临时文件夹并进入
+          mkdir -p temp_upstream
+          cd temp_upstream
+          
+          # 初始化 git 稀疏检出
+          git init
+          git remote add origin https://github.com/FGBLH/HKL.git
+          git config core.sparseCheckout true
+          echo "py/" >> .git/info/sparse-checkout
+          
+          # 拉取主分支代码
+          git pull origin main
+          
+          # 回到根目录，将拉取到的 py 文件夹内容复制并覆盖到你仓库的 py 目录
+          cd ..
+          cp -rf temp_upstream/py/* py/
+          
+          # 清理临时文件夹
+          rm -rf temp_upstream
 
       # 3. 检查是否有新文件或更新，自动 Commit 并 Push
       - name: Commit and Push
