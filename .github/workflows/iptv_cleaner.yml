@@ -37,6 +37,8 @@ jobs:
 
       # 5. 运行异步巡检主程序
       - name: Run IPTV Cleaner
+        env:
+          PYTHONUNBUFFERED: 1   # 👈 加上这一行！强制 Python 实时刷新日志
         run: |
           python iptv_cleaner.py
 
