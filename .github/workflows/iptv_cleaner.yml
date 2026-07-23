@@ -10,6 +10,9 @@ jobs:
   inspect-and-clean:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write # 明确赋予写权限，以便自动提交更新文件
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -43,7 +46,7 @@ jobs:
         python m3u_cleaner.py
 
     - name: Commit and push changes
-      uses: actions/git-auto-commit-action@v5
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "chore: auto update M3U playlist and test cache [skip ci]"
         branch: main
