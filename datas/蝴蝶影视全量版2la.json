@@ -337,6 +337,24 @@
             "searchable": 1
         },
         {
+            "key": "ikbot",
+            "name": "🦋 爱看机器人.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/爱看机器人.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
+            "key": "jok",
+            "name": "🦋 剧OK.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/剧OK.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "xhvm",
             "name": "🦋 骚火影视.py",
             "type": 3,
@@ -3735,9 +3753,14 @@
             }
         },
         {
-            "name": "极速",
+            "name": "789解析1",
             "type": 0,
-            "url": "https://jiexi.789jiexi.net:4433/?url="
+            "url": "https://jiexi.789jiexi.icu:4433/?url="
+        },
+        {
+            "name": "789解析2",
+            "type": 0,
+            "url": "https://jiexi.789jiexi.com/?url="
         },
         {
             "name": "虾米解析",
