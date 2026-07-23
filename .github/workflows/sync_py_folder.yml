@@ -15,14 +15,9 @@ jobs:
       - name: Checkout My Repo
         uses: actions/checkout@v4
 
-      # 2. 使用 svn 增量拉取对方 py 目录下的所有文件到你仓库的 py 文件夹
+      # 2. 使用 svn 导出对方 py 目录下的所有文件直接覆盖保存到你仓库的 py 文件夹下
       - name: Download Remote Folder
         run: |
-          # 创建本地的 py 存放目录（如果不存在的话）
-          mkdir -p py
-          
-          # 使用 svn 导出对方仓库 main 分支下的 py 文件夹全部内容
-          # GitHub 原生支持将 /tree/main/ 替换为 /trunk/ 进行 svn 导出
           svn export https://github.com/FGBLH/HKL/trunk/py py --force
 
       # 3. 检查是否有新文件或更新，自动 Commit 并 Push
