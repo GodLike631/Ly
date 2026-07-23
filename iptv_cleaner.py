@@ -55,6 +55,7 @@ class SQLiteCacheManager:
         return sqlite3.connect(self.db_path)
 
     def _init_db(self):
+        os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
         with self._get_conn() as conn:
             cursor = conn.cursor()
             cursor.execute('''
@@ -75,7 +76,7 @@ class SQLiteCacheManager:
             ''')
             conn.commit()
 
-    @staticmethod:
+    @staticmethod
     def get_url_hash(url: str) -> str:
         return hashlib.md5(url.encode('utf-8')).hexdigest()
 
