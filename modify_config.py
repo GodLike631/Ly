@@ -428,6 +428,11 @@ def object_level_wash_and_compile():
             live_inserted_count += 1
 
     final_obj = copy.deepcopy(json_cnb)
+    
+    # 🎯 【新增】强制覆盖根节点 logo 为 config 中配置的图片地址
+    if hasattr(config, "DEFAULT_LOGO_URL") and config.DEFAULT_LOGO_URL:
+        final_obj["logo"] = config.DEFAULT_LOGO_URL
+
     final_obj.update({
         "parses": unique_parses,
         "sites": ordered_sites,
