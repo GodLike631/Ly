@@ -1,36 +1,32 @@
-# ----------------------------------------------------
-# IPTV 自动化巡检与清洗系统配置文件
-# ----------------------------------------------------
-
 # 路径配置
 paths:
-  input_m3u: "custom_lives.m3u"   # 存量 M3U 文件路径
-  input_txt: "channels.txt"        # 新增/备用 TXT 频道文件
-  output_m3u: "custom_lives.m3u"  # 清洗后导出的 M3U 路径
-  db_path: "cache.db"             # SQLite 缓存数据库路径
-  log_path: "cleaner.log"         # 日志文件路径
+  input_m3u: "datas/custom_lives.m3u"   # 存量 M3U 文件路径
+  input_txt: "channels.txt"             # 备用 TXT 频道文件
+  output_m3u: "datas/custom_lives.m3u"  # 清洗完覆盖回 datas/custom_lives.m3u
+  db_path: "datas/cache.db"             # SQLite 缓存文件存放在 datas/
+  log_path: "datas/cleaner.log"         # 日志文件存放在 datas/
 
-# 并发与超时控制
+# 并发与超时控制 (GitHub Actions 建议不要设得太夸张，防止被 Cloudflare 等 CDN 拦截)
 performance:
-  max_concurrent_http: 100        # aiohttp HTTP 并发请求数
-  max_concurrent_ffprobe: 10      # FFprobe 进程池最大并发数 (防止挤爆 CPU)
-  http_timeout: 3                 # HTTP 请求超时时间 (秒)
-  ffprobe_timeout: 4              # FFprobe 探测超时时间 (秒)
+  max_concurrent_http: 50         # HTTP 并发数
+  max_concurrent_ffprobe: 5       # FFprobe 进程池
+  http_timeout: 3
+  ffprobe_timeout: 4
 
 # 检测规则与阈值
 rules:
-  enable_head_check: true         # 是否开启 HEAD 快速预检 (大幅提升速度)
-  enable_ffprobe: true            # 是否开启 FFprobe 视频流深层探测
-  min_bitrate: 600000             # 最小有效码率 (bps，低于 600kbps 剔除)
-  max_routes_per_channel: 3       # 单频道保留的最优线路上限数
-  cache_ttl_hours: 24             # SQLite 缓存有效期 (小时)
+  enable_head_check: true
+  enable_ffprobe: true
+  min_bitrate: 600000
+  max_routes_per_channel: 3
+  cache_ttl_hours: 24
 
 # EPG 列表
 epg_urls:
   - "https://material.yang-1989.xyz/epg.xml.gz"
   - "http://epg.51zmt.top:8000/e.xml.gz"
 
-# 广告与黑名单关键词
+# 广告黑名单
 ad_keywords:
   - "guanggao"
   - "notice"
