@@ -1,55 +1,57 @@
-name: M3U IPTV Auto Check & Clean Workflow
+name: 定时巡检与清洗 custom_lives.m3u
 
 on:
   schedule:
-    # 每 3 天在 UTC 时间 20:00 (即北京时间早晨 04:00) 自动定时巡检
-    - cron: '0 20 */3 * *'
-  workflow_dispatch: # 支持手动点击触发运行
+    # ⏱️ 每 3 天的 UTC 19:00 (即北京时间凌晨 03:00) 自动运行一次
+    - cron: '0 19 */3 * *'
+  workflow_dispatch: # 支持在 GitHub 网页上手动点击按钮立即运行
 
 jobs:
-  inspect-and-clean:
+  clean-playlist:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write # 明确赋予写权限，以便自动提交更新文件
-
     steps:
-    - name: Checkout repository
+    # 1. 明确拉取 Live 分支代码
+    - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        ref: Live
 
+    # 2. 配置 Python 环境
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-        cache: 'pip'
 
+    # 3. 安装 FFmpeg
     - name: Install FFmpeg
       run: |
         sudo apt-get update
         sudo apt-get install -y ffmpeg
 
-    - name: Install Python dependencies
+    # 4. 安装 Python 依赖
+    - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install requests urllib3
+        pip install requests
 
-    - name: Restore cache file
-      uses: actions/cache@v4
-      with:
-        path: datas/cache.json
-        key: iptv-cache-${{ runner.os }}-${{ github.run_id }}
-        restore-keys: |
-          iptv-cache-${{ runner.os }}-
-
-    - name: Run M3U Cleaner Script
+    # 5. 执行 Live 分支下的 M3U 巡检脚本
+    - name: Run M3U Cleaner
       run: |
         python m3u_cleaner.py
 
-    - name: Commit and push changes
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: "chore: auto update M3U playlist and test cache [skip ci]"
-        branch: main
-        file_pattern: 'datas/custom_lives.m3u datas/cache.json'
-        commit_user_name: 'github-actions[bot]'
-        commit_user_email: 'github-actions[bot]@users.noreply.github.com'
+    # 6. 检测到有线路剔除时自动提交回 Live 分支
+    - name: Commit and Push Changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add datas/custom_lives.m3u
+        
+        if git status --porcelain | grep datas/custom_lives.m3u; then
+          git commit -m "🧹 自动化巡检：已清除 Live 分支 datas/ 目录下的失效与广告线路 [$(date +'%Y-%m-%d %H:%M:%S')]"
+          git push origin Live
+        else
+          echo "所有线路正常，无需提交代码更新。"
+        fi
