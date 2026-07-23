@@ -1,0 +1,44 @@
+name: Sync Remote Py Folder
+
+on:
+  schedule:
+    # 每天 UTC 0:00 (北京时间 08:00) 自动定时运行
+    - cron: '0 0 * * *'
+  # 允许在 GitHub 网页界面手动点击按钮立即触发同步
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出你自己的仓库代码
+      - name: Checkout My Repo
+        uses: actions/checkout@v4
+
+      # 2. 使用 svn 增量拉取对方 py 目录下的所有文件到你仓库的 py 文件夹
+      - name: Download Remote Folder
+        run: |
+          # 创建本地的 py 存放目录（如果不存在的话）
+          mkdir -p py
+          
+          # 使用 svn 导出对方仓库 main 分支下的 py 文件夹全部内容
+          # GitHub 原生支持将 /tree/main/ 替换为 /trunk/ 进行 svn 导出
+          svn export https://github.com/FGBLH/HKL/trunk/py py --force
+
+      # 3. 检查是否有新文件或更新，自动 Commit 并 Push
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # 暂存 py 目录下的所有变动
+          git add py/
+          
+          # 判断是否有代码变更，防止空提交报错
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: auto sync py folder from FGBLH/HKL"
+            git push
+            echo "同步成功并更新到仓库！"
+          else
+            echo "没有检测到任何文件更新，跳过 Commit。"
+          fi
