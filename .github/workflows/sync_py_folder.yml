@@ -11,34 +11,35 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      # 1. 检出你自己的仓库代码
-      - name: Checkout My Repo
+      # 1. 明确检出你仓库的 Live 分支
+      - name: Checkout My Repo (Live Branch)
         uses: actions/checkout@v4
+        with:
+          ref: Live
 
-      # 2. 稀疏拉取对方仓库的 py 文件夹并覆盖保存到本地 py 目录
+      # 2. 稀疏拉取对方仓库的 py 文件夹并同步到本地 py 目录
       - name: Download Remote Py Folder
         run: |
-          # 创建临时文件夹并进入
+          # 确保当前 Live 分支下 py 文件夹必定存在
+          mkdir -p py
+          
+          # 创建临时文件夹拉取对方代码
           mkdir -p temp_upstream
           cd temp_upstream
-          
-          # 初始化 git 稀疏检出
           git init
           git remote add origin https://github.com/FGBLH/HKL.git
           git config core.sparseCheckout true
           echo "py/" >> .git/info/sparse-checkout
-          
-          # 拉取主分支代码
           git pull origin main
-          
-          # 回到根目录，将拉取到的 py 文件夹内容复制并覆盖到你仓库的 py 目录
           cd ..
-          cp -rf temp_upstream/py/* py/
+          
+          # 将拉取到的文件同步复制到 Live 分支的 py 文件夹中
+          cp -rf temp_upstream/py/. py/
           
           # 清理临时文件夹
           rm -rf temp_upstream
 
-      # 3. 检查是否有新文件或更新，自动 Commit 并 Push
+      # 3. 检查是否有新文件或更新，自动 Commit 并 Push 回 Live 分支
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
@@ -51,7 +52,7 @@ jobs:
           if ! git diff --staged --quiet; then
             git commit -m "chore: auto sync py folder from FGBLH/HKL"
             git push
-            echo "同步成功并更新到仓库！"
+            echo "同步成功并更新到 Live 分支！"
           else
             echo "没有检测到任何文件更新，跳过 Commit。"
           fi
