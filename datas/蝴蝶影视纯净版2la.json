@@ -229,6 +229,15 @@
             "searchable": 1
         },
         {
+            "key": "hxq",
+            "name": "🦋 韩小圈.py(关梯)",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/韩小圈.py",
+            "ext": "",
+            "category": "综合",
+            "searchable": 1
+        },
+        {
             "key": "ww",
             "name": "🦋 哇哇APP.py(关梯)",
             "type": 3,
@@ -2578,6 +2587,23 @@
             "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
         },
         {
+            "name": "🦋 Gather「IPTV」(梯子）｜Tg：@huliys9",
+            "type": 3,
+            "url": "https://iptv.1989.click/playlist.m3u",
+            "epg": "https://material.1989.click/epg.xml.gz",
+            "ua": "okhttp/3.8.1",
+            "timeout": 10,
+            "playerType": 2
+        },
+        {
+            "name": "🦋 Live「直播」｜Tg：@huliys9",
+            "type": 3,
+            "url": "https://live.yang-1989.eu.org/Live.m3u",
+            "ua": "okhttp/3.8.1",
+            "timeout": 10,
+            "playerType": 2
+        },
+        {
             "name": "🦋 锋云直播｜Tg：@huliys9",
             "type": 3,
             "url": "https://gh-proxy.org/https://raw.githubusercontent.com/807080747/zv/refs/heads/main/suale.txt",
@@ -2706,18 +2732,6 @@
             "type": 0,
             "ua": "okhttp",
             "url": "https://live.445569.xyz/live.m3u"
-        },
-        {
-            "name": "Gather｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp",
-            "url": "https://iptv.yang-1989.eu.org/m3u/Gather.m3u"
-        },
-        {
-            "name": "Mytv｜Tg：@huliys9",
-            "type": 0,
-            "ua": "okhttp",
-            "url": "https://cdn.qd.je/live.m3u"
         },
         {
             "name": "新加坡(梯子)｜Tg：@huliys9",
