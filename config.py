@@ -40,7 +40,7 @@ DEFAULT_LOGO_URL = "https://img.naixiai.cn/2026/06/18/IMG_6638.jpeg"
 # ====================================================================
 # 🚫 【二、双版本过滤依据、广告拦截与恶意杂质直接清洗区】 (建议 ①)
 # ====================================================================
-BLOCK_KEYWORDS = ("羊壳", "弹幕", "不可用")
+BLOCK_KEYWORDS = ("羊壳", "弹幕", "Gather", "Mytv")
 UPSTREAM_DIRTY_WORDS = ('🐬', '海豚影视', '海豚', '完全免费，如有收费的都是骗子', '交流群 TG：@hshsjk9')
 AD_HOSTS_LIST = ["vip.wwgz.cn", "lziplayer.com", "m3u8.apibdzy.com", "cj.ffzyapi.com", "api.hbzyapi.com"]
 
