@@ -213,6 +213,23 @@ MY_CUSTOM_LIVES = [
         "ua": "okhttp/5.3.2",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/GodLike631/test/refs/heads/main/datas/%E8%B6%85%E7%A8%B3%E5%AE%9A%E6%B5%81%E7%95%85.txt"
     },
+	{
+      "name": "Gather「IPTV」(梯子）",
+      "type": 3,
+      "url": "https://iptv.1989.click/playlist.m3u",
+      "epg":"https://material.1989.click/epg.xml.gz",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
+    },
+    {
+      "name": "Live「直播」",
+      "type": 3,
+      "url": "https://live.yang-1989.eu.org/Live.m3u",
+      "ua": "okhttp/3.8.1",
+      "timeout": 10,
+      "playerType": 2
+    },
     {
         "name": "锋云直播",
         "type": 3,
