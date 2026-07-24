@@ -1967,6 +1967,16 @@
             "searchable": 1
         },
         {
+            "key": "央视网页",
+            "name": "🦋 央视网页直播(关梯)",
+            "type": 3,
+            "jar": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/WvSpider.jar",
+            "api": "csp_WvSpider",
+            "ext": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/央视直播.js",
+            "category": "体育/直播",
+            "searchable": 1
+        },
+        {
             "key": "youtube2",
             "name": "🦋 油管直播,py",
             "type": 3,
@@ -2143,6 +2153,15 @@
             "category": "少儿"
         },
         {
+            "key": "275ts",
+            "name": "🦋 275听书.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/275听书.py",
+            "ext": "",
+            "category": "音乐",
+            "searchable": 0
+        },
+        {
             "key": "kwms",
             "name": "🦋 酷我音乐.py",
             "type": 3,
@@ -2162,6 +2181,15 @@
             "jar": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/jar_js/so.jar",
             "filterable": 1,
             "category": "音乐"
+        },
+        {
+            "key": "djyy",
+            "name": "🦋 DJ呦呦.py",
+            "type": 3,
+            "api": "https://ghfast.top/https://raw.githubusercontent.com/FGBLH/HKL/refs/heads/main/py/DJ呦呦.py",
+            "ext": "",
+            "category": "音乐",
+            "searchable": 0
         },
         {
             "key": "呦呦DJ",
